@@ -1,6 +1,6 @@
 .team-box{
     width: 750px;
-    height: 450px;
+    height: 460px;
     position: absolute;
     left: 50%;
     top: 50%;
@@ -9,7 +9,7 @@
     overflow: hidden;
 }
 .team-box .title{
-    font-size: 16px;
+    font-size: 20px;
     color: #9FD7FF;
     height: 100px;
     line-height: 100px;
@@ -18,19 +18,31 @@
 .team-box .title span{
     color: #00FFFF;
 }
-
+.team-box .team-bg{
+    width: 290px;
+    height: 450px;
+    z-index: 1;
+    position: absolute;
+    top: 90px;
+}
+.team-box .team-bg1{
+    left: 80px;
+}
+.team-box .team-bg2{
+    right: 80px;
+}
 .team-box .team-create{
-    float: left;
-    margin-left: 90px;
+    left: 90px;
 }
 
 .team-box .team-select{
-    float: right;
-    margin-right: 90px;
+    right: 90px;
 }
 .team-frame-box{
     width: 270px;
     height: 430px;
+    z-index: 2;
+    position: absolute;
 }
 .team-frame-box .middle{
     width: 100%;
