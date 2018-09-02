@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>注册</title>
+    <link rel="shortcut icon" href="../../static/img/share/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="../../static/css/share/reset.css">
+    <link rel="stylesheet" href="../../static/css/share/share.css">
+    <link rel="stylesheet" href="../../static/js/plug/webuploader/webuploader.css">
+    <link rel="stylesheet" href="../../static/css/register/register.css">
+</head>
+<body>
+<div class="box">
+    <div class="header">
+        <img src="../../static/img/share/img_logo.png" alt="logo">
+        <span class="title">山西省大学生信息安全技能竞赛</span>
+    </div>
+
+    <div class="register-box">
+        <div class="top unit-frame-top">
+            <p>用户注册</p>
+        </div>
+        <div class="middle unit-frame-middle">
+            <form action="">
+                <ul>
+                    <li>
+                        <label for="username">用户名</label>
+                        <input type="text" autocomplete="off" id="username" name="username">*
+                        <p class="tip">10个字符以内</p>
+                    </li>
+                    <li>
+                        <label for="email">邮箱</label>
+                        <input type="text" autocomplete="off" id="email" name="email">*
+                    </li>
+                    <li>
+                        <label for="school">院校</label>
+                        <input type="text" autocomplete="off" id="school" name="school">
+                    </li>
+                    <li>
+                        <label for="ID">ID</label>
+                        <input type="text" autocomplete="off" id="ID" name="ID">*
+                    </li>
+                    <li>
+                        <label for="sex">性别</label>
+                        <input type="radio" class="radio" name="sex" id="male" value="1"><label class="radio" for="male">男</label>
+                        <input type="radio" class="radio" name="sex" id="female" value="2"><label class="radio" for="female">女</label>
+                        <input type="radio" class="radio" name="sex" id="secrecy" value="3"><label class="radio" for="secrecy">保密</label>
+                    </li>
+                    <li>
+                        <label for="headImg">头像</label>
+                        <input type="text" id="headImg" class="headImgInput">
+                        <button class="selectPic" id="selectPic">选择图片</button>
+                    </li>
+                    <li>
+                        <label for="skill">技能</label>
+                        <textarea name="skill" id="skill"></textarea>*
+                        <p class="tip">编辑技能并按Enter添加</p>
+                    </li>
+                    <li>
+                        <label for="password">密码</label>
+                        <input type="password" autocomplete="off" id="password" name="password">
+                        <p class="tip">密码必须至少包含8个字符且不能全为数字，同时不能是常用密码，不能与您的其他个人信息非常相似</p>
+                    </li>
+                    <li>
+                        <label for="repassword">确认密码</label>
+                        <input type="password" autocomplete="off" id="repassword" name="repassword">
+                    </li>
+                </ul>
+                <button name="submit" id="submit" class="submit">提交</button>
+            </form>
+        </div>
+        <div class="bottom unit-frame-bottom"></div>
+    </div>
+    <div class="register-bg unit-frame-bg"></div>
+    <div class="footer">
+        <span class="left">主办单位：山西省教育局  承办单位：山西省云亭科技有限公司  协办单位：上海来晨网络科技有限公司</span>
+        <span class="right">上海来晨网络科技有限公司©2018 All Rights Reserved. 沪ICP备17040130号</span>
+    </div>
+</div>
+
+<script src="../../static/js/jquery/jquery-2.1.4.js"></script>
+<script src="../../static/js/plug/webuploader/webuploader.js"></script>
+<script src="../../static/js/register/uploadPic.js"></script>
+<script src="../../static/js/register/register.js"></script>
+</body>
+</html>
