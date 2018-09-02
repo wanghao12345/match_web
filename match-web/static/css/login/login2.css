@@ -2,18 +2,23 @@
     width: 100%;
     height: 100%;
     position: relative;
-    background: url("../../img/login/img_sign_BG1.png") no-repeat;
+    background: #080A33;
+}
+.box-bg-img{
+    width: 100%;
+    height: 500px;
+    position: absolute;
+    top: 50%;
+    margin-top: -250px;
+    background: url(../../img/login/img_sign_bg2.png) no-repeat;
     background-size: 100% 100%;
 }
 .login-box{
     width: 370px;
-    height: 500px;
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    margin-left: -185px;
-    margin-top: -250px;
-    z-index: 2;
+    height: 400px;
+    float: right;
+    margin-right: 100px;
+    margin-top: 50px;
 }
 .login-box-bg{
     opacity: 0.1;
@@ -39,19 +44,31 @@
 }
 .login-box .content{
     width: 100%;
-    height: 450px;
+    height: 400px;
+    background: #FFFFFF;
+    box-shadow: 0 10px 40px 0 rgba(159,88,27,0.50);
+    border-radius: 3px;
 }
 .login-box .content .top{
     width: 100%;
-    height: 40px;
+    height: 50px;
+    background: #2399FF;
+    border-radius: 3px 3px 0 0;
+}
+.login-box .content .top p{
+    width: 100%;
+    height: 50px;
+    line-height: 50px;
+    font-size: 20px;
+    color: #FFFFFF;
+    letter-spacing: 0;
+    text-align: left;
 }
 .login-box .content .middle{
     width: 100%;
-    height: 300px;
-    background: url(../../img/login/img_signin_bg_2.png) no-repeat;
-    background-size: 100% 100%;
+    height: 250px;
     box-sizing: border-box;
-    padding-top: 40px;
+    padding-top: 30px;
 
 }
 .login-box .content .middle form{
@@ -70,36 +87,36 @@
 .login-box .content .middle form ul li label{
     font-family: PingFangSC-Regular;
     font-size: 16px;
-    color: #00FFFF;
+    color: #101010;
     letter-spacing: 0;
     margin-right: 5px;
 }
 .login-box .content .middle form ul li input{
     width: 260px;
     height: 38px;
-    background: #080A33;
     border: 0;
-    color: white;
+    color: #4c4c4c;
     box-sizing: border-box;
     padding: 0px 5px;
+    background: #EBEBEB;
 }
 .login-box .content .middle form a{
     float: right;
     margin-right: 36px;
     font-family: PingFangSC-Regular;
     font-size: 12px;
-    color: #9FD7FF;
+    color: #797979;
     letter-spacing: 0;
     margin-top: 8px;
 }
 .login-box .content .middle form input.submit{
     width: 260px;
     height: 40px;
-    background: #6EC5C3;
+    background: #2399FF;
     border: 0;
     display: block;
     margin-left: 56px;
-    margin-top: 70px;
+    margin-top: 50px;
     color: white;
 }
 .login-box .content .bottom{
@@ -115,7 +132,7 @@
 .login-box .content .bottom p em{
     display: block;
     opacity: 0.4;
-    border: 0.5px solid #A9FFFF;
+    border: 0.5px solid #797979;
     width: 80px;
     float: left;
     margin-top: 6px;
@@ -123,7 +140,7 @@
 .login-box .content .bottom p a{
     font-family: PingFangSC-Regular;
     font-size: 12px;
-    color: #9FD7FF;
+    color: #797979;
     letter-spacing: 0;
     float: left;
     margin: 0 10px;
