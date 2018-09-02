@@ -1,0 +1,51 @@
+.team-box{
+    width: 750px;
+    height: 450px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin-left: -375px;
+    margin-top: -260px;
+    overflow: hidden;
+}
+.team-box .title{
+    font-size: 16px;
+    color: #9FD7FF;
+    height: 100px;
+    line-height: 100px;
+    text-align: center;
+}
+.team-box .title span{
+    color: #00FFFF;
+}
+
+.team-box .team-create{
+    float: left;
+    margin-left: 90px;
+}
+
+.team-box .team-select{
+    float: right;
+    margin-right: 90px;
+}
+.team-frame-box{
+    width: 270px;
+    height: 430px;
+}
+.team-frame-box .middle{
+    width: 100%;
+    height: 200px;
+    text-align: center;
+    box-sizing: border-box;
+    padding-top: 30px;
+}
+.team-frame-box .middle p{
+    color: #9FD7FF;
+}
+.team-frame-box .middle p span{
+    color: #01FFFF;
+}
+.team-frame-box .top{
+    background: url("../../img/teamProcess/img_team_bg_1.png");
+    background-size: 100% 100%;
+}
