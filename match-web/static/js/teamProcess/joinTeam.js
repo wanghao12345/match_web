@@ -7,7 +7,7 @@ $(function () {
         activeClass: 'activP' , //active 类样式定义
         clickBack:function(page){
             //page 所选页码
-            console.log(page)
+            requestTable(page);
         }
     })
 
@@ -15,3 +15,21 @@ $(function () {
 
 
 })
+/**
+ * 分页数据处理
+ * @param page
+ */
+function requestTable(page) {
+    ajax({
+        url: myUrl,
+        type: 'get',
+        dataType: 'json',
+        timeout: 1000,
+        success: function (data, status) {
+            console.log(data)
+        },
+        fail: function (err, status) {
+            console.log(err)
+        }
+    })
+}

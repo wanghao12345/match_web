@@ -3,12 +3,14 @@
     height: 100%;
     position: relative;
     background: #080A33;
+    box-sizing: border-box;
+    padding: 40px 0;
 }
 .box-out-content{
     width: 100%;
     height: 100%;
     box-sizing: border-box;
-    padding: 40px 0px;
+    /*padding: 40px 0px;*/
     overflow-y: auto;
 }
 .box-in-content{
@@ -38,6 +40,60 @@
     color: #00FFFF;
     float: left;
 }
+
+.header-nav{
+    width: 500px;
+    height: 100%;
+    position: absolute;
+    left: 50%;
+    margin-left: -250px;
+}
+.header-nav ul{
+    overflow: hidden;
+}
+.header-nav ul li{
+    float: left;
+    margin: 0 30px;
+}
+.header-nav ul li a{
+    font-size: 16px;
+    color: #9FD7FF;
+}
+.header-info-right{
+    width: 300px;
+    float: right;
+}
+.header-info-right a{
+
+}
+.header-info-right a img{
+    width: 22px;
+    margin-left: 15px;
+    line-height: 40px;
+}
+
+.header-info-right a.news{
+
+}
+.header-info-right a.news img{
+    margin-top: 10px;
+}
+
+.header-info-right a.email{
+
+}
+.header-info-right a.email img{
+    margin-top: 13px;
+}
+
+.header-info-right a.info-ID{
+    font-size: 16px;
+    color: #9FD7FF;
+    margin-left: 15px;
+}
+
+
+
 /*脚部*/
 .footer{
     width: 100%;
@@ -100,7 +156,25 @@
     z-index: 1;
 }
 
+/*滚动条*/
 
-
+/* 设置滚动条的样式 */
+::-webkit-scrollbar {
+    width:12px;
+}
+/* 滚动槽 */
+::-webkit-scrollbar-track {
+    -webkit-box-shadow:inset006pxrgba(0,0,0,0.3);
+    border-radius:10px;
+}
+/* 滚动条滑块 */
+::-webkit-scrollbar-thumb {
+    border-radius:10px;
+    background:rgba(0,0,0,0.1);
+    -webkit-box-shadow:inset006pxrgba(0,0,0,0.5);
+}
+::-webkit-scrollbar-thumb:window-inactive {
+    background: rgb(98, 202, 202);
+}
 
 
