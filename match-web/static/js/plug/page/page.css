@@ -1,0 +1,64 @@
+.page-nav{
+  width: 100%;
+  height: 30px;
+  box-sizing: border-box;
+  padding: 0px 150px;
+  margin-top: 20px;
+}
+
+
+.pagingUl{
+  float:right;
+  padding:0;
+  margin:0;
+  list-style: none;
+}
+.pagingUl li{
+  float: left;
+  width: 30px;
+  height: 30px;
+  list-style: 30px;
+  margin: 0 5px;
+  text-align: center;
+}
+.pagingUl li a{
+  text-decoration: none;
+  display: inline-block;
+  width: 25px;
+  height: 25px;
+  text-align: center;
+  line-height: 25px;
+  margin-top: 3px;
+  padding: 0;
+  /* background: #fafafa; */
+  font-size: 12px;
+  color: #9FD7FF;
+  /* border: 1px solid #ddd; */
+}
+
+.prv, .next {
+  width: 70px;
+  height: 30px;
+  float: left;
+  text-align: center;
+  line-height: 30px;
+  color: #9FD7FF;
+  font-size: 12px;
+  /*border: 1px solid #ddd;*/
+  cursor: pointer;
+}
+.first, .last {
+  width: 30px;
+  height: 30px;
+  font-size: 12px;
+  text-align: center;
+  line-height: 30px;
+  color: #9FD7FF;
+  margin: 0 5px;
+  /*border: 1px solid #ddd;*/
+  cursor: pointer;
+}
+.activP{
+  border: 1px solid #01FFFF;
+  border-radius: 4px;
+}

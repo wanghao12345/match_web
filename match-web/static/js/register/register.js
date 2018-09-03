@@ -3,7 +3,7 @@ $(function () {
      * 选择性别动画
      */
     $('input[name="sex"]').on('click', function () {
-        $(this).shake(2, 10, 400);
+        $(this).shake(1, 7, 500);
     })
 
 
