@@ -16,7 +16,7 @@ function countTime(time) {
     var endDate = new Date(time);
     var end = endDate.getTime();
     //时间差
-    var leftTime = end-now;
+    var leftTime = Math.abs(end-now);
     //定义变量 d,h,m,s保存倒计时的时间
     var d,h,m,s;
     if (leftTime>=0) {
