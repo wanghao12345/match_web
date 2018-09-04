@@ -158,7 +158,7 @@
 
 /* 设置滚动条的样式 */
 ::-webkit-scrollbar {
-    width:12px;
+    width:3px;
 }
 /* 滚动槽 */
 ::-webkit-scrollbar-track {
