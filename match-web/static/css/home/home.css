@@ -45,9 +45,10 @@
     margin-left: 5px;
 }
 .home-left-bottom .bottom-middle-icon{
-    width:70px;
-    height: 100%;
+    width: 70px;
+    height: 20px;
     float: left;
+    margin-top: 280px;
     position: relative;
 }
 .home-left-bottom .bottom-middle-icon em.top{
@@ -220,7 +221,7 @@
 }
 
 .home-right-box em.right{
-    width: 150px;
+    width: 159px;
     height: 0.5px;
     display: block;
     float: left;
@@ -236,13 +237,13 @@
 }
 .home-right-box .countTime-box .top{
     width: 100%;
-    height: 60%;
+    height: 65%;
     background: url("../../img/home/img_frame_style4_1.png");
     background-size: 100% 100%;
 }
 .home-right-box .countTime-box .bottom{
     width: 100%;
-    height: 40%;
+    height: 35%;
     background: url("../../img/home/img_frame_style4_3.png");
     background-size: 100% 100%;
 }
@@ -264,8 +265,27 @@
     display: block;
     margin: 0;
 }
-
-
+.home-right-box .countTime-box .countTime-content{
+    width: 100%;
+    height: 50px;
+    position: absolute;
+    top: 50%;
+    margin-top: -25px;
+    font-size: 30px;
+    line-height: 40px;
+    color: #01FFFF;
+    text-align: center;
+}
+.home-right-box .home-right-content{
+    width: 100%;
+    height: 400px;
+    background: red;
+}
+.home-right-box .home-right-content .home-dynamic{
+    width: 100%;
+    height: 350px;
+    background: blue;
+}
 
 
 
