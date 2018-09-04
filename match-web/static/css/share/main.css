@@ -5,7 +5,7 @@
 .flex-body .footer-box{-webkit-flex-shrink: 0;flex-shrink: 0;}
 .header-box{display: -webkit-flex;display: -moz-flex;display: -ms-flex;display: -o-flex;display: flex;justify-content: center;}
 .footer-box{font-size: 14px;height: 46px;display: -webkit-flex;display: -moz-flex;display: -ms-flex;display: -o-flex;display: flex;-ms-align-items: center;align-items: center;justify-content: center;}
-.full-column{flex-grow: 1;}
+.full-column{flex-grow: 1;background: #1A2146;}
 .main-box{flex-grow: 1;display: -webkit-flex;display: -moz-flex;display: -ms-flex;display: -o-flex;display: flex;justify-content: center;}
 .area{width: 1200px;display: -webkit-flex;display: -moz-flex;display: -ms-flex;display: -o-flex;display: flex;}
 .header-box{border-bottom: 1px solid #2f2e6b;}
@@ -26,7 +26,7 @@
 .m-msg .msg-1{width: 14px;height: 14px;}
 .m-msg .msg-2{width: 16px;height: 11px;}
 .m-nav{height: 48px;display: -webkit-flex;display: -moz-flex;display: -ms-flex;display: -o-flex;display: flex;-ms-align-items: center;align-items: center;}
-.m-nav li{flex-grow: 1;text-align: center;}
+.m-nav li{width: 140px;text-align: center;}
 .m-nav a{color: #9FD7FF;}
 
 .mgb-10{margin-bottom: 10px;}
