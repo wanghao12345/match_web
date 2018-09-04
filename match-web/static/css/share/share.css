@@ -31,7 +31,7 @@
     overflow: hidden;
 }
 .header img{
-    margin-left: 50px;
+    margin-left: 90px;
     margin-top: 8px;
     float: left;
 }
@@ -46,21 +46,21 @@
     height: 100%;
     position: absolute;
     left: 50%;
-    margin-left: -250px;
+    margin-left: -170px;
 }
 .header-nav ul{
     overflow: hidden;
 }
 .header-nav ul li{
     float: left;
-    margin: 0 30px;
+    margin: 0 20px;
 }
 .header-nav ul li a{
     font-size: 16px;
     color: #9FD7FF;
 }
 .header-info-right{
-    width: 300px;
+    width: 245px;
     float: right;
 }
 .header-info-right a{
@@ -91,8 +91,6 @@
     color: #9FD7FF;
     margin-left: 15px;
 }
-
-
 
 /*脚部*/
 .footer{
@@ -178,3 +176,57 @@
 }
 
 
+/*table样式*/
+table.table{
+    width: 100%;
+}
+table.table tr{
+    height: 32px;
+    line-height: 32px;
+    text-align: center;
+    font-size: 12px;
+    color: #71a1c4;
+
+}
+table.table tr th{
+    background: #232A57;
+}
+table.table tr td:nth-child(2){
+    color: #62caca;
+}
+table.table tr td a{
+    color: #71a1c4;
+}
+table.table tr:nth-child(1){
+
+}
+table.table tr:nth-child(2){
+    background: #080A33;
+}
+table.table tr:nth-child(3){
+    background: #262f54;
+}
+table.table tr:nth-child(4){
+    background: #080A33;
+}
+table.table tr:nth-child(5){
+    background: #262f54;
+}
+table.table tr:nth-child(6){
+    background: #080A33;
+}
+table.table tr:nth-child(7){
+    background: #262f54;
+}
+table.table tr:nth-child(8){
+    background: #080A33;
+}
+table.table tr:nth-child(9){
+    background: #262f54;
+}
+table.table tr:nth-child(10){
+    background: #080A33;
+}
+table.table tr:nth-child(11){
+    background: #262f54;
+}
