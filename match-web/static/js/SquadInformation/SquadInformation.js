@@ -4,7 +4,7 @@ $(function () {
      */
     $('.j-page-nav-1').page({
         leng: 66,//分页总数
-        activeClass: 'activP' , //active 类样式定义
+        activeClass: 'activP1' , //active 类样式定义
         clickBack:function(page){
             //page 所选页码
             requestTable(page);
@@ -13,7 +13,7 @@ $(function () {
 
     $('.j-page-nav-2').page({
         leng: 66,//分页总数
-        activeClass: 'activP' , //active 类样式定义
+        activeClass: 'activP2' , //active 类样式定义
         clickBack:function(page){
             //page 所选页码
             requestTable(page);
