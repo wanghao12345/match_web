@@ -33,8 +33,9 @@
 .mgb-20{margin-bottom: 20px;}
 
 .color-orange{color: #EF720F;}
+.color-sky{color: #01FFFF;}
 
-
-
-
-
+.ui-progress{display: -webkit-flex;display: -moz-flex;display: -ms-flex;display: -o-flex;display: flex;-ms-align-items: center;align-items: center;margin-right: 20px;}
+.ui-progress .line{margin-right: 10px;flex-grow: 1;background: #464764;}
+.ui-progress .line i{height: 5px;display: block;background: #01FFFF;}
+.ui-progress .num{color: #01FFFF;}
