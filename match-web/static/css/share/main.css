@@ -1,8 +1,13 @@
-.flex-body{display: -webkit-flex;display: -moz-flex;display: -ms-flex;display: -o-flex;display: flex;-webkit-flex-direction: column;-moz-flex-direction: column;-ms-flex-direction: column;-o-flex-direction: column;flex-direction: column;background: #080a33;}
-.header-box{-webkit-flex-shrink: 0;flex-shrink: 0;display: -webkit-flex;display: -moz-flex;display: -ms-flex;display: -o-flex;display: flex;justify-content: center;}
-.footer-box{-webkit-flex-shrink: 0;flex-shrink: 0;height: 46px;display: -webkit-flex;display: -moz-flex;display: -ms-flex;display: -o-flex;display: flex;-ms-align-items: center;align-items: center;justify-content: center;font-size: 14px;}
+.flex-body{display: -webkit-flex;display: -moz-flex;display: -ms-flex;display: -o-flex;display: flex;-webkit-flex-direction: column;-moz-flex-direction: column;-ms-flex-direction: column;-o-flex-direction: column;flex-direction: column;}
+.my-body{background: #080a33;color: #01FFFF;}
+.my-body a{color: #01FFFF;}
+.flex-body .header-box{-webkit-flex-shrink: 0;flex-shrink: 0;}
+.flex-body .footer-box{-webkit-flex-shrink: 0;flex-shrink: 0;}
+.header-box{display: -webkit-flex;display: -moz-flex;display: -ms-flex;display: -o-flex;display: flex;justify-content: center;}
+.footer-box{font-size: 14px;height: 46px;display: -webkit-flex;display: -moz-flex;display: -ms-flex;display: -o-flex;display: flex;-ms-align-items: center;align-items: center;justify-content: center;}
+.full-column{flex-grow: 1;}
 .main-box{flex-grow: 1;display: -webkit-flex;display: -moz-flex;display: -ms-flex;display: -o-flex;display: flex;justify-content: center;}
-.area{width: 1000px;display: -webkit-flex;display: -moz-flex;display: -ms-flex;display: -o-flex;display: flex;}
+.area{width: 1200px;display: -webkit-flex;display: -moz-flex;display: -ms-flex;display: -o-flex;display: flex;}
 .header-box{border-bottom: 1px solid #2f2e6b;}
 .header-box .area{position: relative;height: 48px;display: -webkit-flex;display: -moz-flex;display: -ms-flex;display: -o-flex;display: flex;}
 .header-box .logo{height: 48px;display: -webkit-flex;display: -moz-flex;display: -ms-flex;display: -o-flex;display: flex;-ms-align-items: center;align-items: center;color: #00FFFF;}
@@ -24,13 +29,10 @@
 .m-nav li{flex-grow: 1;text-align: center;}
 .m-nav a{color: #9FD7FF;}
 
+.mgb-10{margin-bottom: 10px;}
+.mgb-20{margin-bottom: 20px;}
 
-
-
-
-
-
-
+.color-orange{color: #EF720F;}
 
 
 
