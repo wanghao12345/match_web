@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>个人信息-未加入小队</title>
+  <title>SquadInformation(5-4.个人信息-未加入小队)</title>
   <link rel="shortcut icon" href="../../static/img/share/favicon.ico" type="image/x-icon">
   <link rel="stylesheet" href="../../static/css/share/reset.css">
   <link rel="stylesheet" href="../../static/css/share/share.css">
@@ -16,6 +16,8 @@
   <script src="../../static/js/plug/echart/myPie-core.js"></script>
   <script src="../../static/js/plug/page/jquery.pagination.js"></script>
   <script src="../../static/js/plug/page/my-page.js"></script>
+  <script src="../../static/js/plug/KOTip/KOTip.js"></script>
+  <script src="../../static/js/plug/KOTip/main-msg.js"></script>
   <script src="../../static/js/SquadInformation/SquadInformation.js"></script>
 </head>
 <body class="my-body">
@@ -36,10 +38,21 @@
 	    </div>
 	    <div class="msgs">
 	    	<ul class="m-msg">
-	    		<li><a href=""><img src="../../static/img/share/msg-1.jpg" class="msg-1" alt=""></a></li>
-	    		<li><a href=""><img src="../../static/img/share/msg-2.jpg" class="msg-2" alt=""></a></li>
-	    		<li class="user-li"><a href="">用户ID</a><div class="logout"><a href="">退出登录</a></div></li>
-	    	</ul>
+          <li>
+            <a href=""><img src="../../static/img/share/msg-1.jpg" class="msg-1" alt=""></a>
+            <div class="msg-con effect-hidden j-msg-con">
+              <div class="cont">紧急通知！紧急通知！紧急通知！紧急通知！紧急通知！紧急通知！紧急通知！紧急通知！紧急通知！紧急通知！紧急通知！</div>
+              <div class="end">我知道了</div>
+            </div>
+          </li>
+          <li class="msg-mail">
+            <a href=""><img src="../../static/img/share/msg-2.jpg" class="msg-2" alt=""></a>
+          </li>
+          <li class="user-li">
+            <a href="">用户ID</a>
+            <div class="logout"><a href="">退出登录</a></div>
+          </li>
+        </ul>
 	    	
 	    </div>
 	  </div>
