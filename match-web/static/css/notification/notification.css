@@ -1,0 +1,4 @@
+.m-message-record{color: #9FD7FF;}
+.m-message-record li{border: 1px solid #28395A;background: #080A33;margin-bottom: 20px;font-size: 14px;}
+.m-message-record .cont{padding: 20px;min-height: 40px;line-height: 20px;border-bottom: 1px solid #28395A;}
+.m-message-record .time{padding: 8px 20px;text-align: right;color: #537099;}
