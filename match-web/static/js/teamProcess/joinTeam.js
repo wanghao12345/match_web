@@ -8,6 +8,14 @@ $(function(){
             myPage();
         }
     });
+    $('table#data').on('click', 'tr td a.join', function () {
+        var data = {
+            id: $(this).attr('data-id')
+        }
+        joinTeam(data);
+    })
+
+
     myPage();
 })
 
@@ -64,7 +72,7 @@ function requestTable(params, api) {
                         '<td>'+item.name+'</td>\n' +
                         '<td>'+item.created_at+'</td>\n' +
                         '<td>'+item.users.join(' ')+'</td>\n' +
-                        '<td><a>申请加入</a></td>\n' +
+                        '<td><a class="join" data-id="'+item.id+'">申请加入</a></td>\n' +
                         '</tr>');
                 })
                 $('table#data').append(arr.join(''));
@@ -72,6 +80,33 @@ function requestTable(params, api) {
         },
         fail: function (err) {
             console.log(err)
+        }
+    })
+}
+
+/**
+ * 加入队伍请求
+ * @param params
+ */
+function joinTeam(params) {
+    $.ajax({
+        url: 'http://s.hackcoll.com:3334/accounts/team/request/create',
+        type: 'post',
+        data:params,
+        dataType: 'json',
+        timeout: 1000,
+        success: function (data) {
+            if(data.code == 200){
+                layer.alert(data.message, function () {
+
+                });
+            }
+            if(data.code == 400){
+                layer.alert(data.message);
+            }
+        },
+        fail: function (err) {
+            layer.alert(err);
         }
     })
 }
