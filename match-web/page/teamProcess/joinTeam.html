@@ -6,14 +6,44 @@
     <link rel="shortcut icon" href="../../static/img/share/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="../../static/css/share/reset.css">
     <link rel="stylesheet" href="../../static/css/share/share.css">
-    <link rel="stylesheet" href="../../static/js/plug/page/page.css">
+    <link rel="stylesheet" href="../../static/js/plug/page/my-page.css">
     <link rel="stylesheet" href="../../static/css/teamProcess/joinTeam.css">
 </head>
 <body>
 <div class="box">
-    <div class="header">
-        <img src="../../static/img/share/img_logo.png" alt="logo">
-        <span class="title">山西省大学生信息安全技能竞赛</span>
+    <div class="header-box">
+        <div class="area">
+            <div class="logo">
+                <img src="../../static/img/share/img_logo.png" alt="logo">
+                <div class="text">山西省大学生信息安全技能竞赛</div>
+            </div>
+            <div class="nav">
+                <ul class="m-nav">
+                    <li><a href="">所有队伍</a></li>
+                    <li><a href="">所有题目</a></li>
+                    <li><a href="">积分榜</a></li>
+                    <li><a href="">比赛说明</a></li>
+                </ul>
+            </div>
+            <div class="msgs">
+                <ul class="m-msg">
+                    <li>
+                        <a href=""><img src="../../static/img/share/msg-1.jpg" class="msg-1" alt=""></a>
+                        <div class="msg-con effect-hidden j-msg-con">
+                            <div class="cont">紧急通知！紧急通知！紧急通知！紧急通知！紧急通知！紧急通知！紧急通知！紧急通知！紧急通知！紧急通知！紧急通知！</div>
+                            <div class="end">我知道了</div>
+                        </div>
+                    </li>
+                    <li class="msg-mail">
+                        <a href=""><img src="../../static/img/share/msg-2.jpg" class="msg-2" alt=""></a>
+                    </li>
+                    <li class="user-li">
+                        <a href="">用户ID</a>
+                        <div class="logout"><a href="">退出登录</a></div>
+                    </li>
+                </ul>
+            </div>
+        </div>
     </div>
     <div class="box-out-content">
         <div class="box-in-content">
@@ -24,10 +54,10 @@
                 </div>
                 <div class="table-content">
                     <div class="soso">
-                        <input type="text" autocomplete="off" placeholder="输入小队名称、搜索小队">
+                        <input type="text" id="search-input" autocomplete="off" placeholder="输入小队名称、搜索小队">
                     </div>
                     <div class="table">
-                        <table>
+                        <table id="data">
                             <tr>
                                 <th>序号</th>
                                 <th>队伍名称</th>
@@ -35,91 +65,21 @@
                                 <th>小队成员</th>
                                 <th>操作</th>
                             </tr>
-                            <tr>
-                                <td>1</td>
-                                <td>旺旺旺</td>
-                                <td>2018-8-12</td>
-                                <td>小王 小明 小李</td>
-                                <td><a href="#">申请加入</a></td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>旺旺旺</td>
-                                <td>2018-8-12</td>
-                                <td>小王 小明 小李</td>
-                                <td><a href="#">申请加入</a></td>
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td>旺旺旺</td>
-                                <td>2018-8-12</td>
-                                <td>小王 小明 小李</td>
-                                <td><a href="#">申请加入</a></td>
-                            </tr>
-                            <tr>
-                                <td>4</td>
-                                <td>旺旺旺</td>
-                                <td>2018-8-12</td>
-                                <td>小王 小明 小李</td>
-                                <td><a href="#">申请加入</a></td>
-                            </tr>
-                            <tr>
-                                <td>5</td>
-                                <td>旺旺旺</td>
-                                <td>2018-8-12</td>
-                                <td>小王 小明 小李</td>
-                                <td><a href="#">申请加入</a></td>
-                            </tr>
-                            <tr>
-                                <td>6</td>
-                                <td>旺旺旺</td>
-                                <td>2018-8-12</td>
-                                <td>小王 小明 小李</td>
-                                <td><a href="#">申请加入</a></td>
-                            </tr>
-                            <tr>
-                                <td>7</td>
-                                <td>旺旺旺</td>
-                                <td>2018-8-12</td>
-                                <td>小王 小明 小李</td>
-                                <td><a href="#">申请加入</a></td>
-                            </tr>
-                            <tr>
-                                <td>8</td>
-                                <td>旺旺旺</td>
-                                <td>2018-8-12</td>
-                                <td>小王 小明 小李</td>
-                                <td><a href="#">申请加入</a></td>
-                            </tr>
-                            <tr>
-                                <td>9</td>
-                                <td>旺旺旺</td>
-                                <td>2018-8-12</td>
-                                <td>小王 小明 小李</td>
-                                <td><a href="#">申请加入</a></td>
-                            </tr>
-                            <tr>
-                                <td>10</td>
-                                <td>旺旺旺</td>
-                                <td>2018-8-12</td>
-                                <td>小王 小明 小李</td>
-                                <td><a href="#">申请加入</a></td>
-                            </tr>
                         </table>
-                        <div class="page-nav"></div>
+                        <div class="m-page page-center j-my-page"></div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <!--<div class="team-box-bg"></div>-->
     <div class="footer">
         <span class="left">主办单位：山西省教育局  承办单位：山西省云亭科技有限公司  协办单位：上海来晨网络科技有限公司</span>
         <span class="right">上海来晨网络科技有限公司©2018 All Rights Reserved. 沪ICP备17040130号</span>
     </div>
 </div>
 <script src="../../static/js/jquery/jquery-2.1.4.js"></script>
-<script src="../../static/js/plug/page/page.js"></script>
+<script src="../../static/js/plug/layer/layer.js"></script>
+<script src="../../static/js/plug/page/jquery.pagination.js"></script>
 <script src="../../static/js/teamProcess/joinTeam.js"></script>
 </body>
 </html>

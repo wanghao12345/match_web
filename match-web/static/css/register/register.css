@@ -1,16 +1,17 @@
 body{
-    /*min-height: 700px;*/
+    min-width: 1000px;
+    min-height: 900px;
+}
+.box{
+    padding: 0;
 }
 .box-out-content{
     width: 100%;
-    height: 100%;
-    box-sizing: border-box;
-    padding: 40px 0px;
-    overflow-y: auto;
+    height: auto!important;
+    overflow: hidden;
 }
 .box-in-content{
     width: 100%;
-    height: 700px;
 }
 .register-box{
     width: 620px;

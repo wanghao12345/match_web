@@ -1,3 +1,15 @@
+.box{
+    padding: 0;
+}
+.box-out-content{
+    overflow: hidden;
+    height: auto;
+    background: #080A33;
+}
+.footer{
+    position: relative;
+    bottom: 0;
+}
 .team-box{
     width: 920px;
     height: 620px;
