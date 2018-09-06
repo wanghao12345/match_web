@@ -102,6 +102,16 @@
             color: options.textColor
           }
         },
+        tooltip : {
+          trigger: 'item',
+          axisPointer: {
+              type: 'cross',
+              label: {
+                  backgroundColor: '#6a7985'
+              }
+          },
+          formatter:options.tipFormatter
+        },
         textStyle:{fontSize:font*1.2,fontWeight:'normal',fontFamily:"microsoft yahei"},
         legend: {
           data: options.dataName,
