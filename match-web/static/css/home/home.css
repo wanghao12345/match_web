@@ -29,7 +29,7 @@ body{
     width: 200px;
     height: 100%;
     float: left;
-    background: rgba(191, 191, 191, 0.2);
+    background: rgba(117, 117, 117, 0.2);
     box-sizing: border-box;
     padding-bottom: 50px;
     position: relative;
@@ -162,7 +162,7 @@ body{
     height: 100%;
     float: left;
     box-sizing: border-box;
-    background: rgba(247, 247, 247, 0.1);
+    background: rgba(123, 116, 116, 0.1);
     position: relative;
 }
 .grap-box{
@@ -312,6 +312,7 @@ body{
     position: absolute;
     left: -200px;
     top: -130px;
+    /*top: -200px;*/
     background: url("../../img/home/img_frame_style5.png");
     background-size: 100% 100%;
     box-sizing: border-box;
@@ -352,7 +353,7 @@ body{
     height: 100%;
     float: left;
     background: red;
-    background: rgba(191, 191, 191, 0.2);
+    background: rgba(117, 117, 117, 0.2);
 }
 .home-right-box em.left{
     width: 6px;
