@@ -45,6 +45,7 @@
     barPosition:'top',//标签的位置，可选：'inside','top','left','right','bottom',其他请参阅Echart...
     axisTickX:false,
     axisTickY:false,
+    tipFormatter:{},
     spNum:0,//y轴坐标分几段
     spInt:3,//强制分段
     inRange:'#43ba76',
@@ -144,7 +145,16 @@
         }
       }
       /*当x轴字太长 E*/
-      var option={color:textColor,title:{text:options.title,left:ttAlign,show:options.title,textStyle:{fontSize:font*1.2,fontWeight:'normal',fontFamily:"microsoft yahei"}},legend: {data:labletip,textStyle:{color:textColor,fontSize:font,fontStyle:"normal",fontFamily:"microsoft yahei"},x:"right"},grid:{x:(2+options.x_gap[0])*font+5,y:(2+_this.y_gap[0])*font,x2:(options.x_gap[1])*font*1.2,y2:(2+_this.y_gap[1])*font*1.25,borderWidth:0},calculable:false,xAxis:{nameTextStyle:{color:options.XNameColor,align:"left"},show:options.XYnumShow,name:options.newUnit?"":options.Xunit,verticalAlign:"bottom",type:"category",nameGap:6,boundaryGap:bound,data:_this.Xarr,textStyle:{color:textColor,fontSize:font,fontStyle:"normal",fontFamily:"microsoft yahei"},splitLine:{show:options.splitLine,lineStyle:{color:options.splitLineColor}},axisLine:{show:1,lineStyle:{width:options.XWeight,color:options.XColor}},axisTick:{show:options.axisTickX},axisLabel:{formatter:function(val,ind){if(val){return options.longX?val.split("").join("\n"):val}else{return ""}},textStyle:{color:textColor,fontSize:font*1.1},interval:0,rotate:0,color:textColor}},yAxis:{nameTextStyle:{color:options.YNameColor,align:"left"},interval:options.interval,splitNumber:options.spNum,nameLocation:options.newUnit?"start":"end",nameGap:font*0.7,show:options.XYnumShow,name:options.Yunit+(options.newUnit?"\t\t\t\t\t\t\t\t":""),type:"value",splitLine:{show:options.areaLineShow,lineStyle:{color:options.arealinecolor}},axisLabel:{formatter:"{value}",textStyle:{color:textColor,fontSize:font*1.1}},axisTick:{show:options.axisTickY},axisLine:{show:1,lineStyle:{width:options.YWeight,color:options.YColor}}},series:seriesArr_All,animation:true,animationDuration:2000};
+      var option={color:textColor,tooltip : {
+        trigger: 'axis',
+        axisPointer: {
+            type: 'cross',
+            label: {
+                backgroundColor: '#6a7985'
+            }
+        },
+        formatter:options.tipFormatter
+    },title:{text:options.title,left:ttAlign,show:options.title,textStyle:{fontSize:font*1.2,fontWeight:'normal',fontFamily:"microsoft yahei"}},legend: {data:labletip,textStyle:{color:textColor,fontSize:font,fontStyle:"normal",fontFamily:"microsoft yahei"},x:"right"},grid:{x:(2+options.x_gap[0])*font+5,y:(2+_this.y_gap[0])*font,x2:(options.x_gap[1])*font*1.2,y2:(2+_this.y_gap[1])*font*1.25,borderWidth:0},calculable:false,xAxis:{nameTextStyle:{color:options.XNameColor,align:"left"},show:options.XYnumShow,name:options.newUnit?"":options.Xunit,verticalAlign:"bottom",type:"category",nameGap:6,boundaryGap:bound,data:_this.Xarr,textStyle:{color:textColor,fontSize:font,fontStyle:"normal",fontFamily:"microsoft yahei"},splitLine:{show:options.splitLine,lineStyle:{color:options.splitLineColor}},axisLine:{show:1,lineStyle:{width:options.XWeight,color:options.XColor}},axisTick:{show:options.axisTickX},axisLabel:{formatter:function(val,ind){if(val){return options.longX?val.split("").join("\n"):val}else{return ""}},textStyle:{color:textColor,fontSize:font*1.1},interval:0,rotate:0,color:textColor}},yAxis:{nameTextStyle:{color:options.YNameColor,align:"left"},interval:options.interval,splitNumber:options.spNum,nameLocation:options.newUnit?"start":"end",nameGap:font*0.7,show:options.XYnumShow,name:options.Yunit+(options.newUnit?"\t\t\t\t\t\t\t\t":""),type:"value",splitLine:{show:options.areaLineShow,lineStyle:{color:options.arealinecolor}},axisLabel:{formatter:"{value}",textStyle:{color:textColor,fontSize:font*1.1}},axisTick:{show:options.axisTickY},axisLine:{show:1,lineStyle:{width:options.YWeight,color:options.YColor}}},series:seriesArr_All,animation:true,animationDuration:2000};
       if(options.weather){
         option.yAxis.min = Ymin;
         option.yAxis.max = Ymax;

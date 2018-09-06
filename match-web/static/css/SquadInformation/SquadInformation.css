@@ -68,11 +68,9 @@ input.m-search::-webkit-input-placeholder{color:#537099;}
 .align-left td{padding-left:10px;text-align: left;}
 
 
-.i-btn{vertical-align: middle;display: inline-block;margin-right: 25px;}
-.i-btn span{vertical-align: middle;color: #00FFFF;}
-.i-btn:before{content:"";display: inline-block;width: 16px;height: 16px;vertical-align: middle;margin-right: 6px;-webkit-border-radius: 50%;-moz-border-radius:50%;border-radius: 50%;}
-.i-btn.i-btn-ok:before{background: url(../../img/SquadInformation/ok.jpg) center/contain no-repeat;}
-.i-btn.i-btn-no:before{background: url(../../img/SquadInformation/no.jpg) center/contain no-repeat;}
+.i-btn{vertical-align: middle;display: inline-block;padding-left: 25px;margin-right: 25px;vertical-align: middle;border: 0;color: #00FFFF;cursor: pointer;}
+.i-btn.i-btn-ok{background: url(../../img/SquadInformation/ok.png) left center/contain no-repeat;}
+.i-btn.i-btn-no{margin-right: 0;background: url(../../img/SquadInformation/no.png) left center/contain no-repeat;}
 
 .table-content{min-height:400px;}
 .page-center{width: 600px;margin-left:auto;margin-right:auto;}
