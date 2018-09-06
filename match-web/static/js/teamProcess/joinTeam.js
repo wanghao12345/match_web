@@ -104,7 +104,7 @@ function joinTeam(params) {
         success: function (data) {
             if(data.code == 200){
                 layer.alert(data.message, function () {
-
+                    window.location.href='/';
                 });
             }
             if(data.code == 400){
