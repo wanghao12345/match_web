@@ -263,7 +263,7 @@ $(function(){
   /*线图-1.得分时间 S*/
   $(".echart-line").loadEchart({
   	dataArr:[["1","0","-","15","25","25","15","15"]],
-  	Yarr:["07:00","08:00","09:00","10:00","11:00","12:00","13:00"],
+  	Yarr:getDate(8),//希望获得的小时数量，这里代表往前8个小时的数组集合
   	lineWeight:1,
   	dianWeight:2,
   	areaStyle:true,
@@ -286,6 +286,7 @@ $(function(){
     arealinecolor:"rgba(148,176,255,0.2)",
   	markAreaColor:'rgba(0,130,255,0.20)',
   	echartHeight: 0.5,
+    tipFormatter:'时间：{b}<br />分值：{c}'
   });
   /*线图-1.得分时间 E*/
 
@@ -316,7 +317,7 @@ $(function(){
   /*线图-2.得分统计 S*/
   $(".echart-line-2").loadEchart({
     dataArr:[["1","0","-","15","25","25","15","15"]],
-    Yarr:["07:00","08:00","09:00","10:00","11:00","12:00","13:00"],
+    Yarr:getDate(8),//希望获得的小时数量，这里代表往前8个小时的数组集合
     lineWeight:1,
     dianWeight:2,
     areaStyle:true,
@@ -339,6 +340,7 @@ $(function(){
     arealinecolor:"rgba(148,176,255,0.2)",
     markAreaColor:'rgba(0,130,255,0.20)',
     echartHeight: 0.3,
+    tipFormatter:'时间：{b}<br />分值：{c}'
   });
   /*线图-2.得分统计 E*/
 

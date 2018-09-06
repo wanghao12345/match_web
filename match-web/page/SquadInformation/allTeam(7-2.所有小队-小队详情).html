@@ -223,50 +223,9 @@
 
 <script>
 $(function(){
-	/*雷达图 S*/
-  $(".echart-radia").loadRadar({
-  	dataArr:[[23, 124, 73, 17, 45]],
-  	indicator:[{ name: '渗透', max: 30,num:23 },
-            	{ name: 'PWIN', max: 300,num:124 },
-            	{ name: 'WEB', max: 300,num:73 },
-            	{ name: '密码', max: 300,num:17 },
-            	{ name: '逆向', max: 300,num:45 }],
-    radius:"60%",
-    center:['50%', '55%'],
-    dataNumShow:false,
-    echartHeight: 0.7,
-    fontCorr:1.6
-    });
-  /*雷达图 E*/
 
-  /*线图-1.得分时间 S*/
-  $(".echart-line").loadEchart({
-  	dataArr:[["1","0","-","15","25","25","15","15"]],
-  	Yarr:["07:00","08:00","09:00","10:00","11:00","12:00","13:00"],
-  	lineWeight:1,
-  	dianWeight:2,
-  	areaStyle:true,
-  	bound:false,
-    numShow:false,
-  	x_gap:[2.5,1.5],
-  	XWeight:0,
-  	YWeight:0,
-  	Yunit:"分",
-  	smooth:false,
-  	minFont:10,
-    Y_val:[0,100],
-    textColor:"#9FD7FF",
-  	linecolor:["#01FFFF"],
-  	diancolor:["#01FFFF"],
-    numcolor:["#01FFFF"],
-    XNameColor:"#9FD7FF",
-    YNameColor:"#9FD7FF",
-    areaColor:["rgba(132,175,177,0.35)"],
-    arealinecolor:"rgba(148,176,255,0.2)",
-  	markAreaColor:'rgba(0,130,255,0.20)',
-  	echartHeight: 0.5,
-  });
-  /*线图-1.得分时间 E*/
+
+  
 
 
   /*饼图-挑战示意图-1 S*/
@@ -295,7 +254,7 @@ $(function(){
   /*线图-2.得分统计 S*/
   $(".echart-line-2").loadEchart({
     dataArr:[["1","0","-","15","25","25","15","15"]],
-    Yarr:["07:00","08:00","09:00","10:00","11:00","12:00","13:00"],
+    Yarr:getDate(8),//希望获得的小时数量，这里代表往前8个小时的数组集合
     lineWeight:1,
     dianWeight:2,
     areaStyle:true,
@@ -317,7 +276,8 @@ $(function(){
     areaColor:["rgba(132,175,177,0.35)"],
     arealinecolor:"rgba(148,176,255,0.2)",
     markAreaColor:'rgba(0,130,255,0.20)',
-    echartHeight: 0.5
+    echartHeight: 0.5,
+    tipFormatter:'时间：{b}<br />分值：{c}'
   });
   /*线图-2.得分统计 E*/
 
