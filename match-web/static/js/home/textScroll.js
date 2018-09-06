@@ -27,7 +27,7 @@
             window.setInterval(function () {
                 $(that.outBox).find(that.itemBox + ':first').animate({
                     marginTop: (itemHeight * (-1)) + 'px'
-                }, 1000, function () {
+                }, 2000, function () {
                     var firstItem = $(that.outBox).children(that.itemBox).eq(0);
                     $(that.outBox).append(firstItem);
                     $(this).css({
@@ -35,16 +35,9 @@
                     })
                 })
 
-            }, 4000)
+            }, 5000)
         }else{
             console.log('达不到滚动条件');
         }
     }
-
-
-
-
-
-
-
 }, "textScroll"));

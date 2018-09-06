@@ -168,10 +168,70 @@ body{
 .grap-box{
     width: 100%;
     height: 100%;
+    position: relative;
     background: url("../../img/home/img_star_bg.png");
     background-size: 100% 100%;
 }
+.grap-box .star-box{
+    position: absolute;
+    cursor: pointer;
+}
+.grap-box .star-box .star-top{
+    width: 160px;
+    height: 160px;
+    text-align: center;
+}
+.grap-box .star-box .star-top img{
 
+}
+.grap-box .star-box .star-bottom{
+    text-align: center;
+    font-size: 15px;
+    line-height: 20px;
+    color: #9FD7FF;
+}
+.grap-box .star-box1{
+    left: 400px;
+    top: 250px;
+}
+.grap-box .star-box1 .star-bottom{
+    margin-top: -30px;
+}
+.grap-box .star-box2{
+    left: 180px;
+    top: 235px;
+}
+.grap-box .star-box2 .star-bottom{
+    margin-top: -70px;
+}
+.grap-box .star-box3{
+    left: 520px;
+    top: 120px;
+}
+.grap-box .star-box3 .star-bottom{
+    margin-top: -70px;
+}
+.grap-box .star-box4{
+    left: 100px;
+    top: 380px;
+}
+.grap-box .star-box4 .star-bottom{
+    margin-top: -40px;
+}
+.grap-box .star-box5{
+    left: 130px;
+    top: 88px;
+}
+.grap-box .star-box5 .star-bottom{
+    margin-top: -72px;
+}
+.grap-box .star-box6{
+    left: 550px;
+    top: 470px;
+}
+.grap-box .star-box6 .star-bottom{
+    margin-top: -50px;
+}
 .home-right-box{
     width: 250px;
     height: 100%;

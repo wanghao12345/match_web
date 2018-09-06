@@ -14,7 +14,7 @@ $(function(){
     });
     $('table#data').on('click', 'tr td a.join', function () {
         var data = {
-            id: $(this).attr('data-id')
+            team: $(this).attr('data-id')
         }
         joinTeam(data);
     })
