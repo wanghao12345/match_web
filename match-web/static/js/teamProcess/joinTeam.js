@@ -5,7 +5,11 @@ $(function(){
     $('input#search-input').bind('keyup', function(event) {
         if (event.keyCode == "13") {
             //回车执行查询
-            myPage();
+            if($(this).val()==''){
+                myPage('http://s.hackcoll.com:3334/accounts/team-page');
+            }else{
+                myPage('http://s.hackcoll.com:3334/accounts/search-team');
+            }
         }
     });
     $('table#data').on('click', 'tr td a.join', function () {
@@ -15,8 +19,7 @@ $(function(){
         joinTeam(data);
     })
 
-
-    myPage();
+    myPage('http://s.hackcoll.com:3334/accounts/team-page');
 })
 
 
@@ -25,7 +28,7 @@ $(function(){
  * 分页
  * @type {*|jQuery}
  */
-function myPage(num) {
+function myPage(url) {
     $('.j-my-page').pagination({
         pageCount: 0, //初始化页数
         showData: 10,//每页显示的条数
@@ -34,7 +37,7 @@ function myPage(num) {
                 name: $('input#search-input').val(),
                 page: api.getCurrent()
             };
-            requestTable(data);
+            requestTable(url,data);
         }
     },function(api){
         api.$el.siblings("i.first").html("共"+api.getPageCount()+"页");
@@ -42,7 +45,7 @@ function myPage(num) {
             name: $('input#search-input').val(),
             page: api.getCurrent()
         };
-        requestTable(data, api);
+        requestTable(url,data, api);
     });
 }
 
@@ -51,11 +54,11 @@ function myPage(num) {
  * 分页数据处理
  * @param page
  */
-function requestTable(params, api) {
+function requestTable(myUrl,params, api) {
     $.ajax({
-        url: 'http://s.hackcoll.com:3334/accounts/team-page/?page=1',
+        url: myUrl,
         type: 'get',
-        data:{},
+        data:params,
         dataType: 'json',
         timeout: 1000,
         success: function (data) {
@@ -67,14 +70,17 @@ function requestTable(params, api) {
                 $('table#data tr.data-tr').remove();
                 var tableData = data.message;
                 var arr = [];
-                tableData.forEach(function (item,index) {
-                    arr.push('<tr class="data-tr"><td>'+index+'</td>\n' +
-                        '<td>'+item.name+'</td>\n' +
-                        '<td>'+item.created_at+'</td>\n' +
-                        '<td>'+item.users.join(' ')+'</td>\n' +
-                        '<td><a class="join" data-id="'+item.id+'">申请加入</a></td>\n' +
+                for (var i = 0; i < 10; i++ ){
+                    if(!tableData[i]){
+                        break;
+                    }
+                    arr.push('<tr class="data-tr"><td>'+(i+1)+'</td>\n' +
+                        '<td>'+tableData[i].name+'</td>\n' +
+                        '<td>'+tableData[i].created_at+'</td>\n' +
+                        '<td>'+tableData[i].users.join('、')+'</td>\n' +
+                        '<td><a class="join" href="javascript:;" data-id="'+tableData[i].team_id+'">申请加入</a></td>\n' +
                         '</tr>');
-                })
+                }
                 $('table#data').append(arr.join(''));
             }
         },
