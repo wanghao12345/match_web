@@ -18,7 +18,8 @@
   <script src="../../static/js/plug/page/my-page.js"></script>
   <script src="../../static/js/plug/KOTip/KOTip.js"></script>
   <script src="../../static/js/plug/KOTip/main-msg.js"></script>
-  <script src="../../static/js/SquadInformation/SquadInformation.js"></script>
+  <script src="../../static/js/plug/layer/layer.js"></script>
+  <script src="../../static/js/SquadInformation/allTeam7-1.js"></script>
 </head>
 <body class="my-body">
 
@@ -66,21 +67,15 @@
         <div class="content-bar">
           <div class="row-con mgb-10">
             <div class="left-lump"></div>
-            <div class="right-lump"><input type="text" value="" class="m-search" placeholder="输入小队名称、搜索小队"></div>
+            <div class="right-lump"><input type="text" id="search-input" value="" class="m-search" placeholder="输入小队名称、搜索小队"></div>
           </div>
           <div class="table-content">
-            <table class="table align-left">
+            <table class="table align-left" id="data">
               <tr>
                 <th>序号</th>
                 <th>队伍名称</th>
                 <th>创建时间</th>
                 <th>小队成员</th>
-              </tr>
-              <tr>
-                <td>1</td>
-                <td>旺旺旺</td>
-                <td>1</td>
-                <td>1</td>
               </tr>
             </table>
           </div>

@@ -10,6 +10,8 @@
 </head>
 <body>
 <div class="box">
+    <input type="hidden" id="Dynamic-Id" value="">
+    <input type="hidden" id="isShowPopup" value="-1">
     <div class="header-box">
         <div class="area">
             <div class="logo">
@@ -54,8 +56,8 @@
                         <em class="right"></em>
                     </div>
                     <div class="home-left-content">
-                        <ul class="rank-list">
-                            <li>
+                        <ul class="rank-list" id="score-rank-list">
+                            <!--<li>
                                 <div class="rank">
                                     <img src="../../static/img/home/img_no1.png" alt="第一">
                                 </div>
@@ -84,61 +86,7 @@
                                 <div class="name">
                                     王小明<br/><i>10000</i>
                                 </div>
-                            </li>
-                            <li>
-                                <div class="rank">NO.5</div>
-                                <div class="name">
-                                    王小明<br/><i>10000</i>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="rank">NO.6</div>
-                                <div class="name">
-                                    王小明<br/><i>10000</i>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="rank">NO.7</div>
-                                <div class="name">
-                                    王小明<br/><i>10000</i>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="rank">NO.8</div>
-                                <div class="name">
-                                    王小明<br/><i>10000</i>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="rank">NO.9</div>
-                                <div class="name">
-                                    王小明<br/><i>10000</i>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="rank">NO.10</div>
-                                <div class="name">
-                                    王小明<br/><i>10000</i>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="rank">NO.11</div>
-                                <div class="name">
-                                    王小明<br/><i>10000</i>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="rank">NO.12</div>
-                                <div class="name">
-                                    王小明<br/><i>10000</i>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="rank">NO.13</div>
-                                <div class="name">
-                                    王小明<br/><i>10000</i>
-                                </div>
-                            </li>
+                            </li>-->
                         </ul>
                     </div>
                     <div class="home-left-bottom">
@@ -169,7 +117,7 @@
                                 <img class="shining" src="../../static/img/home/star/star_2_shining.png" alt="星球2">
                             </div>
                             <div class="star-bottom">
-                                <p>星球二</p>
+                                <p class="name">星球二</p>
                                 <div class="progress">
                                     <span class="bar" style="width: 50%;"></span>
                                 </div>
@@ -181,7 +129,7 @@
                                 <img class="shining" src="../../static/img/home/star/star_3_shining.png" alt="星球3">
                             </div>
                             <div class="star-bottom">
-                                <p>星球三</p>
+                                <p class="name">星球三</p>
                                 <div class="progress">
                                     <span class="bar" style="width: 50%;"></span>
                                 </div>
@@ -193,7 +141,7 @@
                                 <img class="shining" src="../../static/img/home/star/star_4_shining.png" alt="星球4">
                             </div>
                             <div class="star-bottom">
-                                <p>星球四</p>
+                                <p class="name">星球四</p>
                             </div>
                         </div>
                         <div class="star-box star-box5">
@@ -202,7 +150,7 @@
                                 <img class="shining" src="../../static/img/home/star/star_5_shining.png" alt="星球5">
                             </div>
                             <div class="star-bottom">
-                                <p>星球五</p>
+                                <p class="name">星球五</p>
                                 <div class="progress">
                                     <span class="bar" style="width: 50%;"></span>
                                 </div>
@@ -214,14 +162,14 @@
                                 <img class="shining" src="../../static/img/home/star/star_6_shining.png" alt="星球6">
                             </div>
                             <div class="star-bottom">
-                                <p>星球六</p>
+                                <p class="name">星球六</p>
                             </div>
                         </div>
                         <!--弹框-->
                         <div class="popup-tip">
                             <div class="popup-content">
                                 <h6>星球前3名</h6>
-                                <ul>
+                                <ul id="popup-rank-list">
                                     <li>队伍名称一</li>
                                     <li>队伍名称二</li>
                                     <li>队伍名称三</li>
@@ -261,15 +209,15 @@
                         <div class="home-dynamic">
                             <div class="home-dynamic-content" id="textScroll">
                                 <ul id="scroll-item-content">
-                                    <li class="scroll-item"><div class="content"><i>王小明1</i>完成XXXXX题，获得<i>20分</i>，当前累积得分<i>20分</i>，团队总分<i>120分</i></div></li>
-                                    <li class="scroll-item"><div class="content"><i>王小明2</i>完成XXXXX题，获得<i>20分</i>，当前累积得分<i>20分</i>，团队总分<i>120分</i></div></li>
-                                    <li class="scroll-item"><div class="content"><i>王小明3</i>完成XXXXX题，获得<i>20分</i>，当前累积得分<i>20分</i>，团队总分<i>120分</i></div></li>
-                                    <li class="scroll-item"><div class="content"><i>王小明4</i>完成XXXXX题，获得<i>20分</i>，当前累积得分<i>20分</i>，团队总分<i>120分</i></div></li>
-                                    <li class="scroll-item"><div class="content"><i>王小明5</i>完成XXXXX题，获得<i>20分</i>，当前累积得分<i>20分</i>，团队总分<i>120分</i></div></li>
-                                    <li class="scroll-item"><div class="content"><i>王小明6</i>完成XXXXX题，获得<i>20分</i>，当前累积得分<i>20分</i>，团队总分<i>120分</i></div></li>
-                                    <li class="scroll-item"><div class="content"><i>王小明7</i>完成XXXXX题，获得<i>20分</i>，当前累积得分<i>20分</i>，团队总分<i>120分</i></div></li>
-                                    <li class="scroll-item"><div class="content"><i>王小明8</i>完成XXXXX题，获得<i>20分</i>，当前累积得分<i>20分</i>，团队总分<i>120分</i></div></li>
-                                    <li class="scroll-item"><div class="content"><i>王小明9</i>完成XXXXX题，获得<i>20分</i>，当前累积得分<i>20分</i>，团队总分<i>120分</i></div></li>
+                                    <!--<li class="scroll-item"><div class="content"><i>王小明1</i>完成XXXXX题，获得<i>20分</i>，当前累积得分<i>20分</i>，团队总分<i>120分</i></div></li>-->
+                                    <!--<li class="scroll-item"><div class="content"><i>王小明2</i>完成XXXXX题，获得<i>20分</i>，当前累积得分<i>20分</i>，团队总分<i>120分</i></div></li>-->
+                                    <!--<li class="scroll-item"><div class="content"><i>王小明3</i>完成XXXXX题，获得<i>20分</i>，当前累积得分<i>20分</i>，团队总分<i>120分</i></div></li>-->
+                                    <!--<li class="scroll-item"><div class="content"><i>王小明4</i>完成XXXXX题，获得<i>20分</i>，当前累积得分<i>20分</i>，团队总分<i>120分</i></div></li>-->
+                                    <!--<li class="scroll-item"><div class="content"><i>王小明5</i>完成XXXXX题，获得<i>20分</i>，当前累积得分<i>20分</i>，团队总分<i>120分</i></div></li>-->
+                                    <!--<li class="scroll-item"><div class="content"><i>王小明6</i>完成XXXXX题，获得<i>20分</i>，当前累积得分<i>20分</i>，团队总分<i>120分</i></div></li>-->
+                                    <!--<li class="scroll-item"><div class="content"><i>王小明7</i>完成XXXXX题，获得<i>20分</i>，当前累积得分<i>20分</i>，团队总分<i>120分</i></div></li>-->
+                                    <!--<li class="scroll-item"><div class="content"><i>王小明8</i>完成XXXXX题，获得<i>20分</i>，当前累积得分<i>20分</i>，团队总分<i>120分</i></div></li>-->
+                                    <!--<li class="scroll-item"><div class="content"><i>王小明9</i>完成XXXXX题，获得<i>20分</i>，当前累积得分<i>20分</i>，团队总分<i>120分</i></div></li>-->
                                 </ul>
                             </div>
                         </div>
