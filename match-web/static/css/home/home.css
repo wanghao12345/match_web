@@ -19,7 +19,7 @@ body{
     overflow: hidden;
 }
 .home-box{
-    width: 1200px;
+    width: 1350px;
     height: 650px;
     margin: 0 auto;
     margin-top: 20px;
@@ -29,7 +29,7 @@ body{
     width: 200px;
     height: 100%;
     float: left;
-    background: rgba(191, 191, 191, 0.2);
+    background: rgba(117, 117, 117, 0.2);
     box-sizing: border-box;
     padding-bottom: 50px;
     position: relative;
@@ -158,11 +158,11 @@ body{
 }
 
 .home-middle-box{
-    width: 750px;
+    width: 900px;
     height: 100%;
     float: left;
     box-sizing: border-box;
-    background: rgba(247, 247, 247, 0.1);
+    background: rgba(123, 116, 116, 0.1);
     position: relative;
 }
 .grap-box{
@@ -255,56 +255,146 @@ body{
     transition: width 0.6s ease;
 }
 
-
-
 .grap-box .star-box1{
-    left: 400px;
+    left: 500px;
     top: 250px;
+}
+.grap-box .star-box1 .star-top{
+    /*width: 200px;*/
+}
+.grap-box .star-box1 img{
+    /*width: 100%;*/
 }
 .grap-box .star-box1 .star-bottom{
     margin-top: -30px;
 }
 .grap-box .star-box2{
-    left: 180px;
+    left: 230px;
     top: 235px;
 }
 .grap-box .star-box2 .star-bottom{
     margin-top: -70px;
 }
 .grap-box .star-box3{
-    left: 520px;
+    left: 620px;
     top: 120px;
 }
 .grap-box .star-box3 .star-bottom{
     margin-top: -70px;
 }
 .grap-box .star-box4{
-    left: 100px;
+    left: 130px;
     top: 380px;
 }
 .grap-box .star-box4 .star-bottom{
     margin-top: -40px;
 }
 .grap-box .star-box5{
-    left: 130px;
+    left: 170px;
     top: 88px;
 }
 .grap-box .star-box5 .star-bottom{
     margin-top: -72px;
 }
 .grap-box .star-box6{
-    left: 550px;
-    top: 470px;
+    left: 700px;
+    top: 460px;
 }
 .grap-box .star-box6 .star-bottom{
     margin-top: -50px;
+}
+.star-bottom{
+    position: relative;
+}
+.popup-tip{
+    width: 250px;
+    height: 130px;
+    position: absolute;
+    left: -200px;
+    top: -130px;
+    /*top: -200px;*/
+    background: url("../../img/home/img_frame_style5.png");
+    background-size: 100% 100%;
+    box-sizing: border-box;
+    padding: 10px 45px 40px 10px;
+    z-index: 2;
+    display: none;
+}
+.popup-tip .popup-content{
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+    text-align: left;
+}
+.popup-tip .popup-content h6{
+    font-size: 12px;
+    color: #FFFFFF;
+
+}
+.popup-tip .popup-content ul{
+    margin: 5px 0px;
+}
+.popup-tip .popup-content ul li{
+    font-size: 13px;
+    color: #01FFFF;
+    line-height: 18px;
+}
+.popup-tip .popup-content ul li:before{
+    content: '';
+    background: url("../../img/home/img_adrow_white.png");
+    background-size: 100% 100%;
+    width: 17px;
+    height: 10px;
+    display: inline-block;
+    margin-right: 3px;
+}
+.notice-box{
+    position: absolute;
+    top: 60px;
+    left: 50%;
+    margin-left: -200px;
+    width: 400px;
+    height: 40px;
+}
+.notice-box a.line{
+    height: 0.5px;
+    width: 9px;
+    border-radius: 50%;
+    background: -webkit-radial-gradient(rgba(0, 0, 0, 0.68) 5%, #01FFFF 0%, rgba(0, 0, 0, 0.46) 85%);
+    transform: scale(55, 2);
+    display: inline-block;
+    position: absolute;
+    margin-left: 50%;
+}
+.notice-box .notice-content{
+    width: 100%;
+    height: 38px;
+    font-size: 16px;
+    color: #01FFFF;
+    line-height: 38px;
+    overflow: hidden;
+    position: relative;
+}
+.notice-box .notice-content p{
+    display: none;
+}
+.notice-box .notice-content ul{
+    height: 100%;
+    /*width: 200%;*/
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+.notice-box .notice-content ul li{
+    float: left;
+    width: 16px;
 }
 .home-right-box{
     width: 250px;
     height: 100%;
     float: left;
     background: red;
-    background: rgba(191, 191, 191, 0.2);
+    background: rgba(117, 117, 117, 0.2);
 }
 .home-right-box em.left{
     width: 6px;
