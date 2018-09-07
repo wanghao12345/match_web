@@ -23,6 +23,8 @@ $(function () {
     $('.star-top img').on('click',function () {
         //星球重新排序
         initStarPoint();
+        //去掉进度条
+        $('.grap-box .star-box .star-bottom .progress').remove();
         //给目标元素添加弹框
         var $popup = $('.popup-tip');
         $popup.css('display', 'none');
@@ -37,11 +39,34 @@ $(function () {
     }, function () {
         $(this).find('.popup-tip').fadeOut();
     })
-
-
+    /**
+     * 广告滚动
+     */
+    noticeRolling();
 })
 
 
+/**
+ * 广告滚动
+ */
+function noticeRolling() {
+    var $textArr = $('p#notice-rolling-content').html().split('');
+    $textArr = $textArr.map(function (item) {
+        return '<li>' + item + '</li>';
+    });
+    $('div#notice-rolling').html('<ul id="notice-rolling-ul" style="width: '+16 * $textArr.length+'px;">'+$textArr.join('')+'</ul>');
+
+    var num = 0;
+    setInterval(function(){
+        if (num <= -(16 * $textArr.length)) {
+            num = $('div#notice-rolling').width();
+        }
+        num -= 1;
+        $("ul#notice-rolling-ul").css({
+            left: num
+        })
+    }, 20);
+}
 /**
  * 初始化星球的位置
  */
@@ -56,10 +81,6 @@ function initStarPoint(){
         point.splice(index, 1);
     }
 }
-
-
-
-
 /**
  * 抖动
  * @param intShakes 次数
