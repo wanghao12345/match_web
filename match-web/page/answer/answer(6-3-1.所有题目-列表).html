@@ -22,7 +22,8 @@
   <script src="../../static/js/plug/KOtab/KOtab.js"></script>
   <script src="../../static/js/plug/winPop/win-popup.js"></script>
   <script src="../../static/js/plug/KOTip/main-msg.js"></script>
-  <script src="../../static/js/answer/answer.js"></script>
+  <script src="../../static/js/plug/layer/layer.js"></script>
+  <script src="../../static/js/answer/answer6-3-1.js"></script>
 </head>
 <body class="my-body">
 
@@ -64,13 +65,13 @@
   	<div class="area">
   		<div class="inner main-column">
         <div class="m-title-2 style-2">
-          <h2><img src="../../static/img/SquadInformation/tt-ico.jpg" class="ico" alt=""><div class="s1">密码</div><span class="s2">题目数量 <i>20</i></span></h2>
+          <h2><img src="../../static/img/SquadInformation/tt-ico.jpg" class="ico" alt=""><div class="s1" id="subject-type">逆向</div><span class="s2">题目数量 <i>20</i></span></h2>
           <h3><a href="">返回</a></h3>
         </div>
         <div class="content-bar">
           
-          <ul class="m-answer-list j-show-subject-ul">
-            <li>
+          <ul class="m-answer-list j-show-subject-ul" id="subject-list">
+            <!--<li>
               <div class="lump">
                 <div class="lump-inner">
                   <div class="top-lump">
@@ -91,75 +92,9 @@
                 </div>
                 <i class="i-1"></i><i class="i-2"></i>
               </div>
-            </li>
-            <li>
-              <div class="lump">
-                <div class="lump-inner">
-                  <div class="top-lump">
-                    <h2>题目类型:密码</h2>
-                    <h3>分值:1000pt</h3>
-                    <h4><i class="i-icon i-ok"></i><span>提示</span></h4>
-                  </div>
-                  <div class="mid-lump">
-                    <div class="cont">
-                      题目名称:XXXXX获取XXXXX获取XXXXX获取XXXXX获取XXXXX获取XXXXX
-                    </div>
-                  </div>
-                  <div class="end-lump">
-                    <h2>第一名:王小明</h2>
-                    <h2>第二名:谢晓宇</h2>
-                    <h2>第三名:陈岑</h2>
-                  </div>
-                </div>
-                <i class="i-1"></i><i class="i-2"></i>
-              </div>
-            </li>
-            <li>
-              <div class="lump">
-                <div class="lump-inner">
-                  <div class="top-lump">
-                    <h2>题目类型:密码</h2>
-                    <h3>分值:1000pt</h3>
-                    <h4></h4>
-                  </div>
-                  <div class="mid-lump">
-                    <div class="cont">
-                      题目名称:XXXXX获取XXXXX获取XXXXX获取XXXXX获取XXXXX获取XXXXXXXXXX获取XXXXX获取XXXXX获取XXXXX获取XXXXX获取XXXXXXXXXX获取XXXXX获取XXXXX获取XXXXX获取XXXXX获取XXXXXXXXXX获取XXXXX获取XXXXX获取XXXXX获取XXXXX获取XXXXX
-                    </div>
-                  </div>
-                  <div class="end-lump">
-                    <h2>第一名:王小明</h2>
-                    <h2>第二名:谢晓宇</h2>
-                    <h2>第三名:陈岑</h2>
-                  </div>
-                </div>
-                <i class="i-1"></i><i class="i-2"></i>
-              </div>
-            </li>
-            <li>
-              <div class="lump">
-                <div class="lump-inner">
-                  <div class="top-lump">
-                    <h2>题目类型:密码</h2>
-                    <h3>分值:1000pt</h3>
-                    <h4></h4>
-                  </div>
-                  <div class="mid-lump">
-                    <div class="cont">
-                      题目名称:XXXXX获取XXXXX获取XXXXX获取XXXXX获取XXXXX获取XXXXX
-                    </div>
-                  </div>
-                  <div class="end-lump">
-                    <h2>第一名:王小明</h2>
-                    <h2>第二名:谢晓宇</h2>
-                    <h2>第三名:陈岑</h2>
-                  </div>
-                </div>
-                <i class="i-1"></i><i class="i-2"></i>
-              </div>
-            </li>
+            </li>-->
           </ul>
-          <div class="m-page page-center j-my-page"></div>
+          <!--<div class="m-page page-center j-my-page"></div>-->
         </div><!--content-bar-->
       </div>
   	</div>
@@ -169,14 +104,12 @@
     上海来晨网络科技有限公司 © 2018 All Rights Reserved.  沪ICP备17040130号
   </div>
 
-<div class="win-popUp win-subject"><div class="popUp-bar"><div class="operat-btn"><div class="o-close ani-pulse-hover j-operat-cancel"></div></div><div class="popUp-content"><div class="popUp-body"><div class="popUp-inner">
+<div class="win-popUp win-subject" style="display: none"><div class="popUp-bar"><div class="operat-btn"><div class="o-close ani-pulse-hover j-operat-cancel"></div></div><div class="popUp-content"><div class="popUp-body"><div class="popUp-inner">
   <!--弹窗内容content S-->
-
-  
   <div class="m-subject">
     <div class="top-bar">
-      <h2>题目类型:密码</h2>
-      <h3>分值:1000pt</h3>
+      <h2 id="sub-type">题目类型:密码</h2>
+      <h3 id="sub-point">分值:1000pt</h3>
     </div>
     <div class="mid-bar">
       <div class="m-subject-tab j-subject-tab">
@@ -192,11 +125,11 @@
               <div class="m-subject-text">
                 <div class="row row-horizontal">
                   <div class="name">题目名称：</div>
-                  <div class="content">内容</div>
+                  <div class="content" id="sub-name">内容</div>
                 </div>
                 <div class="row row-horizontal">
                   <div class="name">题目描述：</div>
-                  <div class="content">内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容</div>
+                  <div class="content" id="sub-description">内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容</div>
                 </div>
                 <!--<div class="row-button">
                   <input type="submit" class="i-button" value="下发题目">
@@ -218,14 +151,16 @@
                 </div>-->
                 <div class="row row-vertical">
                   <div class="name">Key：</div>
-                  <div class="content">内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容</div>
+                  <input class="content" style="border: 0;width: 720px;height: 40px;padding: 0 5px;margin-top: 10px;" type="text" id="sub-key">
                 </div>
                 <div class="row-feedback">
                   <!--<div class="correct">你已答对本题！请再接再厉！</div>
                   <div class="error">抱歉，答案错误，请重新输入</div>-->
                 </div>
                 <div class="row-end">
-                  <a href="javascript:;" class="i-btn j-operat-cancel">Send Key</a>
+                  <a href="javascript:;" class="i-btn" id="sub-sendKey">
+                    <input type="hidden" id="sub-shallenge" value="">
+                    Send Key</a>
                 </div>
               </div>
             </dd>
@@ -234,22 +169,16 @@
                 <div class="title">解决团队</div>
                 <div class="content">
                   <div class="table-content">
-                    <table class="table align-left">
+                    <table class="table align-left" id="sub-table">
                       <tr>
                         <th>序号</th>
                         <th>用户名</th>
                         <th>队伍</th>
                         <th>时间</th>
                       </tr>
-                      <tr>
-                        <td>1</td>
-                        <td>旺旺旺</td>
-                        <td>1</td>
-                        <td>1</td>
-                      </tr>
                     </table>
                   </div>
-                  <div class="m-page page-center j-my-page"></div>
+                  <!--<div class="m-page page-center j-my-page"></div>-->
                 </div>
               </div>
             </dd>
@@ -261,26 +190,7 @@
   <i class="i-1"></i><i class="i-2"></i>
   
   <!--弹窗内容content E-->
-</div></div></div></div><div class="popUp-cover"></div></div><!--win-popUp-demo-->
-
-
-
-<script>
-$(function(){
-	var Pop_rule = $(".win-subject").popUp({"visible":false,"width":800});
-  $(".j-show-subject-ul").on('click','li', function(event) {
-    Pop_rule.showPop();
-  });
-  $(".j-subject-tab").on('initEnd', function(event) {
-    Pop_rule.resizePop()
-  });
-  $(".j-subject-tab").KOtab({autoplay:0,callback:function($el){
-    $el.find(".j-open").addClass("open");
-    setTimeout(function(){
-      Pop_rule.resizePop()
-    },300)
-  }});
-})
-</script>
+</div></div></div></div><div class="popUp-cover"></div></div>
+  <!--win-popUp-demo-->
 </body>
 </html>
