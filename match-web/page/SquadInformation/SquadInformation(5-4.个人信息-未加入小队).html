@@ -19,6 +19,7 @@
   <script src="../../static/js/plug/KOTip/KOTip.js"></script>
   <script src="../../static/js/plug/KOTip/main-msg.js"></script>
   <script src="../../static/js/SquadInformation/SquadInformation.js"></script>
+  <script src="../../static/js/SquadInformation/SquadInformation5-4.js"></script>
 </head>
 <body class="my-body">
 
@@ -95,42 +96,18 @@
 	  			<div class="content-bar">
 	  				<div class="m-no-team">
 	  					<h2>您还没有加入任何队伍，加入已有小队或 <a href="">创建小队</a></h2>
-	  					<h3><input type="text" value="" class="m-search" placeholder="输入小队名称、搜索小队"></h3>
+	  					<h3><input type="text" id="search-input" value="" class="m-search" placeholder="输入小队名称、搜索小队"></h3>
 	  				</div>
 	  				<div>
-            <div class="table-content">
-              <table class="table align-left">
+            <div class="table-content" style="min-height: 30px">
+              <table class="table align-left" id="data">
                   <tr>
                       <th>序号</th>
                       <th>队伍名称</th>
                       <th>创建时间</th>
                       <th>小队成员</th>
                   </tr>
-                  <tr>
-                      <td>1</td>
-                      <td>旺旺旺</td>
-                      <td>2018-8-12</td>
-                      <td>小王 小明 小李</td>
-                  </tr>
-                  <tr>
-                      <td>1</td>
-                      <td>旺旺旺</td>
-                      <td>2018-8-12</td>
-                      <td>小王 小明 小李</td>
-                  </tr>
-                  <tr>
-                      <td>1</td>
-                      <td>旺旺旺</td>
-                      <td>2018-8-12</td>
-                      <td>小王 小明 小李</td>
-                  </tr>
-                  <tr>
-                      <td>1</td>
-                      <td>旺旺旺</td>
-                      <td>2018-8-12</td>
-                      <td>小王 小明 小李</td>
-                  </tr>
-                  <tr>
+                  <tr class="data-tr">
                       <td>1</td>
                       <td>旺旺旺</td>
                       <td>2018-8-12</td>
