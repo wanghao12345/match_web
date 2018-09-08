@@ -1,0 +1,624 @@
+<!DOCTYPE html> {% load static %}
+<html lang="en">
+
+<head>
+  
+  <!-- Meta, title, CSS, favicons, etc. -->
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}  | 主页{% endblock %}</title>
+  <link href="{% static 'sctf/vendors/bootstrap/dist/css/bootstrap.min.css' %}" rel="stylesheet">
+  <!-- Font Awesome -->
+  <link href="{% static 'sctf/vendors/font-awesome/css/font-awesome.min.css' %}" rel="stylesheet">
+  <!-- NProgress -->
+  <link href="{% static 'sctf/vendors/nprogress/nprogress.css' %}" rel="stylesheet">
+  <!-- iCheck -->
+  <link href="{% static 'sctf/vendors/iCheck/skins/flat/green.css' %}" rel="stylesheet">
+  <!-- bootstrap-progressbar -->
+  <link href="{% static 'sctf/vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css' %}" rel="stylesheet">
+  <!-- JQVMap -->
+  <link href="{% static 'sctf/vendors/jqvmap/dist/jqvmap.min.css' %}" rel="stylesheet" />
+  <!-- Datatables -->
+  <link href="{% static 'sctf/vendors/datatables.net-bs/css/dataTables.bootstrap.min.css' %}" rel="stylesheet">
+  <link href="{% static 'sctf/vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css' %}" rel="stylesheet">
+  <!-- Custom Theme Style -->
+  <link href="{% static 'sctf/build/css/custom.css' %}" rel="stylesheet">
+  <link href="{% static 'sctf/vendors/jquery.tagsinput/src/jquery.tagsinput.css' %}" rel="stylesheet">
+  <!-- PNotify -->
+  <link href="{% static 'sctf/vendors/pnotify/dist/pnotify.css' %}" rel="stylesheet">
+  <link href="{% static 'sctf/vendors/pnotify/dist/pnotify.buttons.css' %}" rel="stylesheet">
+  <link href="{% static 'sctf/vendors/pnotify/dist/pnotify.nonblock.css' %}" rel="stylesheet">
+  <!-- jQuery -->
+  <script src="{% static 'sctf/vendors/jquery/dist/jquery.min.js' %}"></script>
+ 
+
+</head>
+
+<body class="nav-md">
+  <div class="container body">
+    <div class="main_container ">
+      <div class="col-md-3 left_col">
+        <div class="left_col scroll-view">
+          <div class="navbar nav_title" style="border: 0;">
+           <a href="{% url 'index' %}" class="site_title" style="height:65px;">
+						<img style="width:130px;margin:5px auto;" src="{% static 'sctf/images/logo-light.png' %}" alt=""></a>
+          </div>
+          <div class="clearfix"></div>
+          <!-- menu profile quick info -->
+          <div class="profile clearfix">
+            <div class="profile_pic">
+              <img src="/{{ user.profile.image.url }}" alt="..." class="img-circle profile_img">
+            </div>
+            <div class="profile_info">
+              <span>欢迎,</span>
+              <h2>{{user.username}}</h2>
+            </div>
+          </div>
+          <!-- /menu profile quick info -->
+          <br>
+          <!-- sidebar menu -->
+          <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+            <div class="menu_section">
+              <h3>面板</h3>
+              <ul class="nav side-menu">
+                <li>
+                  <a><i class="fa fa-group"></i> 所有队伍 <span class="fa fa-chevron-down"></span></a>
+                  <ul class="nav child_menu">
+                    <li><a href="{% url 'teams' %}"><i class="fa fa-database"></i>查看</a></li>
+                  </ul>
+                </li>
+                <li>
+                  <a><i class="fa fa-bug"></i> 所有题目 <span class="fa fa-chevron-down"></span></a>
+                  <ul class="nav child_menu">
+                    <li><a href="{% url 'challenges_categories' %}"><i class="fa fa-tags"></i>题目</a></li>
+                  </ul>
+                </li>
+                <li><a><i class="fa fa-edit"></i> 积分榜 <span class="fa fa-chevron-down"></span></a>
+                  <ul class="nav child_menu">
+                    <li><a href="{% url 'teams_ranking' %}"><i class="fa fa-sort-amount-desc"></i>队伍排名</a></li>
+                    <li><a href="{% url 'users_ranking' %}"><i class="fa fa-sort-amount-desc"></i>用户排名</a></li>
+                  </ul>
+                </li>
+              </ul>
+            </div>
+            <div class="menu_section">
+              <h3>个人信息</h3>
+              <ul class="nav side-menu">
+                <li><a><i class="fa fa-group"></i> 我的队伍 <span class="fa fa-chevron-down"></span></a>
+                  <ul class="nav child_menu">
+                    <li><a href="{% url 'team' %}"><i class="fa fa-pie-chart"></i> 统计</a></li>
+                  </ul>
+                </li>
+                <li><a><i class="fa fa-user"></i> 我的信息 <span class="fa fa-chevron-down"></span></a>
+                  <ul class="nav child_menu">
+                    <li><a href="{% url 'user' %}"><i class="fa fa-tasks"></i>详细</a></li>
+                  </ul>
+                </li>
+              </ul>
+            </div>
+            <div class="menu_section">
+              <h3>结果</h3>
+              <ul class="nav side-menu">
+                <li><a><i class="fa fa-shield"></i> 比赛结果 <span class="fa fa-chevron-down"></span></a>
+                  <ul class="nav child_menu">
+                    <li><a href="#"><i class="fa fa-trophy"></i> 胜出者</a></li>
+                    <li><a href="#"><i class="fa fa-trophy"></i> 团队报告</a></li>
+                    <li><a href="#"><i class="fa fa-trophy"></i> 我的报告</a></li>
+                  </ul>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <!-- /sidebar menu -->
+        <!-- /menu footer buttons -->
+        
+        <div class="sidebar-footer hidden-small">
+          <!--<a data-toggle="tooltip" data-placement="top" title="设置">-->
+            <!--<span class="glyphicon glyphicon-cog" aria-hidden="true"></span>-->
+          <!--</a>-->
+          <a data-toggle="tooltip" data-placement="top" title="全屏" onclick="toggleFullscreen();">
+            <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
+          </a>
+          <a data-toggle="tooltip" data-placement="top" title="锁定">
+            <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
+          </a>
+          <a data-toggle="tooltip" data-placement="top" title="退出" href="{% url 'auth_logout' %}">
+            <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
+          </a>
+        </div>
+        <!-- /menu footer buttons -->
+      </div>
+    </div>
+    <!-- top navigation -->
+    <div class="top_nav">
+      <div class="nav_menu">
+        
+        <nav>
+          <div class="nav toggle">
+            <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+          </div> 
+         
+          <ul class="nav navbar-nav navbar-right">
+                  
+            <li class="">
+              <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                <img src="/{{ user.profile.image.url }}" alt="">{{user.username}}
+                <span class=" fa fa-angle-down"></span>
+              </a>
+              <ul class="dropdown-menu dropdown-usermenu pull-right">
+                <li><a href="{% url 'user' %}"> 我的简介</a></li>
+                {% if user.created_team.exists %}
+                  <li><a href="{% url 'team_admin' %}"> 队伍管理</a></li>
+                {% endif %}
+                <li><a href="{% url 'auth_logout' %}"><i class="fa fa-sign-out pull-right"></i> 退出</a></li>
+              </ul>
+            </li>
+            
+            <li role="presentation" class="dropdown">
+                  <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
+                    <i class="fa fa-envelope-o"></i>
+                    <span id="badge_message" class="badge bg-green">1</span>
+                  </a>
+                  <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">
+                    <li>
+                      <a>
+                        <span class="image"><img src="/{{ user.profile.image.url }}" alt="Profile Image" /></span>
+                        <span>
+                          <span>John Smith</span>
+                          <span class="time">3 mins ago</span>
+                        </span>
+                        <span class="message">
+                          Film festivals used to be do-or-die moments for movie makers. They were where...
+                        </span>
+                      </a>
+                    </li>
+                    <!--<li>-->
+                      <!--<div class="text-center">-->
+                        <!--<a>-->
+                          <!--<strong>See All Messages</strong>-->
+                          <!--<i class="fa fa-angle-right"></i>-->
+                        <!--</a>-->
+                      <!--</div>-->
+                    <!--</li>-->
+                  </ul>
+                </li>
+                {% if user.created_team.exists %}
+                <li><a href="{% url 'team_admin' %}" class="dropdown-toggle info-number" data-toggle="" aria-expanded="false">
+                    <i class="fa fa-bell"></i>
+                    <span id="badge_join" class="badge bg-green">{{user.profile.team.userteamrequest_set.pending.count}}</span>
+                  </a>
+                </li>
+                {% endif %}
+                 {% if user.is_staff %}
+                <li><a href="{% url 'admin_game_end' %}" class="dropdown-toggle info-number" data-toggle="" aria-expanded="false">
+                    <i class="fa fa-stop red"></i>
+                </a>
+                </li>
+                <li><a href="{% url 'admin_game_pause' %}" class="dropdown-toggle info-number" data-toggle="" aria-expanded="false">
+                  <i class="fa fa-pause orange"></i>
+              </a>
+                </li>
+                <li><a href="{% url 'admin_game_start' %}" class="dropdown-toggle info-number" data-toggle="" aria-expanded="false">
+                <i class="fa fa-play green"></i>
+               </a>
+                </li>
+                {% endif %}
+          </ul>
+        </nav>
+      </div>
+    </div>
+    <!-- /top navigation -->
+    {% block content %}
+    <!-- page content -->
+    <div class="right_col" role="main">
+        <div class="clearfix"></div>
+            <div class="countdown alert alert-info alert-dismissible fade in" role="alert">
+                <h1 style="text-align:center;">
+
+                  {% ifequal config.GAME_STATUS 'SETUP' %}
+                  (比赛暂未开始)
+                  {% else %}
+                  ({{config.GAME_STATUS}})
+                  倒计时: <span id="clock"></span>
+                  {% endifequal %}
+                </h1>
+            </div>
+      <!-- top tiles -->
+      <div class="row tile_count">
+        <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+          <span class="count_top"><i class="fa fa-user"></i> 总人数</span>
+          <div class="count">{{users_count}}</div>
+          <!--<span class="count_bottom"><i class="fa fa-user"></i>&lt;!&ndash;<i class="green">4% </i> From last Week&ndash;&gt; TODO</span>-->
+        </div>
+        <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+          <span class="count_top"><i class="fa fa-group"></i> 队伍数量</span>
+          <div class="count">{{teams_count}}</div>
+          <!--<span class="count_bottom"><i class="green"><i class="fa fa-group"></i> TODO </i>Components [AVG]</span>-->
+        </div>
+        <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+          <span class="count_top"><i class="fa fa-bug"></i> 题目数</span>
+          <div class="count">{{challenges_count}}</div>
+          <!--<span class="count_bottom"><i class="green"><i class="fa fa-bug"></i> TODO </i> 类型</span>-->
+        </div>
+        <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+          <span class="count_top"><i class="fa fa-flag"></i> 总积分</span>
+          <div class="count">{{total_points_count}}</div>
+          <!--<span class="count_bottom"><i class="green"><i class="fa fa-flag"></i> {{user_points_count}} </i> 总积分</span>-->
+        </div>
+        <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+          <span class="count_top"><i class="fa fa-key"></i> 提交错误次数</span>
+          <div class="count red">{{total_challenge_fail_count}}</div>
+          <!--<span class="count_bottom"><i class="red"><i class="fa fa-bug"></i> TODO </i> 错误数目</span>-->
+        </div>
+        <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+          <span class="count_top"><i class="fa fa-key"></i> 成功提交次数</span>
+          <div class="count green">{{total_challenge_solved_count}}</div>
+          <!--<span class="count_bottom"><i class="green"><i class="fa fa-bug"></i> TODO </i> 成功数目</span>-->
+        </div>
+      </div>
+      <!-- /top tiles -->
+      <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+          <div class="x_panel">
+            <div class="x_title">
+                <h2 class="blue"><i class="fa fa-home"></i> 主页</h2>
+              <ul class="nav navbar-right panel_toolbox">
+                <li style="margin-left: 46px;"><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                </li>
+              </ul>
+              <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+              <div class="bs-example" data-example-id="simple-jumbotron">
+                <div class="jumbotron" style="background-color:#333;">
+                  <h3 style="color:#fff;text-align:center;margin-top:-25px;"> {{user.username}} 祝你挑战成功!</h3><br>
+                  <h3 style="text-align:center;margin-bottom:-20px;"><img style="width:31%;" src="{% static 'sctf/images/logo-light.png' %}" alt=""></h3><br>
+                  <h1 style="text-align:center;margin-bottom:-20px;"><span class="blue">取得你最好的成绩</span></h1>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="clearfix"></div>
+        <!--<div class="col-md-12 col-sm-12 col-xs-12">-->
+          <!--<div class="x_panel">-->
+            <!--<div class="x_title">-->
+              <!--<h2 class="blue"><i class="fa fa-info-circle"></i> 用户定位</h2>-->
+              <!--<ul class="nav navbar-right panel_toolbox">-->
+                <!--<li style="margin-left: 46px;"><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>-->
+                <!--</li>-->
+              <!--</ul>-->
+              <!--<div class="clearfix"></div>-->
+            <!--</div>-->
+            <!--<div class="x_content">-->
+              <!--<div class="dashboard-widget-content">-->
+                <!--<div class="col-md-4 hidden-small">-->
+                  <!--<h2 class="line_30">125.7k Views from 60 countries</h2>-->
+                  <!--<table class="countries_list">-->
+                    <!--<tbody>-->
+                      <!--<tr>-->
+                        <!--<td>United States</td>-->
+                        <!--<td class="fs15 fw700 text-right">33%</td>-->
+                      <!--</tr>-->
+                      <!--<tr>-->
+                        <!--<td>France</td>-->
+                        <!--<td class="fs15 fw700 text-right">27%</td>-->
+                      <!--</tr>-->
+                      <!--<tr>-->
+                        <!--<td>Germany</td>-->
+                        <!--<td class="fs15 fw700 text-right">16%</td>-->
+                      <!--</tr>-->
+                      <!--<tr>-->
+                        <!--<td>Spain</td>-->
+                        <!--<td class="fs15 fw700 text-right">11%</td>-->
+                      <!--</tr>-->
+                      <!--<tr>-->
+                        <!--<td>Britain</td>-->
+                        <!--<td class="fs15 fw700 text-right">10%</td>-->
+                      <!--</tr>-->
+                    <!--</tbody>-->
+                  <!--</table>-->
+                <!--</div>-->
+                <!--<div id="world-map-gdp" class="col-md-8 col-sm-12 col-xs-12" style="height:430px;"></div>-->
+              <!--</div>-->
+            <!--</div>-->
+          <!--</div>-->
+        <!--</div>-->
+        <div class="clearfix"></div>
+      </div>
+    </div>
+    <script>
+      function init_JQVmap() { void 0 !== jQuery.fn.vectorMap && (console.log("init_JQVmap"), $("#world-map-gdp").length && $("#world-map-gdp").vectorMap({ map: "world_en", backgroundColor: null, color: "#ffffff", hoverOpacity: .7, selectedColor: "#666666", enableZoom: !0, showTooltip: !0, values: sample_data, scaleColors: ["#E6F2F0", "#149B7E"], normalizeFunction: "polynomial" })) } $(document).ready(function () { init_JQVmap() }); var sample_data = JSON.parse("{{ countries_users | escapejs }}");
+    </script>
+    <!-- /page content -->
+    {% endblock %}
+    <!-- footer content -->
+    <footer>
+      <div class="pull-right">
+        COPYRIGHT © 2018 LAICHEN. ALL RIGHTS RESERVED. <a href="#" class="green"> 上海来晨网络科技有限公司</a>版权所有 沪ICP备17040130号
+      </div>
+      <div class="clearfix"></div>
+    </footer>
+    <!-- /footer content -->
+  </div>
+  <!-- Bootstrap -->
+  <script src="{% static 'sctf/vendors/bootstrap/dist/js/bootstrap.min.js' %}"></script>
+  <!-- FastClick -->
+  <script src="{% static 'sctf/vendors/fastclick/lib/fastclick.js' %}"></script>
+  <!-- NProgress -->
+  <script src="{% static 'sctf/vendors/nprogress/nprogress.js' %}"></script>
+  <!-- Chart.js -->
+  <script src="{% static 'sctf/vendors/Chart.js/dist/Chart.min.js' %}"></script>
+  <!-- bootstrap-progressbar -->
+  <script src="{% static 'sctf/vendors/bootstrap-progressbar/bootstrap-progressbar.min.js' %}"></script>
+  <!-- iCheck -->
+  <script src="{% static 'sctf/vendors/iCheck/icheck.min.js' %}"></script>
+  <!-- jQuery Tags Input -->
+  <script src="{% static 'sctf/vendors/jquery.tagsinput/src/jquery.tagsinput.js' %}"></script>
+  <!-- Flot -->
+  <script src="{% static 'sctf/vendors/Flot/jquery.flot.js' %}"></script>
+  <script src="{% static 'sctf/vendors/Flot/jquery.flot.time.js' %}"></script>
+  <!-- JQVMap -->
+  <script src="{% static 'sctf/vendors/jqvmap/dist/jquery.vmap.js' %}"></script>
+  <script src="{% static 'sctf/vendors/jqvmap/dist/maps/jquery.vmap.world.js' %}"></script>
+  <!-- Custom Theme Scripts -->
+  <script src="{% static 'sctf/vendors/datatables.net/js/jquery.dataTables.min.js' %}"></script>
+  <script src="{% static 'sctf/vendors/datatables.net-bs/js/dataTables.bootstrap.min.js' %}"></script>
+  <script src="{% static 'sctf/vendors/datatables.net-buttons/js/dataTables.buttons.min.js' %}"></script>
+  <script src="{% static 'sctf/vendors/datatables.net-buttons-bs/js/buttons.bootstrap.min.js' %}"></script>
+  <script src="{% static 'sctf/vendors/datatables.net-buttons/js/buttons.html5.min.js' %}"></script>
+  <script src="{% static 'sctf/vendors/datatables.net-buttons/js/buttons.print.min.js' %}"></script>
+  <!-- jQuery Smart Wizard -->
+  <script src="{% static 'sctf/vendors/jQuery-Smart-Wizard/js/jquery.smartWizard.js' %}"></script>
+  <!-- Tags input -->
+  <script src="{% static 'sctf/vendors/jquery.tagsinput/src/jquery.tagsinput.js' %}"></script>
+  <!-- PNotify -->
+  <script src="{% static 'sctf/vendors/pnotify/dist/pnotify.js' %}"></script>
+  <script src="{% static 'sctf/vendors/pnotify/dist/pnotify.buttons.js' %}"></script>
+  <script src="{% static 'sctf/vendors/pnotify/dist/pnotify.nonblock.js' %}"></script>
+  <script src="{% static 'sctf/vendors/pnotify/dist/pnotify.confirm.js' %}"></script>
+  <script src="{% static 'sctf/vendors/pnotify/dist/pnotify.callbacks.js' %}"></script>
+  
+  <!-- Custom Theme Scripts -->
+  <script src="{% static 'sctf/build/js/custom.js' %}"></script>
+  <script src="{% static 'sctf/build/js/countdown.js' %}"></script>
+
+
+  <script>
+      var startDate = new Date(Date.UTC(
+        {{config.GAME_START_DATETIME.year}},
+        {{config.GAME_START_DATETIME.month}} - 1,
+        {{config.GAME_START_DATETIME.day}},
+        {{config.GAME_START_DATETIME.hour}},
+        {{config.GAME_START_DATETIME.minute}},
+        {{config.GAME_START_DATETIME.second}},
+      ));
+      
+      var endDate = new Date(Date.UTC(
+        {{game_end_datetime.year}},
+        {{game_end_datetime.month}} - 1,
+        {{game_end_datetime.day}},
+        {{game_end_datetime.hour}},
+        {{game_end_datetime.minute}},
+        {{game_end_datetime.second}},
+      ));
+
+      console.log('start date ' + startDate);
+      console.log('end date ' + endDate);
+
+      {% if config.GAME_STATUS == 'PLAY' %}
+
+      $('#clock').countdown(endDate, function(event) {
+        $(this).html(event.strftime('%D days %H:%M:%S'));
+      });
+      /*
+      $('#clock').countdown("{{game_end_datetime.isoformat}}")
+      .on('update.countdown', function(event) {
+        var format = '%H:%M:%S';
+        if(event.offset.totalDays > 0) {
+          format = '%-d day%!d ' + format;
+        }
+        if(event.offset.weeks > 0) {
+          format = '%-w week%!w ' + format;
+        }
+        $(this).html(event.strftime(format));
+      })
+      .on('finish.countdown', function(event) {
+        $(this).html('CTF 比赛结束!')
+          .parent().addClass('disabled');   
+      });
+      */
+
+      {% endif %}
+
+
+    </script>
+
+
+  <!-- Cookie -->
+  <script type="text/javascript">
+    $.ajaxSetup({ beforeSend: function (e, t) { /^http:.*/.test(t.url) || /^https:.*/.test(t.url) || e.setRequestHeader("X-CSRFToken", function (e) { var t = null; if (document.cookie && "" != document.cookie) for (var n = document.cookie.split(";"), o = 0; o < n.length; o++) { var r = jQuery.trim(n[o]); if (r.substring(0, e.length + 1) == e + "=") { t = decodeURIComponent(r.substring(e.length + 1)); break } } return t }("csrftoken")) } });
+  </script>
+  <!-- Full Screen -->
+  <script type="text/javascript">
+    function toggleFullscreen(e) { e = e || document.documentElement, document.fullscreenElement || document.mozFullScreenElement || document.webkitFullscreenElement || document.msFullscreenElement ? document.exitFullscreen ? document.exitFullscreen() : document.msExitFullscreen ? document.msExitFullscreen() : document.mozCancelFullScreen ? document.mozCancelFullScreen() : document.webkitExitFullscreen && document.webkitExitFullscreen() : (e.requestFullscreen ? e.requestFullscreen() : e.msRequestFullscreen ? e.msRequestFullscreen() : e.mozRequestFullScreen ? e.mozRequestFullScreen() : e.webkitRequestFullscreen && e.webkitRequestFullscreen(Element.ALLOW_KEYBOARD_INPUT), b) }
+  </script>
+  
+  {% if user.is_authenticated %}
+    <script>
+      var my_team = "{{ user.profile.team.id }}";
+      // channels
+      socket = new WebSocket("ws{% if request.is_secure %}s{% endif %}://" + window.location.host + "/sctf_channels/");
+      socket.onmessage = function(e) {
+        console.log(e);
+        var message = JSON.parse(e['data']);
+        if ('event' in message && message['event'] in events_functions) {
+          events_functions[message['event']](message);
+        }
+      }
+      // Call onopen directly if socket is already open
+      if (socket.readyState == WebSocket.OPEN) socket.onopen();
+
+      var events_functions = {
+        CHALLENGE_SOLVED: function(message){
+          createNewNotification(
+            message['team_id'] == my_team ? "恭喜！" : "你的队友答对了一道题目",
+            `${message['team_name']} 的 ${message['user_name']} 答对一道题目 ${message['challenge_id']}`,
+            message['team_id'] == my_team ? "success" : "success"
+          );
+        },
+        JOIN_REQUEST: function(message){
+          $('#badge_join').text(message['num_pending_requests']);
+          createNewNotification(
+            '有人请求加入你的队伍',
+            `用户 ${message['user_name']} 想要加入到你的队伍`,
+            'warning',
+            function(notice, timer_hide){ /*fake_load("{% url 'team_admin' %}");*/ }
+          );
+        },
+        JOIN_REQUEST_APPROVED: function(message){
+          $('#badge_join').text(message['num_pending_requests']);
+          createNewNotification(
+            '你的请求正在处理中',
+            `你有一条队伍请求处理 ${message['team_name']}`,
+            'success',
+            function(notice, timer_hide){ fake_load("{% url 'index' %}"); }
+          );
+      },
+        JOIN_REQUEST_REJECTED: function(message){
+          $('#badge_join').text(message['num_pending_requests']);
+          createNewNotification(
+            '请求加入队伍被拒绝',
+            `你的队伍请求被拒绝 ${message['team_name']}`,
+            'error',
+            function(notice, timer_hide){ fake_load("{% url 'no_team' %}"); }
+          );
+        },
+        JOIN_REQUEST_DELETED: function(message){
+          $('#badge_join').text(message['num_pending_requests']);
+          createNewNotification(
+            '加入请求删除',
+            `用户 ${message['user_name']} 取消加入队伍请求`,
+            'warning'
+          );
+        },
+
+        // GAME STATUS NOTIFICATIONS
+        GAME_START: function(message){
+          createNewNotification(
+            'GAME START',
+            'game start text',
+            'success',
+            function(notice, timer_hide){ fake_load("{% url 'index' %}"); }
+          );
+        },
+
+        GAME_PAUSE: function(message){
+          createNewNotification(
+            'GAME PAUSE',
+            'game pause text',
+            'warning',
+            function(notice, timer_hide){ fake_load("{% url 'index' %}"); }
+          );
+        },
+
+        GAME_RESUME: function(message){
+          createNewNotification(
+            'GAME RESUME',
+            'game resume text',
+            'success',
+            function(notice, timer_hide){ fake_load("{% url 'index' %}"); }
+          );
+        },
+
+        GAME_END: function(message){
+          createNewNotification(
+            'GAME END',
+            'game end text',
+            'error',
+            function(notice, timer_hide){ fake_load("{% url 'index' %}"); }
+          );
+        },
+
+
+      };
+
+      function createNewNotification(title, text, type='success', after_open=null){
+        new PNotify({
+            title: '<div class="full-width full-height"><p style="text-align:center;">'+title+'</p></div>',
+            text: `<div class="full-width full-height"><img class="img_notify" src="{% static 'sctf/images/logo-light.png' %}" alt=""> <i class="fa fa-info-circle"></i> `+text+`</div>`,
+            hide: true,
+            type: type,
+            styling: 'bootstrap3',
+            nonblock: {
+              nonblock: true
+            },
+            after_open: after_open
+          });
+      }
+
+      function fake_load(url) {
+        var cur_value = 1,
+            progress;
+    
+        // Make a loader.
+        var loader = new PNotify({
+            title: "Redirect...",
+            text: '<div class="progress progress-striped active" style="margin:0">\
+      <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0">\
+        <span class="sr-only">0%</span>\
+      </div>\
+    </div>',
+            //icon: 'fa fa-moon-o fa-spin',
+            icon: 'fa fa-cog fa-spin',
+            hide: false,
+            buttons: {
+                closer: false,
+                sticker: false
+            },
+            history: {
+                history: false
+            },
+            before_open: function(notice) {
+                progress = notice.get().find("div.progress-bar");
+                progress.width(cur_value + "%").attr("aria-valuenow", cur_value).find("span").html(cur_value + "%");
+                // Pretend to do something.
+                var timer = setInterval(function() {
+                    /*if (cur_value == 70) {
+                        loader.update({
+                            title: "Redirect in 3 seconds...",
+                            icon: "fa fa-circle-o-notch fa-spin"
+                        });
+                    }
+                    if (cur_value == 80) {
+                        loader.update({
+                            title: "Redirect in 2 seconds...",
+                            icon: "fa fa-refresh fa-spin"
+                        });
+                    }*/
+                    if (cur_value >= 100) {
+                        // Remove the interval.
+                        window.clearInterval(timer);
+                        loader.remove();
+                        return;
+                    }
+                    cur_value += 8;
+                    progress.width(cur_value + "%").attr("aria-valuenow", cur_value).find("span").html(cur_value + "%");
+                }, 90);
+            }
+        });
+       
+       setTimeout(function() {
+        window.location=url
+    }, 2000);
+    }
+
+    </script>
+  {% endif %}
+  {% block extra_js %}{% endblock %}
+
+</body>
+
+</html>
