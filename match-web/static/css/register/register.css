@@ -105,6 +105,13 @@ body{
     border: 0;
     background: #080A33;
     margin-left: 66px;
+    text-align: center;
+    line-height: 32px;
+    box-sizing: border-box;
+    padding-left: 5px;
+    font-size: 12px;
+    color: white;
+
 }
 .middle form ul li button.selectPic{
     border: 1px solid #6EC5C3;
@@ -118,7 +125,15 @@ body{
     overflow: hidden;
     float: right;
     margin-right: 175px;
-    margin-top: -30px;
+    position: relative;
+}
+.middle form ul li button.selectPic input{
+    position: absolute;
+    left: -20px;
+    font-size: 500%;
+    top: -20px;
+    opacity: 0;
+    cursor: pointer;
 }
 
 .middle form ul li label.radio{

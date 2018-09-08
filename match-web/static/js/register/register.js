@@ -20,6 +20,15 @@ $(function () {
             $(this).css('background','#009688');
         }
     })
+
+    /**
+     * 选择图片
+     */
+    $('button#selectPic input').on('change', function (e) {
+        // $('.headImgInput').text($(this).val());
+        $('.headImgInput').val(e.currentTarget.files[0].name);
+    })
+
 })
 
 
