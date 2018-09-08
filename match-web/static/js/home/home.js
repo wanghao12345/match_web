@@ -64,16 +64,25 @@ $(function () {
      * 积分榜
      */
     requestScoreList();
+    window.setInterval(function () {
+        requestScoreList();
+    }, 10000);
+
     /**
      * 答题动态
      */
     requestDynamic();
+    //10秒后加载答题动态
     window.setInterval(function () {
         requestDynamic();
-    }, 10000) // 10s请求一次
+    }, 10000);
+
+
+
+
+
 
 })
-
 /**
  * 积分榜请求
  */
@@ -90,7 +99,7 @@ function requestScoreList() {
             for(var i = 0; i < 10; i++){
                 if(data[i]){
                     if(i<3){
-                        arr.push('<li>\n' +
+                        arr.push('<li class="rank-item">\n' +
                             '    <div class="rank">\n' +
                             '        <img src="../../static/img/home/img_no'+(i+1)+'.png" alt="第一">\n' +
                             '    </div>\n' +
@@ -99,7 +108,7 @@ function requestScoreList() {
                             '    </div>\n' +
                             '</li>');
                     }else{
-                        arr.push('<li>\n' +
+                        arr.push('<li class="rank-item">\n' +
                             '    <div class="rank">\n' +
                             '        NO.'+(i+1)+'\n' +
                             '    </div>\n' +
@@ -115,6 +124,10 @@ function requestScoreList() {
 
             }
             $('ul#score-rank-list').append(arr.join(''));
+            $('#rank-scroll').textScroll({
+                itemBox:'.rank-item',
+                outBox: '#score-rank-list'
+            });
         },
         fail: function (err) {
             layer.alert(err);
@@ -131,7 +144,6 @@ function requestDynamic() {
         type: 'get',
         data:{},
         dataType: 'json',
-        timeout: 1000,
         success: function (data) {
             if (data.code == 200){
                 $('input#Dynamic-Id').val(data.first_id);
@@ -150,12 +162,12 @@ function requestDynamic() {
                 })
                 $('ul#scroll-item-content').append(arr.join(''));
                 /**
-                 * 大体动态
+                 * 答题动态
                  */
                 $('#textScroll').textScroll({
                     itemBox:'.scroll-item',
                     outBox: '#scroll-item-content'
-                })
+                });
             }
         },
         fail: function (err) {

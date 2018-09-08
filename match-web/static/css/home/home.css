@@ -115,7 +115,7 @@ body{
     height: 550px;
     box-sizing: border-box;
     padding: 0px 20px;
-    overflow-y: auto;
+    overflow: hidden;
 }
 .home-left-content ul.rank-list{
 
