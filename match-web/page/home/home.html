@@ -11,7 +11,7 @@
 <body>
 <div class="box">
     <input type="hidden" id="Dynamic-Id" value="">
-    <input type="hidden" id="isShowPopup" value="-1">
+    <input type="hidden" id="isEntrySec" value="1">
     <div class="header-box">
         <div class="area">
             <div class="logo">
@@ -55,9 +55,9 @@
                         <span class="title">积分榜</span>
                         <em class="right"></em>
                     </div>
-                    <div class="home-left-content">
+                    <div class="home-left-content" id="rank-scroll">
                         <ul class="rank-list" id="score-rank-list">
-                            <!--<li>
+                            <li class="rank-item">
                                 <div class="rank">
                                     <img src="../../static/img/home/img_no1.png" alt="第一">
                                 </div>
@@ -65,7 +65,7 @@
                                     王小明<br/><i>10000</i>
                                 </div>
                             </li>
-                            <li>
+                            <li class="rank-item">
                                 <div class="rank">
                                     <img src="../../static/img/home/img_no2.png" alt="第二">
                                 </div>
@@ -73,7 +73,7 @@
                                     王小明<br/><i>10000</i>
                                 </div>
                             </li>
-                            <li>
+                            <li class="rank-item">
                                 <div class="rank">
                                     <img src="../../static/img/home/img_no3.png" alt="第三">
                                 </div>
@@ -81,12 +81,12 @@
                                     王小明<br/><i>10000</i>
                                 </div>
                             </li>
-                            <li>
+                            <li class="rank-item">
                                 <div class="rank">NO.4</div>
                                 <div class="name">
                                     王小明<br/><i>10000</i>
                                 </div>
-                            </li>-->
+                            </li>
                         </ul>
                     </div>
                     <div class="home-left-bottom">
@@ -100,6 +100,7 @@
                 </div>
                 <div class="home-middle-box">
                     <div class="grap-box">
+                        <a href="javascript:;" id="back-btn">返回</a>
                         <!--星球-->
                         <div class="star-box star-box1">
                             <div class="star-top star-normal">

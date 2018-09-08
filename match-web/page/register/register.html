@@ -53,7 +53,7 @@
                     <p>用户注册</p>
                 </div>
                 <div class="middle unit-frame-middle">
-                    <form action="">
+                    <form action="" enctype ="multipart/form-data">
                         <ul>
                             <li>
                                 <label for="username">用户名</label>
@@ -80,9 +80,11 @@
                             </li>
                             <li>
                                 <label for="headImg">头像</label>
-                                <!--<input type="text" id="headImg" class="headImgInput">-->
-                                <div class="headImgInput" id="headImg"></div>
-                                <button class="selectPic" id="selectPic">选择图片</button>
+                                <input type="text" readonly class="headImgInput" id="headImg">
+                                <!--<div class="headImgInput" id="headImg"></div>-->
+                                <button class="selectPic" id="selectPic">
+                                    <input type="file" value="选择图片" name="">
+                                    选择图片</button>
                             </li>
                             <li style="position: relative;">
                                 <label for="skill">技能</label>
@@ -122,8 +124,6 @@
     </div>
 </div>
 <script src="../../static/js/jquery/jquery-2.1.4.js"></script>
-<script src="../../static/js/plug/webuploader/webuploader.js"></script>
-<script src="../../static/js/register/uploadPic.js"></script>
 <script src="../../static/js/register/register.js"></script>
 </body>
 </html>
