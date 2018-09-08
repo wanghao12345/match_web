@@ -1,9 +1,12 @@
 $(function () {
     /**
+     * 星球重新排序
+     */
+    initStarPoint();
+    /**
      * 倒计时
      */
     countTime("2018-09-04 23:23:23");
-
     /**
      * 星球上下浮动
      */
@@ -15,15 +18,25 @@ $(function () {
      * 选择进入星球
      */
     $('.star-top img').on('click',function () {
-        $('input#isShowPopup').val(1);
-        //星球重新排序
-        initStarPoint();
+        //显示第一页隐藏的星球
+        $('.star-box' + first_random_point).css('display','block');
+        //显示返回按钮
+        $('a#back-btn').css('display', 'block');
+        //点击进入第二页的标志
+        $('input#isEntrySec').val(2);
         //去掉进度条
         $('.grap-box .star-box .star-bottom .progress').remove();
-        //给目标元素添加弹框
-        var $popup = $('.popup-tip');
-        $popup.css('display', 'none');
-        $(this).parents('.star-box').find('.star-bottom').append($popup);
+    })
+    /**
+     * 返回第一页
+     */
+    $('a#back-btn').on('click', function () {
+        //隐藏第一页隐藏的星球
+        $('.star-box' + first_random_point).css('display','none');
+        //隐藏返回按钮
+        $('a#back-btn').css('display', 'none');
+        //点击进入第二页的标志
+        $('input#isEntrySec').val(1);
     })
 
     /**
@@ -31,11 +44,15 @@ $(function () {
      */
     $('.star-box').hover(function () {
         var category = $(this).find('p.name').html();
-        if(category && parseInt($('input#isShowPopup').val()) != -1){
-
+        var $isShing = $(this).find('.star-top').hasClass('star-shining');
+        var $isEntrySec = $('input#isEntrySec').val();
+        if($isShing && $isEntrySec == '1'){
             requestPopupData(category, this);
+            //给目标元素添加弹框
+            var $popup = $('.popup-tip');
+            $popup.css('display', 'none');
+            $(this).find('.star-bottom').append($popup);
         }
-        // $(this).find('.popup-tip').fadeIn();
     }, function () {
         $(this).find('.popup-tip').fadeOut();
     })
@@ -108,7 +125,6 @@ function requestScoreList() {
 /**
  * 答题动态请求
  */
-
 function requestDynamic() {
     $.ajax({
         url: 'http://s.hackcoll.com:3334/challenges/api/solved/?id=' + $('input#Dynamic-Id').val(),
@@ -179,18 +195,6 @@ function requestPopupData(category, _this){
         }
     })
 }
-
-
-
-
-
-
-
-
-
-
-
-
 /**
  * 广告滚动
  */
@@ -215,10 +219,20 @@ function noticeRolling() {
 /**
  * 初始化星球的位置
  */
+//星球固定分布
+// var point = [[500, 250],[230, 235],[620, 120],[130, 380],[170, 88],[700, 460]];
+var point = [[230, 235],[620, 120],[130, 380],[170, 88],[700, 460]];
+//存储第一次刷新的随机分布
+var first_random = [];
+//存储第一次刷新某个随机球不显示
+var first_random_point = 2;
 function initStarPoint(){
-    var point = [[500, 250],[230, 235],[620, 120],[130, 380],[170, 88],[700, 460]];
-    for (var i = 1; i < 7; i++) {
+    first_random_point = Math.floor(Math.random()*5 + 2);
+    //隐藏掉第一页随机消失的星球
+    $('.star-box' + first_random_point).css('display','none');
+    for (var i = 2; i < 7; i++) {
         var index = Math.round(Math.random()*(point.length-1));
+        first_random.push([point[index][0], point[index][1]]);
         $('.star-box' + i).css({
             left: point[index][0] + 'px',
             top: point[index][1] + 'px'
