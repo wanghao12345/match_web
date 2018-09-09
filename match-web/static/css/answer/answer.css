@@ -21,7 +21,7 @@
 
 
 .m-answer-list{display: -webkit-flex;display: -moz-flex;display: -ms-flex;display: -o-flex;display: flex;-webkit-flex-wrap:wrap;flex-wrap:wrap;margin: 0 -10px;}
-.m-answer-list li{padding: 0 10px;margin-bottom: 20px;flex-basis: 33.33%;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;-o-box-sizing:border-box;-ms-box-sizing:border-box;box-sizing:border-box;display: -webkit-flex;display: -moz-flex;display: -ms-flex;display: -o-flex;display: flex;}
+.m-answer-list li{cursor: pointer;padding: 0 10px;margin-bottom: 20px;flex-basis: 33.33%;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;-o-box-sizing:border-box;-ms-box-sizing:border-box;box-sizing:border-box;display: -webkit-flex;display: -moz-flex;display: -ms-flex;display: -o-flex;display: flex;}
 .m-answer-list .lump{width: 100%;position: relative;background: #10163C;color: #9FD7FF;font-size: 14px;line-height: 1.6;display: -webkit-flex;display: -moz-flex;display: -ms-flex;display: -o-flex;display: flex;}
 .m-answer-list .lump-inner{width: 100%;padding: 15px;display: -webkit-flex;display: -moz-flex;display: -ms-flex;display: -o-flex;display: flex;-webkit-flex-direction: column;-moz-flex-direction: column;-ms-flex-direction: column;-o-flex-direction: column;flex-direction: column;}
 .m-answer-list .top-lump{display: -webkit-flex;display: -moz-flex;display: -ms-flex;display: -o-flex;display: flex;-ms-align-items: center;align-items: center;background: #212C4E;padding: 5px 10px;-webkit-flex-shrink: 0;flex-shrink: 0;}
