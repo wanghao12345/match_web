@@ -55,8 +55,27 @@ $(function(){
         }else{
             sendKey(data);
         }
-
     })
+    /**
+     * 下发题目
+     */
+    $('input#opera-topic').on('click', function () {
+        sendSubject('topic');
+    });
+    /**
+     * 延长时间
+     */
+    $('input#opera-delay').on('click', function () {
+        sendSubject('delay');
+    });
+    /**
+     * 重新下发
+     */
+    $('input#opera-restart').on('click', function () {
+        sendSubject('restart');
+    });
+
+
 
 
 })
@@ -99,9 +118,9 @@ function requestSubjectList() {
                              '        </div>\n' +
                              '      </div>\n' +
                              '      <div class="end-lump">\n' +
-                             '        <h2>第一名:'+value.ranking[0]+'</h2>\n' +
-                             '        <h2>第二名:'+value.ranking[1]+'</h2>\n' +
-                             '        <h2>第三名:'+value.ranking[2]+'</h2>\n' +
+                             '        <h2>'+(value.ranking[0]==undefined? '' : '第一名:'+ value.ranking[0])+'</h2>\n' +
+                             '        <h2>'+(value.ranking[1]==undefined? '' : '第二名:'+ value.ranking[1])+'</h2>\n' +
+                             '        <h2>'+(value.ranking[2]==undefined? '' : '第三名:'+ value.ranking[2])+'</h2>\n' +
                              '      </div>\n' +
                              '    </div>\n' +
                              '    <i class="i-1"></i><i class="i-2"></i>\n' +
@@ -132,27 +151,13 @@ function getSubjectDetail(cid, point, Pop_rule) {
         timeout: 1000,
         success: function (data) {
             if(data.code == 200){
-                var item = data.message;
-                $('#sub-type').html('题目类型:' + $('#subject-type').html());
-                $('#sub-point').html('题目类型:分值:'+point+'pt');
-                $('#sub-name').html(item.name);
-                $('#sub-description').html(item.description);
-                $('#sub-shallenge').val(item.id);
+                if(data.message.type == '1'){
+                    subjectType1(data, point, Pop_rule);
+                }
+                if(data.message.type == '2'){
+                    subjectType2(data, point, Pop_rule);
+                }
 
-                $('table#sub-table tr.sub-tr').remove();
-                var rankArr = item.ranking;
-                var tableArr = [];
-                rankArr.forEach(function (value, index, arr) {
-                    tableArr.push(' <tr class="sub-tr">\n' +
-                                  '  <td>' + (index+1) + '</td>\n' +
-                                  '  <td>' + value.name + '</td>\n' +
-                                  '  <td>' + value.team + '</td>\n' +
-                                  '  <td>' + value.datetime + '</td>\n' +
-                                  '</tr>');
-                })
-
-                $('table#sub-table').append(tableArr.join(''));
-                Pop_rule.showPop();
             }else{
                 layer.alert('题目详情获取失败！');
             }
@@ -163,6 +168,120 @@ function getSubjectDetail(cid, point, Pop_rule) {
     })
 }
 
+/**
+ * 题目类型1
+ * @param data
+ */
+function subjectType1(data, point, Pop_rule) {
+    $('.win-popUp .sub-type1').css('display', 'block');
+    $('.win-popUp .sub-type2').css('display', 'none');
+    $('.win-popUp #input-key').html('Key:');
+
+    var item = data.message;
+    $('#sub-type').html('题目类型:' + $('#subject-type').html());
+    $('#sub-point').html('题目类型:分值:'+point+'pt');
+    $('#sub-name').html(item.name);
+    if(item.prompt){
+        $('#sub-prompt-box').css('display', 'block');
+        $('#sub-prompt-box #sub-prompt').html(item.prompt);
+    }else{
+        $('#sub-prompt-box').css('display', 'none');
+    }
+    $('#sub-description').html(item.description);
+    $('#sub-shallenge').val(item.id);
+
+    $('table#sub-table tr.sub-tr').remove();
+    var rankArr = item.ranking;
+    var tableArr = [];
+    rankArr.forEach(function (value, index, arr) {
+        tableArr.push(' <tr class="sub-tr">\n' +
+            '  <td>' + (index+1) + '</td>\n' +
+            '  <td>' + value.name + '</td>\n' +
+            '  <td>' + value.team + '</td>\n' +
+            '  <td>' + value.datetime + '</td>\n' +
+            '</tr>');
+    })
+
+    $('table#sub-table').append(tableArr.join(''));
+    Pop_rule.showPop();
+}
+/**
+ * 题目类型2
+ * @param data
+ */
+function subjectType2(data, point, Pop_rule) {
+    $('.win-popUp .sub-type1').css('display', 'none');
+    $('.win-popUp .sub-type2').css('display', 'block');
+    $('.win-popUp .sub-type2-progress').css('display', 'flex');
+    $('.win-popUp #input-key').html('Flag:');
+
+    var item = data.message;
+    $('#sub-type').html('题目类型:' + $('#subject-type').html());
+    $('#sub-point').html('题目类型:分值:'+point+'pt');
+    $('#sub-name').html(item.name);
+    $('#sub-description').html(item.description);
+    $('#sub-shallenge').val(item.id);
+
+    $('table#sub-table tr.sub-tr').remove();
+    var rankArr = item.ranking;
+    var tableArr = [];
+    rankArr.forEach(function (value, index, arr) {
+        tableArr.push(' <tr class="sub-tr">\n' +
+            '  <td>' + (index+1) + '</td>\n' +
+            '  <td>' + value.name + '</td>\n' +
+            '  <td>' + value.team + '</td>\n' +
+            '  <td>' + value.datetime + '</td>\n' +
+            '</tr>');
+    })
+
+    $('table#sub-table').append(tableArr.join(''));
+    Pop_rule.showPop();
+}
+
+/**
+ * 下发题目和延长时间
+ * @param opera (topic: 下发题目， delay: 延时， restart: 重启)
+ * @param uid 题目id
+ */
+function sendSubject(opera) {
+    $.ajax({
+        url: 'http://s.hackcoll.com:3334/challenges/control/topic/?opera='+opera+'&uid='+$('input#sub-shallenge').val(),
+        type: 'get',
+        data:{},
+        dataType: 'json',
+        timeout: 1000,
+        success: function (data) {
+            console.log(data);
+            if(data.code == 200){
+                if(opera == 'topic'){
+                    $('input#opera-restart').css('display', 'inline-block');
+                    $('input#opera-topic').css('display', 'none');
+                }
+                if(opera == 'restart'){
+                    $('input#opera-restart').css('display', 'none');
+                    $('input#opera-topic').css('display', 'inline-block');
+                }
+                $('#opera-result').html(data.message);
+            }
+
+            if(data.code == 201){
+                if(opera == 'topic'){
+                    window.setTimeout(function () {
+                        sendSubject('topic');
+                    }, 1000)
+                }
+            }
+
+            if(data.code == 400){
+                $('#opera-result').html(data.message);
+            }
+
+        },
+        fail: function (err) {
+            layer.alert(err);
+        }
+    })
+}
 /**
  * 发送答案
  * @param param
