@@ -17,7 +17,6 @@
     },
     _initEvents : function(){
       var _this = this,options = _this.options,$el = _this.$el;
-
       _this.animateIn($el);
       if(options.time&&options.time>0){
         setTimeout(function(){
@@ -78,7 +77,8 @@
   $.fn.KOTipHide = function(){
     var instance = [];
     this.each(function(i){
-      instance[i] = $(this).eq(i).data('KOTip');
+      instance[i] = $(this).data('KOTip');
+      //console.log(instance[i])
       if(instance[i]){
         instance[i].animateOut(instance[i].$el)
       }
@@ -89,7 +89,7 @@
     if(is.String(options)){    
       var args = Array.prototype.slice.call(arguments, 1);  
       this.each(function(i){
-        instance[i] = $(this).eq(i).data(dataName)
+        instance[i] = $(this).data(dataName)
         if(!instance[i]){
           console.log("初始化之前无法在"+dataName+"上调用方法; 试图调用方法 '" + options + "'");
           return;
@@ -102,12 +102,12 @@
       });
     } else {
       this.each(function(i){
-        instance[i] = $(this).eq(i).data(dataName)
+        instance[i] = $(this).data(dataName)
         if (instance[i]) {
           instance[i]._init(options);
         }else {
           instance[i] = new KOCode(options, this);
-          $(this).eq(i).data(dataName, instance[i]);
+          $(this).data(dataName, instance[i]);
         }
       });
     }
