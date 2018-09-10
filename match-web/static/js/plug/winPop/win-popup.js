@@ -272,7 +272,7 @@
     if(typeof options === 'string'){
       var args = Array.prototype.slice.call(arguments, 1);  
       $this.each(function(i){
-        instance[i] = $(this).eq(i).data(dataName)
+        instance[i] = $(this).data(dataName)
         if(!instance[i]){
           console.log("初始化之前无法在"+dataName+"上调用方法; 试图调用方法 '" + options + "'");
           return;
@@ -285,13 +285,13 @@
       });
     } else {
       $this.each(function(i){
-        instance[i] = $(this).eq(i).data(dataName)
+        instance[i] = $(this).data(dataName)
         if (instance[i]) {
           instance[i]._init(options);
         }else {
           instance[i] = new KOcode(options, this);
           KOcode.name = dataName;
-          $(this).eq(i).data(dataName, instance[i]);
+          $(this).data(dataName, instance[i]);
         }
       });
     }
