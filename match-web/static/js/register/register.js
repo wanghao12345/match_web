@@ -12,13 +12,23 @@ $(function () {
      */
     $('#skill').on('click', 'li', function () {
         var $status = $(this).attr('data-select');
-        if($status=='true'){
-            $(this).attr('data-select', 'false');
-            $(this).css('background','#a2a2a2');
-        }else{
+        if($status=='false'){
             $(this).attr('data-select', 'true');
             $(this).css('background','#009688');
+        }else{
+            $(this).attr('data-select', 'false');
+            $(this).css('background','#a2a2a2');
         }
+
+        var $li = $('ul#skill-list li');
+        var str = '';
+        for (var i = 0; i< $li.length; i++){
+            if($($li[i]).attr('data-select')=='true'){
+                str += $($li[i]).text() + ',';
+            }
+        }
+        $('input#skills').val(str.substring(0, str.length-1));
+
     })
 
     /**
