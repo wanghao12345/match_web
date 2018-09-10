@@ -63,12 +63,20 @@ $(function(){
      * 延长时间
      */
     $('input#opera-delay').on('click', function () {
-        sendSubject('delay');
+        if($(this).attr('data-delayStatus')=='1'){
+            sendSubject('delay');
+        }
     });
     /**
      * 重新下发
      */
     $('input#opera-restart').on('click', function () {
+        $('input#opera-delay').attr('data-delayStatus', '0');
+        $('input#opera-delay').css({
+            'cursor':'no-drop',
+            'color':'#cfcbcb',
+            'border-color':'#c9c2c2'
+        });
         sendSubject('restart');
     });
 
@@ -275,6 +283,12 @@ function sendSubject(opera) {
                         $('input#opera-restart').css('display', 'inline-block');
                         $('input#opera-topic').css('display', 'none');
                         $('#opera-result').html(data.message);
+                        $('input#opera-delay').attr('data-delayStatus', '1');
+                        $('input#opera-delay').css({
+                            'cursor':'pointer',
+                            'color':'#0ff',
+                            'border-color':'#6EC5C3'
+                        });
                     })
                 }else if(opera == 'restart'){
                     $('input#opera-restart').css('display', 'none');
@@ -315,12 +329,17 @@ function sendKey(param) {
         crossDomain: true,
         timeout: 1000,
         success: function (data) {
-            if(data.code == 200 || data.code == 412){ //正确
+            if(data.code == 200){ //正确
+                $('.answer-correct').html('你已答对本题！请再接再厉！');
                 $('.answer-correct').css('display', 'block');
                 $('.answer-error').css('display', 'none');
                 window.setTimeout(function () {
                     window.location.reload();
                 }, 2000)
+            }else if(data.code == 412){
+                $('.answer-correct').html('你已答过本题！请回答下一道题！');
+                $('.answer-correct').css('display', 'block');
+                $('.answer-error').css('display', 'none');
             }else{ //错误
                 $('.answer-correct').css('display', 'none');
                 $('.answer-error').css('display', 'block');

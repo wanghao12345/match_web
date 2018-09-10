@@ -25,18 +25,24 @@ $(function () {
         //点击进入第二页的标志
         $('input#isEntrySec').val(2);
         //去掉进度条
-        $('.grap-box .star-box .star-bottom .progress').remove();
+        $('.grap-box .star-box .star-bottom .progress').css('display', 'none');
+        //进入第二页星球分布
+        getSecPoint($(this).parents('.star-box').find('p.name').html());
     })
     /**
      * 返回第一页
      */
     $('a#back-btn').on('click', function () {
+        //显示所有的星球
+        $('.star-box').css('display','block');
         //隐藏第一页隐藏的星球
         $('.star-box' + first_random_point).css('display','none');
         //隐藏返回按钮
         $('a#back-btn').css('display', 'none');
         //点击进入第二页的标志
         $('input#isEntrySec').val(1);
+        //进度条
+        $('.grap-box .star-box .star-bottom .progress').css('display', 'block');
     })
 
     /**
@@ -76,12 +82,6 @@ $(function () {
     window.setInterval(function () {
         requestDynamic();
     }, 10000);
-
-
-
-
-
-
 })
 /**
  * 积分榜请求
@@ -233,16 +233,19 @@ function noticeRolling() {
  */
 //星球固定分布
 // var point = [[500, 250],[230, 235],[620, 120],[130, 380],[170, 88],[700, 460]];
-var point = [[230, 235],[620, 120],[130, 380],[170, 88],[700, 460]];
+var point = [[230, 235],[620, 120],[130, 380],[170, 88],[700, 460],[420, 470]];
+var point1 = [[230, 235],[620, 120],[130, 380],[170, 88],[700, 460],[420, 470]];
 //存储第一次刷新的随机分布
 var first_random = [];
 //存储第一次刷新某个随机球不显示
 var first_random_point = 2;
 function initStarPoint(){
+
     first_random_point = Math.floor(Math.random()*5 + 2);
     //隐藏掉第一页随机消失的星球
     $('.star-box' + first_random_point).css('display','none');
-    for (var i = 2; i < 7; i++) {
+
+    for (var i = 2; i < 8; i++) {
         var index = Math.round(Math.random()*(point.length-1));
         first_random.push([point[index][0], point[index][1]]);
         $('.star-box' + i).css({
@@ -251,6 +254,34 @@ function initStarPoint(){
         })
         point.splice(index, 1);
     }
+}
+
+
+/**
+ * 第二页的星球
+ */
+function getSecPoint(name){
+    $.ajax({
+        url: 'http://s.hackcoll.com:3334/challenges/api/category/?type='+name,
+        type: 'get',
+        data:{},
+        dataType: 'json',
+        timeout: 1000,
+        success: function (data) {
+            if(data.code == 200){
+                var item  = data.message;
+                var len = data.message.length;
+                $('.star-box').css('display', 'none');
+                for (var i = 2; i < 2 + len; i++) {
+                    $('.star-box' + i).css('display', 'block');
+                    $('.star-box' + i + ' p.name').html(item[i-2].name);
+                }
+            }
+        },
+        fail: function (err) {
+            layer.alert(err);
+        }
+    })
 }
 /**
  * 抖动
