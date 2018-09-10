@@ -73,7 +73,7 @@
 .m-subject-text .row-button{margin-bottom: 10px;text-align: center;}
 .m-subject-text .row-button .i-button{padding: 5px 10px;margin: 0 5px;background: #10163C;border:1px solid #6EC5C3;color: #0ff;cursor: pointer;}
 .m-subject-text .row-button .i-button:hover{-webkit-filter: brightness(120%);-moz-filter:brightness(120%);-o-filter: brightness(120%);-ms-filter: brightness(120%);filter: brightness(120%);}
-.m-subject-text .row-progress{display: -webkit-flex;display: -moz-flex;display: -ms-flex;display: -o-flex;display: flex;-ms-align-items: center;align-items: center;justify-content: center;font-size: 12px;margin-bottom: 10px;}
+.m-subject-text .row-progress{margin-top: 20px;display: -webkit-flex;display: -moz-flex;display: -ms-flex;display: -o-flex;display: flex;-ms-align-items: center;align-items: center;justify-content: center;font-size: 12px;margin-bottom: 10px;}
 .m-subject-text .row-progress .name{}
 .m-subject-text .row-progress .progress{margin: 0 10px;height: 5px;width: 320px;background: #737689;}
 .m-subject-text .row-progress .progress i{display: block;height: 5px;width: 0;background: #0ff;-webkit-transition: .3s ease-out;transition: .3s ease-out;}

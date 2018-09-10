@@ -3,6 +3,12 @@
  */
 
 $(function(){
+    /**
+     * 关闭右上角信息框
+     */
+    $(".j-msg-con").on('click', '.end', function(event) {
+        $(this).closest(".j-msg-con").KOTipHide();
+    });
 
     $(".win-subject").on('click', '.j-open .title', function(event) {
         event.preventDefault();
@@ -23,6 +29,11 @@ $(function(){
     $(".j-show-subject-ul").on('click','li', function(event) {
         var cid = $(this).find('input#cid').val();
         var point = $(this).find('input#point').val();
+        $('input#sub-key').val('');
+        $('input#opera-restart').css('display', 'none');
+        $('input#opera-topic').css('display', 'inline-block');
+        $('#opera-result').html('');
+
         getSubjectDetail(cid, point, Pop_rule);
         // Pop_rule.showPop();
     });
@@ -41,21 +52,6 @@ $(function(){
      * 初始化题目列表
      */
     requestSubjectList();
-
-    /**
-     * 发送答案key
-     */
-    $('a#sub-sendKey').on('click', function () {
-        var data = {
-            shallenge: $(this).find('input#sub-shallenge').val(),
-            key: $('input#sub-key').val()
-        }
-        if(data.key == ''){
-            layer.alert('key不能为空！');
-        }else{
-            sendKey(data);
-        }
-    })
     /**
      * 下发题目
      */
@@ -75,17 +71,37 @@ $(function(){
         sendSubject('restart');
     });
 
-
+    /**
+     * 发送答案key
+     */
+    $('a#sub-sendKey').on('click', function () {
+        var data = {
+            shallenge: $(this).find('input#sub-shallenge').val(),
+            key: $('input#sub-key').val()
+        }
+        if(data.key == ''){
+            layer.alert('key不能为空！');
+        }else{
+            sendKey(data);
+        }
+    });
+    /**
+     * 提交答案Flag
+     */
+    $('a#sub-submit').on('click', function () {
+        var data = {
+            shallenge: $('input#sub-shallenge').val(),
+            key: $('input#sub-key').val()
+        }
+        if(data.key == ''){
+            layer.alert('key不能为空！');
+        }else{
+            sendKey(data);
+        }
+    });
 
 
 })
-
-function setProgress(num){
-    $(".j-progress i").width(num);
-    $(".j-progress .num").html(num);
-}
-
-
 /**
  * 请求题目列表
  */
@@ -212,7 +228,7 @@ function subjectType1(data, point, Pop_rule) {
 function subjectType2(data, point, Pop_rule) {
     $('.win-popUp .sub-type1').css('display', 'none');
     $('.win-popUp .sub-type2').css('display', 'block');
-    $('.win-popUp .sub-type2-progress').css('display', 'flex');
+    $('.win-popUp .sub-type2-progress').css('display', 'none');
     $('.win-popUp #input-key').html('Flag:');
 
     var item = data.message;
@@ -254,16 +270,19 @@ function sendSubject(opera) {
             console.log(data);
             if(data.code == 200){
                 if(opera == 'topic'){
-                    $('input#opera-restart').css('display', 'inline-block');
-                    $('input#opera-topic').css('display', 'none');
-                }
-                if(opera == 'restart'){
+                    setProgress(function () {
+                        $('input#opera-restart').css('display', 'inline-block');
+                        $('input#opera-topic').css('display', 'none');
+                        $('#opera-result').html(data.message);
+                    })
+                }else if(opera == 'restart'){
                     $('input#opera-restart').css('display', 'none');
                     $('input#opera-topic').css('display', 'inline-block');
+                    $('#opera-result').html(data.message);
+                }else{
+                    $('#opera-result').html(data.message);
                 }
-                $('#opera-result').html(data.message);
             }
-
             if(data.code == 201){
                 if(opera == 'topic'){
                     window.setTimeout(function () {
@@ -288,24 +307,83 @@ function sendSubject(opera) {
  */
 function sendKey(param) {
     $.ajax({
-        url: 'http://s.hackcoll.com:3334/api/challenges/solve-challenge/',
+        url: 'http://s.hackcoll.com:3334/challenges/api/solve-challenge/',
         type: 'post',
         data:param,
         dataType: 'json',
+        crossDomain: true,
         timeout: 1000,
         success: function (data) {
-            if(data.code == 200){
-                layer.alert('答案正确！', function () {
+            if(data.code == 200 || data.code == 412){ //正确
+                $('.answer-correct').css('display', 'block');
+                $('.answer-error').css('display', 'none');
+                window.setTimeout(function () {
                     window.location.reload();
-                });
-            }else if(data.code == 417){
-                layer.alert('答案错误！');
-            }else{
-                layer.alert('发送失败！');
+                }, 2000)
+            }else{ //错误
+                $('.answer-correct').css('display', 'none');
+                $('.answer-error').css('display', 'block');
+                window.setTimeout(function () {
+                    $('.answer-correct').css('display', 'none');
+                    $('.answer-error').css('display', 'none');
+                }, 2000)
             }
+
+
+
         },
         fail: function (err) {
             layer.alert(err);
         }
     })
 }
+
+/**
+ * 进度条
+ * @param num
+ */
+function setProgress(callback){
+    $('.sub-type2-progress').css('display', 'flex');
+    var num = 0;
+    var time = window.setInterval(function () {
+        num += (Math.floor(Math.random()*10+1));
+        if(num>=100){
+            num = 100;
+            $(".j-progress i").width(num + '%');
+            $(".j-progress .num").html(num + '%');
+            window.clearInterval(time);
+            $('.sub-type2-progress').css('display', 'none');
+            $(".j-progress i").width('0%');
+            $(".j-progress .num").html('0%');
+            callback();
+        }else{
+            $(".j-progress i").width(num + '%');
+            $(".j-progress .num").html(num + '%');
+        }
+    }, 500)
+}
+
+/**
+ * 获取Cookie
+ * @param name
+ * @returns {*}
+ */
+function getCookie(name) {
+    // (^| )name=([^;]*)(;|$),match[0]为与整个正则表达式匹配的字符串，match[i]为正则表达式捕获数组相匹配的数组；
+    var arr = document.cookie.match(new RegExp("(^| )"+name+"=([^;]*)(;|$)"));
+    if(arr != null) {
+        return unescape(arr[2]);
+    }
+    return null;
+}
+
+
+
+
+
+
+
+
+
+
+
