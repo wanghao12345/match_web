@@ -30,6 +30,10 @@ $(function(){
         var cid = $(this).find('input#cid').val();
         var point = $(this).find('input#point').val();
         $('input#sub-key').val('');
+        $('input#opera-restart').css('display', 'none');
+        $('input#opera-topic').css('display', 'inline-block');
+        $('#opera-result').html('');
+
         getSubjectDetail(cid, point, Pop_rule);
         // Pop_rule.showPop();
     });
@@ -302,25 +306,35 @@ function sendSubject(opera) {
  * @param param
  */
 function sendKey(param) {
+    var csrftoken = getCookie('X-CSRFToken');
     $.ajax({
-        url: 'http://s.hackcoll.com:3334/api/challenges/solve-challenge/',
+        url: 'http://s.hackcoll.com:3334/challenges/api/solve-challenge/',
         type: 'post',
         data:param,
         dataType: 'json',
+        crossDomain: true,
+        headers:{
+            'Cookie': 'sessionid=3oifovm4jjzdnppm4v3uzhiuw9i0o25s',
+            'X-CSRFToken':'V8ReEEftaxCvZQdL7cPRpZlhdv9gWWgIUakk5yLTq4k9cJwIxhd0xLeeL3vneK8j'
+        },
         timeout: 1000,
         success: function (data) {
             if(data.code == 200 || data.code == 412){ //正确
                 $('.answer-correct').css('display', 'block');
                 $('.answer-error').css('display', 'none');
+                window.setTimeout(function () {
+                    window.location.reload();
+                }, 2000)
             }else{ //错误
                 $('.answer-correct').css('display', 'none');
                 $('.answer-error').css('display', 'block');
+                window.setTimeout(function () {
+                    $('.answer-correct').css('display', 'none');
+                    $('.answer-error').css('display', 'none');
+                }, 2000)
             }
 
-            window.setTimeout(function () {
-                $('.answer-correct').css('display', 'none');
-                $('.answer-error').css('display', 'none');
-            }, 2000)
+
 
         },
         fail: function (err) {
@@ -353,5 +367,28 @@ function setProgress(callback){
         }
     }, 500)
 }
+
+/**
+ * 获取Cookie
+ * @param name
+ * @returns {*}
+ */
+function getCookie(name) {
+    // (^| )name=([^;]*)(;|$),match[0]为与整个正则表达式匹配的字符串，match[i]为正则表达式捕获数组相匹配的数组；
+    var arr = document.cookie.match(new RegExp("(^| )"+name+"=([^;]*)(;|$)"));
+    if(arr != null) {
+        return unescape(arr[2]);
+    }
+    return null;
+}
+
+
+
+
+
+
+
+
+
 
 
