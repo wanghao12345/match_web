@@ -6,8 +6,9 @@ $(function(){
     /**
      * 关闭右上角信息框
      */
-    $(".j-msg-con").on('click', '.end', function(event) {
-        $(this).closest(".j-msg-con").KOTipHide();
+    $("body").on('click', '.j-msg-con .end', function(event) {
+        $(this).parent('.j-msg-con').remove();
+
     });
 
     $(".win-subject").on('click', '.j-open .title', function(event) {
