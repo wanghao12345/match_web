@@ -306,17 +306,12 @@ function sendSubject(opera) {
  * @param param
  */
 function sendKey(param) {
-    var csrftoken = getCookie('X-CSRFToken');
     $.ajax({
         url: 'http://s.hackcoll.com:3334/challenges/api/solve-challenge/',
         type: 'post',
         data:param,
         dataType: 'json',
         crossDomain: true,
-        headers:{
-            'Cookie': 'sessionid=3oifovm4jjzdnppm4v3uzhiuw9i0o25s',
-            'X-CSRFToken':'V8ReEEftaxCvZQdL7cPRpZlhdv9gWWgIUakk5yLTq4k9cJwIxhd0xLeeL3vneK8j'
-        },
         timeout: 1000,
         success: function (data) {
             if(data.code == 200 || data.code == 412){ //正确
