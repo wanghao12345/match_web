@@ -37,9 +37,41 @@ $(function(){
 		}
 	});
 
-
-
+	$(".j-delete").on('click', function(event) {
+		jConfirm("销毁实验机，将无法保留实验机内已进行的所有操作，确认释放么？", "提示",function(result){
+			if(result){
+				console.log("删除")
+			}
+		});
+	});
+	setDate();
+  setInterval(setDate,1000);
 
 
 
 })
+
+function setDate(){
+  var T = new Date().toArray();
+  $('.j-date').html(addZero(T[3])+":"+addZero(T[4])+":"+addZero(T[5])+"");
+}
+function addZero(num){
+    if(num<10){
+      return "0"+num;
+    }else{
+      return num;
+    }
+  }
+
+Date.prototype.toArray = function()  
+{   
+    var myDate = this;  
+    var myArray = Array();  
+    myArray[0] = myDate.getFullYear();  
+    myArray[1] = myDate.getMonth()+1;  
+    myArray[2] = myDate.getDate();  
+    myArray[3] = myDate.getHours();  
+    myArray[4] = myDate.getMinutes();  
+    myArray[5] = myDate.getSeconds();  
+    return myArray;  
+} 
