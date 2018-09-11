@@ -43,20 +43,18 @@
 	    </div>
 	    <div class="msgs">
 	    	<ul class="m-msg">
-	    		<li>
-            <a href=""><img src="../../static/img/share/msg-1.jpg" class="msg-1" alt=""></a>
-            <div class="msg-con effect-hidden j-msg-con">
-              <div class="cont">紧急通知！紧急通知！紧急通知！紧急通知！紧急通知！紧急通知！紧急通知！紧急通知！紧急通知！紧急通知！紧急通知！</div>
-              <div class="end">我知道了</div>
-            </div>
-          </li>
+	    		<li id="msg-dom-li">
+                  <a href="">
+                    <img src="../../static/img/share/msg-1.jpg" class="msg-1" alt="">
+                  </a>
+                </li>
 	    		<li class="msg-mail">
-            <a href=""><img src="../../static/img/share/msg-2.jpg" class="msg-2" alt=""></a>
-          </li>
-	    		<li class="user-li">
-            <a href="">用户ID</a>
-            <div class="logout"><a href="">退出登录</a></div>
-          </li>
+                  <a href=""><img src="../../static/img/share/msg-2.jpg" class="msg-2" alt=""></a>
+                </li>
+                      <li class="user-li">
+                  <a href="">用户ID</a>
+                  <div class="logout"><a href="">退出登录</a></div>
+                </li>
 	    	</ul>
 	    </div>
 	  </div>
@@ -141,7 +139,7 @@
                         <div class="row-button sub-type2">
                           <input type="button" id="opera-restart" class="i-button" value="重新下发" style="display: none">
                           <input type="button" id="opera-topic" class="i-button" value="下发题目">
-                          <input type="button" id="opera-delay" class="i-button" value="延长时间">
+                          <input type="button" id="opera-delay" data-delayStatus="0" style="cursor: no-drop;color: #cfcbcb;border-color: #c9c2c2;" class="i-button" value="延长时间">
                         </div>
                         <div class="row-href sub-type2 sub-type2-result" id="opera-result">
 

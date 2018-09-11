@@ -1,5 +1,5 @@
 .p-body{overflow: hidden;}
-.p-topbar{position: absolute;top: 0;left: 0;right: 0;height: 50px;border-bottom: 2px solid #e5e5e5;z-index:9;}
+.p-topbar{position: absolute;top: 0;left: 0;right: 0;height: 50px;border-bottom: 2px solid #dadada;z-index:9;background: #e8e8e8;}
 .p-pannel{position: absolute;width: 35%;left: -35%;top: 52px;bottom: 0;background: #FFF;-webkit-transition: .3s ease-out;transition: .3s ease-out;-webkit-box-shadow:0 0 .4em rgba(0,0,0,0.3);-moz-box-shadow:0 0 .4em rgba(0,0,0,0.3);box-shadow:0 0 .4em rgba(0,0,0,0.3);}
 .p-pannel .pannel-inner{height: 100%;}
 .p-pannel .pannel-btn{position: absolute;display: block;right: -22px;top:10px;width: 22px;height: 96px;background: url(../../img/pannel/hideLeftBtn.png) center no-repeat;cursor: pointer;}
@@ -12,14 +12,14 @@
 .p-body.pannel-open .pannel-btn{background: url(../../img/pannel/hideRightBtn.png) center no-repeat;}
 
 .m-pannel-tab{height: 100%;}
-.m-pannel-tab .tab-tt{position: absolute;top: 0;left: 0;right: 0;padding: 20px 20px 0 20px;background: #F6FAFF;border-bottom: 1px solid #B3BECE;}
+.m-pannel-tab .tab-tt{position: absolute;top: 0;left: 0;right: 0;padding: 20px 20px 0 20px;background: #ebebeb;border-bottom: 1px solid #B3BECE;}
 .m-pannel-tab .tab-tt:after{content: '.';display: block;height: 0;clear: both;overflow: hidden;}
 .m-pannel-tab .tab-tt .tab-tt-dl{float: left;width: 85%;}
 .m-pannel-tab .tab-tt .tab-tt-dl:after{content: '.';display: block;height: 0;clear: both;overflow: hidden;}
 .m-pannel-tab .tab-tt dt{position: relative;float: left;width: 25%;padding-bottom: 10px;height: 30px;line-height: 30px;text-align: center;cursor: pointer;}
-.m-pannel-tab .tab-tt dt:hover{color: #0F7AFE;}
-.m-pannel-tab .tab-tt dt.current{color: #0F7AFE;}
-.m-pannel-tab .tab-tt dt.current:after{content:"";display: block;position: absolute;bottom: -1px;left: 0;right: 0;border-bottom: 2px solid #0F7AFE;}
+.m-pannel-tab .tab-tt dt:hover{color: red;}
+.m-pannel-tab .tab-tt dt.current{color: red;}
+.m-pannel-tab .tab-tt dt.current:after{content:"";display: block;position: absolute;bottom: -1px;left: 0;right: 0;border-bottom: 2px solid red;}
 .m-pannel-tab .tab-cn{position: absolute;top: 61px;bottom: 0;left: 0;right: 0;overflow: hidden;}
 .m-pannel-tab .tab-cn-dl{height: 100%;}
 .m-pannel-tab dd.switch-dd{height: 100%;overflow: hidden;overflow-y: auto;}
@@ -54,7 +54,7 @@
 .m-my-answers .head-img img{width: 40px;height: 40px;display: block;margin-left:auto;margin-right:auto;-webkit-border-radius: 50%;-moz-border-radius:50%;border-radius: 50%;}
 .m-my-answers .content{float: right;width: 370px;font-size: 14px;}
 .m-my-answers .content .editor textarea{width: 100%;height: 60px;padding: 5px;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;-o-box-sizing:border-box;-ms-box-sizing:border-box;box-sizing:border-box;border: 1px solid #ccc;-webkit-border-radius: 2px;-moz-border-radius:2px;border-radius: 2px;}
-.m-my-answers .content .input-btn{width:80px;height:28px;line-height:28px;text-align:center;background-color:#0f7afe;color:#fff;font-size:12px;float:right;border-radius:3px;cursor:pointer;border: 0;margin-left: 10px;}
+.m-my-answers .content .input-btn{width:80px;height:28px;line-height:28px;text-align:center;background-color:#189b99;color:#fff;font-size:12px;float:right;border-radius:3px;cursor:pointer;border: 0;margin-left: 10px;}
 .m-my-answers .content .end{padding-top: 6px;line-height: 28px;text-align: right;}
 .m-my-answers .name{padding-top: 10px;margin-bottom: 10px;}
 .m-my-answers .cont{margin-bottom: 10px;}
@@ -76,13 +76,13 @@
 .p-topbar .logo-name{float: left;padding: 14px;font-size: 20px;color: #333;margin: 0 20px 0 10px;}
 .p-topbar .link{float: left;padding: 14px 0;color: #0f7afe;font-size: 14px;}
 .p-topbar .link img{vertical-align: middle;margin-right: 5px;}
-.p-topbar .link span{vertical-align: middle;color: #0f7afe;}
+.p-topbar .link span{vertical-align: middle;color: #ed0000;}
 .p-topbar .link:hover{text-decoration: underline;}
 .p-topbar .btns{float: right;}
 .p-topbar .btns li{position: relative;float: right;border-left: 1px solid #E6E6E6;}
 .p-topbar .btns li:last-child{border-left: 0;}
 .p-topbar .btns a{display: block;padding: 14px 20px;color: #333;}
-.p-topbar .btns a i{display: inline-block;margin-left: 3px;color: #0f7afe;}
+.p-topbar .btns a i{display: inline-block;margin-left: 3px;color: red;}
 .p-topbar .btns a:hover{opacity: .8;}
 .p-topbar .btns .time{font-size: 24px;padding: 14px;color: #ff3d3d;}
 .p-topbar .btns img{vertical-align: middle;margin-right: 5px;}

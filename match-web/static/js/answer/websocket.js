@@ -58,21 +58,39 @@ var events_functions = {
  * @param type 类型 1.success:成功   2.warning: 警告    3. error 错误
  */
 function createNewNotification(text, type='success'){
-    $('.msg-con .cont').html(text);
-    switch (type) {
-        case "success":
-            $('.msg-con').css('border-color', '#e91e63');
-            break;
-        case "warning":
-            $('.msg-con').css('border-color', '#FFC107');
-            break;
-        case "error":
-            $('.msg-con').css('border-color', '#01FFFF');
-            break;
-    }
-    $(".j-msg-con").KOTip();
-    window.setTimeout(function () {
-        $(".j-msg-con").KOTipHide();
-    }, 2000)
+    creatTip(text, type);
+
 }
 
+/**
+ * 创建弹窗
+ * @param text
+ * @param type
+ */
+function creatTip(text, type) {
+    var content = '';
+    switch (type) {
+        case "success":
+            content = ' <div style="border-color: #e91e63;display: block !important;" class="msg-con effect-hidden j-msg-con">\n' +
+                '  <div class="cont">'+text+'</div>\n' +
+                '  <div class="end">我知道了</div>\n' +
+                '</div>';
+
+            break;
+        case "warning":
+            content = ' <div style="border-color: #FFC107;display: block !important;" class="msg-con effect-hidden j-msg-con">\n' +
+                '  <div class="cont">'+text+'</div>\n' +
+                '  <div class="end">我知道了</div>\n' +
+                '</div>';
+
+            break;
+        case "error":
+            content = ' <div style="border-color: #01FFFF;display: block !important;" class="msg-con effect-hidden j-msg-con">\n' +
+                '  <div class="cont">'+text+'</div>\n' +
+                '  <div class="end">我知道了</div>\n' +
+                '</div>';
+
+            break;
+    }
+    $('li#msg-dom-li').append(content);
+}

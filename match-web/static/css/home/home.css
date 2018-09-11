@@ -317,6 +317,21 @@ body{
 .grap-box .star-box6 .star-bottom{
     margin-top: -65px;
 }
+.grap-box .star-box7 .star-bottom{
+    margin-top: -65px;
+}
+.grap-box .min-star-box{
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    left: 75px;
+    top: 295px;
+}
+.grap-box .min-star-box a{
+    width: 100%;
+    height: 100%;
+    display: block;
+}
 .star-bottom{
     position: relative;
 }
