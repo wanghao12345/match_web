@@ -18,21 +18,27 @@ $(function () {
      * 选择进入星球
      */
     $('.star-top img').on('click',function () {
-        //显示第一页隐藏的星球
-        $('.star-box' + first_random_point).css('display','block');
-        //显示返回按钮
-        $('a#back-btn').css('display', 'block');
-        //点击进入第二页的标志
-        $('input#isEntrySec').val(2);
-        //去掉进度条
-        $('.grap-box .star-box .star-bottom .progress').css('display', 'none');
-        //进入第二页星球分布
-        getSecPoint($(this).parents('.star-box').find('p.name').html());
+        if ($('input#isEntrySec').val() == '1'){
+            //显示第一页隐藏的星球
+            $('.star-box' + first_random_point).css('display','block');
+            //显示返回按钮
+            $('a#back-btn').css('display', 'block');
+            //点击进入第二页的标志
+            $('input#isEntrySec').val(2);
+            //去掉进度条
+            $('.grap-box .star-box .star-bottom .progress').css('display', 'none');
+            //进入第二页星球分布
+            getSecPoint($(this).parents('.star-box').find('p.name').html());
+        }
     })
     /**
      * 返回第一页
      */
     $('a#back-btn').on('click', function () {
+        //恢复所有的星球名字
+        for(var i = 2; i < 8; i++){
+            $('.star-box' + i).find('p.name').html(starName[i -2]);
+        }
         //显示所有的星球
         $('.star-box').css('display','block');
         //隐藏第一页隐藏的星球
@@ -234,7 +240,7 @@ function noticeRolling() {
 //星球固定分布
 // var point = [[500, 250],[230, 235],[620, 120],[130, 380],[170, 88],[700, 460]];
 var point = [[230, 235],[620, 120],[130, 380],[170, 88],[700, 460],[420, 470]];
-var point1 = [[230, 235],[620, 120],[130, 380],[170, 88],[700, 460],[420, 470]];
+var starName = [];
 //存储第一次刷新的随机分布
 var first_random = [];
 //存储第一次刷新某个随机球不显示
@@ -248,6 +254,7 @@ function initStarPoint(){
     for (var i = 2; i < 8; i++) {
         var index = Math.round(Math.random()*(point.length-1));
         first_random.push([point[index][0], point[index][1]]);
+        starName.push($('.star-box' + i).find('p.name').html());
         $('.star-box' + i).css({
             left: point[index][0] + 'px',
             top: point[index][1] + 'px'
@@ -272,10 +279,14 @@ function getSecPoint(name){
                 var item  = data.message;
                 var len = data.message.length;
                 $('.star-box').css('display', 'none');
+                $('.star-box1').css('display', 'block');
                 for (var i = 2; i < 2 + len; i++) {
                     $('.star-box' + i).css('display', 'block');
                     $('.star-box' + i + ' p.name').html(item[i-2].name);
                 }
+            }else{
+                $('.star-box').css('display', 'none');
+                $('.star-box1').css('display', 'block');
             }
         },
         fail: function (err) {
