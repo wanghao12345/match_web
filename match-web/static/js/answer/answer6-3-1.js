@@ -128,29 +128,38 @@ function requestSubjectList() {
                 $('ul#subject-list').html('');
                 item.forEach(function (value) {
                     arr.push('<li>\n' +
-                             '  <input type="hidden" value="'+value.id+'" id="cid">\n' +
-                             '  <input type="hidden" value="'+value.point+'" id="point">\n' +
-                             '  <div class="lump">\n' +
-                             '    <div class="lump-inner">\n' +
-                             '      <div class="top-lump">\n' +
-                             '        <h2>题目类型:' + $('#subject-type').html() + '</h2>\n' +
-                             '        <h3>分值:'+value.point+'pt</h3>\n' +
-                             '        <h4><i class="i-icon i-tip"></i><span>提示</span></h4>\n' +
-                             '      </div>\n' +
-                             '      <div class="mid-lump">\n' +
-                             '        <div class="cont">\n' +
-                             '          题目名称:'+value.name+'' +
-                             '        </div>\n' +
-                             '      </div>\n' +
-                             '      <div class="end-lump">\n' +
-                             '        <h2>'+(value.ranking[0]==undefined? '' : '第一名:'+ value.ranking[0])+'</h2>\n' +
-                             '        <h2>'+(value.ranking[1]==undefined? '' : '第二名:'+ value.ranking[1])+'</h2>\n' +
-                             '        <h2>'+(value.ranking[2]==undefined? '' : '第三名:'+ value.ranking[2])+'</h2>\n' +
-                             '      </div>\n' +
-                             '    </div>\n' +
-                             '    <i class="i-1"></i><i class="i-2"></i>\n' +
-                             '  </div>\n' +
-                             '</li>');
+                        '  <input type="hidden" value="'+value.id+'" id="cid">\n' +
+                        '  <input type="hidden" value="'+value.point+'" id="point">\n' +
+                        '  <div class="lump">\n' +
+                        '    <div class="lump-inner">\n' +
+                        '      <div class="top-lump">\n' +
+                        '        <h2>题目类型:' + $('#subject-type').html() + '</h2>\n' +
+                        '        <h3>分值:'+value.point+'pt</h3>');
+                    if(value.status){
+                        arr.push('<h4><i class="i-icon i-ok"></i>');
+                    }else{
+                        arr.push('<h4><i class="i-icon i-tip"></i>');
+                    }
+                    if(value.prompt){
+                        arr.push('<span>提示</span></h4>');
+                    }else{
+                        arr.push('<span></span></h4>');
+                    }
+                    arr.push('</div>\n' +
+                        '      <div class="mid-lump">\n' +
+                        '        <div class="cont">\n' +
+                        '          题目名称:'+value.name+'' +
+                        '        </div>\n' +
+                        '      </div>\n' +
+                        '      <div class="end-lump">\n' +
+                        '        <h2>'+(value.ranking[0]==undefined? '' : '第一名:'+ value.ranking[0])+'</h2>\n' +
+                        '        <h2>'+(value.ranking[1]==undefined? '' : '第二名:'+ value.ranking[1])+'</h2>\n' +
+                        '        <h2>'+(value.ranking[2]==undefined? '' : '第三名:'+ value.ranking[2])+'</h2>\n' +
+                        '      </div>\n' +
+                        '    </div>\n' +
+                        '    <i class="i-1"></i><i class="i-2"></i>\n' +
+                        '  </div>\n' +
+                        '</li>');
                 });
                 $('ul#subject-list').append(arr.join(''));
 
@@ -239,6 +248,7 @@ function subjectType2(data, point, Pop_rule) {
     $('.win-popUp .sub-type2').css('display', 'block');
     $('.win-popUp .sub-type2-progress').css('display', 'none');
     $('.win-popUp #input-key').html('Flag:');
+    $('#opera-result').html(data.message.url);
 
     var item = data.message;
     $('#sub-type').html('题目类型:' + $('#subject-type').html());

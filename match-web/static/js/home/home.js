@@ -244,10 +244,10 @@ var starName = [];
 //存储第一次刷新的随机分布
 var first_random = [];
 //存储第一次刷新某个随机球不显示
-var first_random_point = 2;
+var first_random_point = 7;
 function initStarPoint(){
 
-    first_random_point = Math.floor(Math.random()*5 + 2);
+    // first_random_point = Math.floor(Math.random()*5 + 2);
     //隐藏掉第一页随机消失的星球
     $('.star-box' + first_random_point).css('display','none');
 
@@ -279,7 +279,6 @@ function getSecPoint(name){
                 var item  = data.message;
                 var len = data.message.length;
                 $('.star-box').css('display', 'none');
-                $('.star-box1').css('display', 'block');
                 for (var i = 2; i < 2 + len; i++) {
                     $('.star-box' + i).css('display', 'block');
                     $('.star-box' + i + ' p.name').html(item[i-2].name);
