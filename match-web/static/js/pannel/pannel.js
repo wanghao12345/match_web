@@ -55,7 +55,9 @@ $(function(){
 	setDate();
   setInterval(setDate,1000);
 
-
+  setTimeout(function () {
+	  $('.loading').css('display', 'none');
+  }, 5000)
 
 })
 

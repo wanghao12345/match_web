@@ -1,8 +1,8 @@
 .p-body{overflow: hidden;}
 .p-topbar{position: absolute;top: 0;left: 0;right: 0;height: 40px;border-bottom: 2px solid #e5e5e5;z-index:9;}
-.p-pannel{position: absolute;width: 35%;left: -35%;top: 0;bottom: 0;background: #FFF;-webkit-transition: .3s ease-out;transition: .3s ease-out;-webkit-box-shadow:0 0 .4em rgba(0,0,0,0.3);-moz-box-shadow:0 0 .4em rgba(0,0,0,0.3);box-shadow:0 0 .4em rgba(0,0,0,0.3);}
+.p-pannel{position: absolute;width: 35%;top: 0;bottom: 0;background: #FFF;-webkit-transition: .3s ease-out;transition: .3s ease-out;-webkit-box-shadow:0 0 .4em rgba(0,0,0,0.3);-moz-box-shadow:0 0 .4em rgba(0,0,0,0.3);box-shadow:0 0 .4em rgba(0,0,0,0.3);}
 .p-pannel .pannel-inner{height: 100%;}
-.p-pannel .pannel-btn{position: absolute;display: block;right: -22px;top:10px;width: 22px;height: 96px;background: url(../../img/pannel/hideLeftBtn.png) center no-repeat;cursor: pointer;}
+.p-pannel .pannel-btn{position: absolute;display: block;z-index:999;right: -22px;top:10px;width: 22px;height: 96px;background: url(../../img/pannel/hideLeftBtn.png) center no-repeat;cursor: pointer;}
 .p-pannel .pannel-btn:hover{-webkit-filter: brightness(110%);-moz-filter:brightness(110%);-o-filter: brightness(110%);-ms-filter: brightness(110%);filter: brightness(110%);}
 
 .p-pannel-2{position: absolute;width: 140px;right: -140px;top: 0;bottom: 0;background: rgba(85,85,85,.85);-webkit-transition: .3s ease-out;transition: .3s ease-out;-webkit-box-shadow:0 0 .4em rgba(0,0,0,0.3);-moz-box-shadow:0 0 .4em rgba(0,0,0,0.3);box-shadow:0 0 .4em rgba(0,0,0,0.3);}
@@ -15,9 +15,11 @@
 .p-main{height: 100%;-webkit-transition: .3s ease-out;transition: .3s ease-out;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;-o-box-sizing:border-box;-ms-box-sizing:border-box;box-sizing:border-box;}
 .p-main iframe{height: 100%;}
 
-.p-body.pannel-open .p-pannel{left: 0;}
+.p-body.pannel-open .p-pannel{left: 0;width: 100%}
 .p-body.pannel-open .p-main{margin-left: 35%;}
 .p-body.pannel-open .p-pannel .pannel-btn{background: url(../../img/pannel/hideRightBtn.png) center no-repeat;}
+
+.p-body.pannel-open .p-pannel .pannel-btn{background: url(../../img/pannel/hideRightBtn2.png) center no-repeat;right: 0;}
 
 .m-pannel-tab{height: 100%;}
 .m-pannel-tab .tab-tt{position: absolute;top: 0;left: 0;right: 0;padding:0px 0 0 10px;background: #2B2F36;color: #FFF;}
@@ -110,3 +112,62 @@
 
 .msg-con2{display: none;background:#ecf0f5;position:absolute;top:100%;left:-110px;width:240px;padding:8px 14px;font-size:12px;-webkit-border-radius: 20px;-moz-border-radius:20px;border-radius: 20px;-webkit-box-shadow:.1em .1em .4em rgba(0,0,0,0.3);-moz-box-shadow:.1em .1em .4em rgba(0,0,0,0.3);box-shadow:.1em .1em .4em rgba(0,0,0,0.3);text-align: center;z-index:999;}
 .msg-con2:before{content:'';display: block;position: absolute;left: 50%;bottom: 100%;margin-left: -.5em;margin-top: -.1em;border-width:.5em;display: block;width:0;height:0;border-style:solid;border-color: transparent transparent #ecf0f5 transparent;}
+
+.loading{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    background: rgba(0,0,0,0.2);
+}
+.loading .loading-content{
+    width: 400px;
+    height: 60px;
+    background: white;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-left: -200px;
+    margin-top: -30px;
+    border-radius: 5px;
+    overflow: hidden;
+    line-height: 60px;
+}
+.loading .loading-content img{
+    float: left;
+    margin: 15px;
+}
+img#img-loading{
+    -webkit-transition-property: -webkit-transform;
+    -webkit-transition-duration: 1s;
+    -moz-transition-property: -moz-transform;
+    -moz-transition-duration: 1s;
+    -webkit-animation: rotate 1s linear infinite;
+    -moz-animation: rotate 1s linear infinite;
+    -o-animation: rotate 1s linear infinite;
+    animation: rotate 1s linear infinite;}
+@-webkit-keyframes rotate{from{-webkit-transform: rotate(0deg)}
+    to{-webkit-transform: rotate(360deg)}
+}
+@-moz-keyframes rotate{from{-moz-transform: rotate(0deg)}
+    to{-moz-transform: rotate(359deg)}
+}
+@-o-keyframes rotate{from{-o-transform: rotate(0deg)}
+    to{-o-transform: rotate(359deg)}
+}
+@keyframes rotate{from{transform: rotate(0deg)}
+    to{transform: rotate(359deg)}
+}
+
+
+
+
+
+
+
+
+
+
+
+
