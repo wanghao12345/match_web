@@ -1,11 +1,19 @@
 $(function(){
   var $body = $(".j-p-body");
-	$body.on('click', '.pannel-btn', function(event) {
+	$body.on('click', '.j-pannel-btn', function(event) {
 		event.preventDefault();
 		if($body.hasClass("pannel-open")){
 			$body.removeClass("pannel-open");
 		}else{
 			$body.addClass("pannel-open");
+		}
+	});
+	$body.on('click', '.j-pannel-btn2', function(event) {
+		event.preventDefault();
+		if($body.hasClass("pannel-open2")){
+			$body.removeClass("pannel-open2");
+		}else{
+			$body.addClass("pannel-open2");
 		}
 	});
 
