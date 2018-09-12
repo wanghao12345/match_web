@@ -35,6 +35,8 @@ $(function () {
      * 返回第一页
      */
     $('a#back-btn').on('click', function () {
+        //恢复a
+        $('.star-box').find('a').attr('href', 'javascript:;');
         //恢复所有的星球名字
         for(var i = 2; i < 8; i++){
             $('.star-box' + i).find('p.name').html(starName[i -2]);
@@ -262,8 +264,6 @@ function initStarPoint(){
         point.splice(index, 1);
     }
 }
-
-
 /**
  * 第二页的星球
  */
@@ -281,6 +281,7 @@ function getSecPoint(name){
                 $('.star-box').css('display', 'none');
                 for (var i = 2; i < 2 + len; i++) {
                     $('.star-box' + i).css('display', 'block');
+                    $('.star-box' + i).find('a').attr('href','http://127.0.0.1:8000/challenges/category/1/?id='+item[i-2].id);
                     $('.star-box' + i + ' p.name').html(item[i-2].name);
                 }
             }else{

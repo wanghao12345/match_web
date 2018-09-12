@@ -4,6 +4,15 @@
 
 $(function(){
     /**
+     * 题目详情框
+     * @type {*|jQuery}
+     */
+    var Pop_rule = $(".win-subject").popUp({"visible":false,"width":800});
+    /**
+     * 初始化题目列表
+     */
+    requestSubjectList(Pop_rule);
+    /**
      * 关闭右上角信息框
      */
     $("body").on('click', '.j-msg-con .end', function(event) {
@@ -20,23 +29,19 @@ $(function(){
             $tip.addClass("open");
         }
     });
-
     /**
-     * 题目详情框
-     * @type {*|jQuery}
+     * 打开题目详情框
      */
-    var Pop_rule = $(".win-subject").popUp({"visible":false,"width":800});
-    //打开
     $(".j-show-subject-ul").on('click','li', function(event) {
         var cid = $(this).find('input#cid').val();
         var point = $(this).find('input#point').val();
+        var status = $(this).find('input#answer-status').val();
         $('input#sub-key').val('');
         $('input#opera-restart').css('display', 'none');
         $('input#opera-topic').css('display', 'inline-block');
         $('#opera-result').html('');
+        getSubjectDetail(cid, point, Pop_rule, status);
 
-        getSubjectDetail(cid, point, Pop_rule);
-        // Pop_rule.showPop();
     });
     $(".j-subject-tab").on('initEnd', function(event) {
         Pop_rule.resizePop()
@@ -49,10 +54,6 @@ $(function(){
             },300)
     }});
 
-    /**
-     * 初始化题目列表
-     */
-    requestSubjectList();
     /**
      * 下发题目
      */
@@ -114,7 +115,7 @@ $(function(){
 /**
  * 请求题目列表
  */
-function requestSubjectList() {
+function requestSubjectList(Pop_rule) {
     $.ajax({
         url: 'http://s.hackcoll.com:3334/challenges/api/category/?type=' + $('#subject-type').html(),
         type: 'get',
@@ -127,7 +128,7 @@ function requestSubjectList() {
                 var arr = [];
                 $('ul#subject-list').html('');
                 item.forEach(function (value) {
-                    arr.push('<li>\n' +
+                    arr.push('<li id="subject-item'+value.id+'">\n' +
                         '  <input type="hidden" value="'+value.id+'" id="cid">\n' +
                         '  <input type="hidden" value="'+value.point+'" id="point">\n' +
                         '  <div class="lump">\n' +
@@ -137,8 +138,13 @@ function requestSubjectList() {
                         '        <h3>分值:'+value.point+'pt</h3>');
                     if(value.status){
                         arr.push('<h4><i class="i-icon i-ok"></i>');
-                    }else{
+                        arr.push('<input type="hidden" id="answer-status" value="1">');
+                    }else if(value.prompt){
                         arr.push('<h4><i class="i-icon i-tip"></i>');
+                        arr.push('<input type="hidden" id="answer-status" value="0">');
+                    }else{
+                        arr.push('<h4><i class="i-icon"></i>');
+                        arr.push('<input type="hidden" id="answer-status" value="0">');
                     }
                     if(value.prompt){
                         arr.push('<span>提示</span></h4>');
@@ -162,7 +168,8 @@ function requestSubjectList() {
                         '</li>');
                 });
                 $('ul#subject-list').append(arr.join(''));
-
+                //判断是否弹出框
+                isOpenDetail(Pop_rule);
             }
         },
         fail: function (err) {
@@ -176,7 +183,7 @@ function requestSubjectList() {
  * @param cid 题目id
  * @param Pop_rule 弹框
  */
-function getSubjectDetail(cid, point, Pop_rule) {
+function getSubjectDetail(cid, point, Pop_rule, status) {
     $.ajax({
         url: 'http://s.hackcoll.com:3334/challenges/api/category/des/?type=' + $('#subject-type').html() + '&cid=' + cid,
         type: 'get',
@@ -186,10 +193,10 @@ function getSubjectDetail(cid, point, Pop_rule) {
         success: function (data) {
             if(data.code == 200){
                 if(data.message.type == '1'){
-                    subjectType1(data, point, Pop_rule);
+                    subjectType1(data, point, Pop_rule, status);
                 }
                 if(data.message.type == '2'){
-                    subjectType2(data, point, Pop_rule);
+                    subjectType2(data, point, Pop_rule, status);
                 }
 
             }else{
@@ -206,9 +213,17 @@ function getSubjectDetail(cid, point, Pop_rule) {
  * 题目类型1
  * @param data
  */
-function subjectType1(data, point, Pop_rule) {
+function subjectType1(data, point, Pop_rule, status) {
     $('.win-popUp .sub-type1').css('display', 'block');
     $('.win-popUp .sub-type2').css('display', 'none');
+    if(status==1){ //已回答过
+        $('.answer-hasd').css('display', 'block');
+        $('.has-answer').css('display', 'none');
+    }else{
+        $('.answer-hasd').css('display', 'none');
+        $('.has-answer').css('display', 'block');
+    }
+
     $('.win-popUp #input-key').html('Key:');
 
     var item = data.message;
@@ -243,10 +258,18 @@ function subjectType1(data, point, Pop_rule) {
  * 题目类型2
  * @param data
  */
-function subjectType2(data, point, Pop_rule) {
+function subjectType2(data, point, Pop_rule, status) {
     $('.win-popUp .sub-type1').css('display', 'none');
     $('.win-popUp .sub-type2').css('display', 'block');
     $('.win-popUp .sub-type2-progress').css('display', 'none');
+    if(status==1){ //已回答过
+        $('.answer-hasd').css('display', 'block');
+        $('.has-answer').css('display', 'none');
+    }else{
+        $('.answer-hasd').css('display', 'none');
+        $('.has-answer').css('display', 'block');
+    }
+
     $('.win-popUp #input-key').html('Flag:');
     $('#opera-result').html(data.message.url);
 
@@ -254,6 +277,12 @@ function subjectType2(data, point, Pop_rule) {
     $('#sub-type').html('题目类型:' + $('#subject-type').html());
     $('#sub-point').html('题目类型:分值:'+point+'pt');
     $('#sub-name').html(item.name);
+    if(item.prompt){
+        $('#sub-prompt-box').css('display', 'block');
+        $('#sub-prompt-box #sub-prompt').html(item.prompt);
+    }else{
+        $('#sub-prompt-box').css('display', 'none');
+    }
     $('#sub-description').html(item.description);
     $('#sub-shallenge').val(item.id);
 
@@ -345,7 +374,7 @@ function sendKey(param) {
                 $('.answer-error').css('display', 'none');
                 window.setTimeout(function () {
                     window.location.reload();
-                }, 2000)
+                }, 1000)
             }else if(data.code == 412){
                 $('.answer-correct').html('你已答过本题！请回答下一道题！');
                 $('.answer-correct').css('display', 'block');
@@ -358,9 +387,6 @@ function sendKey(param) {
                     $('.answer-error').css('display', 'none');
                 }, 2000)
             }
-
-
-
         },
         fail: function (err) {
             layer.alert(err);
@@ -393,6 +419,38 @@ function setProgress(callback){
     }, 500)
 }
 
+
+/**
+ * 判断是否自动打开题目
+ */
+function isOpenDetail(Pop_rule) {
+    var subject_id = getQueryString('id');
+    if(subject_id != null){
+        var cid    = $('li#subject-item'+subject_id).find('input#cid').val();
+        var point  = $('li#subject-item'+subject_id).find('input#point').val();
+        var status = $('li#subject-item'+subject_id).find('input#answer-status').val();
+        $('input#sub-key').val('');
+        $('input#opera-restart').css('display', 'none');
+        $('input#opera-topic').css('display', 'inline-block');
+        $('#opera-result').html('');
+        getSubjectDetail(cid, point, Pop_rule, status);
+    }
+}
+/**
+ * 获取url中的参数
+ * @param name
+ * @returns {*}
+ */
+function getQueryString(name) {
+    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); // 匹配目标参数
+    var result = window.location.search.substr(1).match(reg); // 对querystring匹配目标参数
+    if (result != null) {
+        return decodeURIComponent(result[2]);
+    } else {
+        return null;
+    }
+}
+
 /**
  * 获取Cookie
  * @param name
@@ -406,7 +464,6 @@ function getCookie(name) {
     }
     return null;
 }
-
 
 
 

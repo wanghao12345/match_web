@@ -136,6 +136,14 @@
                           <div class="name">题目描述：</div>
                           <div class="content" id="sub-description">内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容</div>
                         </div>
+
+                        <div class="row-tip m-tip-box j-open open sub-type1" id="sub-prompt-box">
+                          <div class="title">提示</div>
+                          <div class="content">
+                            <div class="msg" id="sub-prompt">1+1+2+3-21+1+2+3-21+1+2+3-21+1+2+3-21+1+2+3-21+1+2+3-2</div>
+                          </div>
+                        </div>
+
                         <div class="row-button sub-type2">
                           <input type="button" id="opera-restart" class="i-button" value="重新下发" style="display: none">
                           <input type="button" id="opera-topic" class="i-button" value="下发题目">
@@ -149,26 +157,24 @@
                           <div class="progress"><i style="width:0%"></i></div>
                           <div class="num">0%</div>
                         </div>
-                        <div class="row-tip m-tip-box j-open open sub-type1" id="sub-prompt-box">
-                          <div class="title">提示</div>
-                          <div class="content">
-                            <div class="msg" id="sub-prompt">1+1+2+3-21+1+2+3-21+1+2+3-21+1+2+3-21+1+2+3-21+1+2+3-2</div>
-                          </div>
-                        </div>
-                        <div class="row row-vertical">
+
+
+
+                        <div class="row row-vertical has-answer">
                           <div class="name" id="input-key">Key：</div>
                           <input class="content" style="border: 0;width: 720px;height: 40px;padding: 0 5px;margin-top: 10px;" type="text" id="sub-key">
                         </div>
                         <div class="row-feedback">
                           <div class="correct answer-correct" style="display: none">你已答对本题！请再接再厉！</div>
                           <div class="error answer-error" style="display: none;">抱歉，答案错误，请重新输入</div>
+                          <div class="error answer-hasd" style="display: none;">您或您的队友已回答过该题目</div>
                         </div>
-                        <div class="row-end sub-type1">
+                        <div class="row-end sub-type1 has-answer">
                           <a href="javascript:;" class="i-btn" id="sub-sendKey">
                             <input type="hidden" id="sub-shallenge" value="">
                             Send Key</a>
                         </div>
-                        <div class="row-end sub-type2">
+                        <div class="row-end sub-type2 has-answer">
                           <a href="javascript:;" class="i-btn" id="sub-submit">提交</a>
                         </div>
                       </div>
