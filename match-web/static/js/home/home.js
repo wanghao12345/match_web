@@ -1,12 +1,12 @@
 $(function () {
     /**
-     * 星球重新排序
+     * 星球初始化排序
      */
     initStarPoint();
     /**
      * 倒计时
      */
-    countTime("2018-09-04 23:23:23");
+    countTime("2018-09-14 17:08:00");
     /**
      * 星球上下浮动
      */
@@ -17,57 +17,56 @@ $(function () {
     /**
      * 选择进入星球
      */
-    $('.star-top img').on('click',function () {
-        if ($('input#isEntrySec').val() == '1'){
-            //显示第一页隐藏的星球
-            $('.star-box' + first_random_point).css('display','block');
+    $('.grap-box').on('click','.star-top img',function () {
+        var index = $(this).attr('data-index');
+        if ($('input#isEntrySec').val() == '1' && index == undefined){
             //显示返回按钮
             $('a#back-btn').css('display', 'block');
             //点击进入第二页的标志
             $('input#isEntrySec').val(2);
-            //去掉进度条
-            $('.grap-box .star-box .star-bottom .progress').css('display', 'none');
             //进入第二页星球分布
             getSecPoint($(this).parents('.star-box').find('p.name').html());
         }
+    });
+    /**
+     * 选择第一颗球
+     */
+    $('.grap-box').on('click','.star-box1',function () {
+        if($(this).attr('data-status')=='0'){
+            var secStarPointArr = [[400, 120], [400, 470], [750, 270], [120, 350], [10, 470], [300, 440], [600, 440]];
+            var index = Math.round(Math.random()*(secStarPointArr.length-1));
+            $('.grap-box').append('<div class="star-box star-box7 star-box-add" style="left: '+secStarPointArr[index][0]+'px;top: '+secStarPointArr[index][1]+'px;">\n' +
+                '    <a target="_blank" href="http://www.baidu.com">\n' +
+                '        <div class="star-top star-shining">\n' +
+                '            <img class="normal" data-index="2" src="../../static/img/home/star/star_7_normal.png" alt="星球7">\n' +
+                '            <img class="shining" data-index="2" src="../../static/img/home/star/star_7_shining.png" alt="星球7">\n' +
+                '        </div>\n' +
+                '        <div class="star-bottom">\n' +
+                '            <p class="name">新增链接球</p>\n' +
+                '        </div>\n' +
+                '    </a>\n' +
+                '</div>');
+            $(this).attr('data-status', '1');
+        }else{
+            $('.grap-box .star-box-add').remove();
+            $(this).attr('data-status', '0');
+        }
+
+
+
     })
     /**
      * 返回第一页
      */
     $('a#back-btn').on('click', function () {
-        //恢复所有的星球名字
-        for(var i = 2; i < 8; i++){
-            $('.star-box' + i).find('p.name').html(starName[i -2]);
-        }
-        //显示所有的星球
-        $('.star-box').css('display','block');
-        //隐藏第一页隐藏的星球
-        $('.star-box' + first_random_point).css('display','none');
+        //初始化第一页
+        initStarPoint();
         //隐藏返回按钮
         $('a#back-btn').css('display', 'none');
         //点击进入第二页的标志
         $('input#isEntrySec').val(1);
-        //进度条
-        $('.grap-box .star-box .star-bottom .progress').css('display', 'block');
-    })
 
-    /**
-     * 鼠标悬浮显示弹框
-     */
-    $('.star-box').hover(function () {
-        var category = $(this).find('p.name').html();
-        var $isShing = $(this).find('.star-top').hasClass('star-shining');
-        var $isEntrySec = $('input#isEntrySec').val();
-        if($isShing && $isEntrySec == '1'){
-            requestPopupData(category, this);
-            //给目标元素添加弹框
-            var $popup = $('.popup-tip');
-            $popup.css('display', 'none');
-            $(this).find('.star-bottom').append($popup);
-        }
-    }, function () {
-        $(this).find('.popup-tip').fadeOut();
-    })
+    });
     /**
      * 广告滚动
      */
@@ -235,32 +234,100 @@ function noticeRolling() {
     }, 20);
 }
 /**
- * 初始化星球的位置
+ * 随机初始化第一页星球布局
  */
-//星球固定分布
-// var point = [[500, 250],[230, 235],[620, 120],[130, 380],[170, 88],[700, 460]];
-var point = [[230, 235],[620, 120],[130, 380],[170, 88],[700, 460],[420, 470]];
-var starName = [];
-//存储第一次刷新的随机分布
-var first_random = [];
-//存储第一次刷新某个随机球不显示
-var first_random_point = 7;
-function initStarPoint(){
-
-    // first_random_point = Math.floor(Math.random()*5 + 2);
-    //隐藏掉第一页随机消失的星球
-    $('.star-box' + first_random_point).css('display','none');
-
-    for (var i = 2; i < 8; i++) {
+function initStarRandomPoint(){
+    var point = [[230, 235],[620, 120],[170, 450],[170, 88],[700, 460],[420, 470]];
+    $('.grap-box .star-box').remove();
+    var starArr = [];
+    var starName = ['密码', 'WEB', 'PWN', '渗透', '逆向'];
+    starArr.push('<div class="star-box star-box1">\n' +
+        '    <a href="javascript:;">\n' +
+        '        <div class="star-top star-normal">\n' +
+        '            <img class="normal" src="../../static/img/home/star/star_1_normal.png" alt="星球1">\n' +
+        '            <img class="shining" src="../../static/img/home/star/star_1_shining.png" alt="星球1">\n' +
+        '        </div>\n' +
+        '        <div class="star-bottom">\n' +
+        '            <p>参赛队伍 50支</p>\n' +
+        '            <p>参赛队员 2324人</p>\n' +
+        '        </div>\n' +
+        '    </a>\n' +
+        '</div>');
+    for (var i = 2; i < 7; i++){
         var index = Math.round(Math.random()*(point.length-1));
-        first_random.push([point[index][0], point[index][1]]);
-        starName.push($('.star-box' + i).find('p.name').html());
-        $('.star-box' + i).css({
-            left: point[index][0] + 'px',
-            top: point[index][1] + 'px'
-        })
+        starArr.push('<div class="star-box star-box'+i+'" style="left: '+point[index][0]+'px;top: '+point[index][1]+'px;">\n' +
+            '    <a href="javascript:;">'
+        );
+        if(i % 2 == 0){
+            starArr.push('        <div class="star-top star-shining">');
+        }else{
+            starArr.push('        <div class="star-top star-normal">');
+        }
+        starArr.push('            <img class="normal" src="../../static/img/home/star/star_'+i+'_normal.png" alt="星球'+i+'">\n' +
+            '            <img class="shining" src="../../static/img/home/star/star_'+i+'_shining.png" alt="星球'+i+'">\n' +
+            '        </div>\n' +
+            '        <div class="star-bottom">\n' +
+            '            <p class="name">'+starName[i-2]+'</p>\n' +
+            '            <div class="progress">\n' +
+            '                <span class="bar" style="width: 50%;"></span>\n' +
+            '            </div>\n' +
+            '        </div>\n' +
+            '    </a>\n' +
+            '</div>');
         point.splice(index, 1);
     }
+
+    $('.grap-box').append(starArr.join(''));
+
+
+
+
+}
+
+/**
+ * 固定初始化第一页星球布局
+ */
+function initStarPoint() {
+    var point = [[230, 235],[620, 120],[170, 450],[170, 88],[700, 460],[420, 470]];
+    $('.grap-box .star-box').remove();
+    var starArr = [];
+    var starName = ['密码', 'WEB', 'PWN', '渗透', '逆向'];
+    starArr.push('<div class="star-box star-box1" data-status="0">\n' +
+                 '    <a href="javascript:;">\n' +
+                 '        <div class="star-top star-normal">\n' +
+                 '            <img class="normal" data-index="1" src="../../static/img/home/star/star_1_normal.png" alt="星球1">\n' +
+                 '            <img class="shining" data-index="1" src="../../static/img/home/star/star_1_shining.png" alt="星球1">\n' +
+                 '        </div>\n' +
+                 '        <div class="star-bottom">\n' +
+                 '            <p>参赛队伍 50支</p>\n' +
+                 '            <p>参赛队员 2324人</p>\n' +
+                 '        </div>\n' +
+                 '    </a>\n' +
+                 '</div>');
+    for (var i = 2; i < 7; i++){
+        starArr.push('<div class="star-box star-box'+i+'" style="left: '+point[i-2][0]+'px;top: '+point[i-2][1]+'px;">\n' +
+                     '    <a href="javascript:;">'
+        );
+        if(i % 2 == 0){
+            starArr.push('        <div class="star-top star-shining">');
+        }else{
+            starArr.push('        <div class="star-top star-normal">');
+        }
+        starArr.push('            <img class="normal" src="../../static/img/home/star/star_'+i+'_normal.png" alt="星球'+i+'">\n' +
+                     '            <img class="shining" src="../../static/img/home/star/star_'+i+'_shining.png" alt="星球'+i+'">\n' +
+                     '        </div>\n' +
+                     '        <div class="star-bottom">\n' +
+                     '            <p class="name">'+starName[i-2]+'</p>\n' +
+                     '            <div class="progress">\n' +
+                     '                <span class="bar" style="width: 50%;"></span>\n' +
+                     '            </div>\n' +
+                     '        </div>\n' +
+                     '    </a>\n' +
+                     '</div>');
+    }
+
+    $('.grap-box').append(starArr.join(''));
+
 }
 
 
@@ -272,27 +339,80 @@ function getSecPoint(name){
         url: 'http://s.hackcoll.com:3334/challenges/api/category/?type='+name,
         type: 'get',
         data:{},
+        header:{
+            'X-Requested-With':'XMLHttpRequest'
+        },
         dataType: 'json',
         timeout: 1000,
         success: function (data) {
-            if(data.code == 200){
-                var item  = data.message;
-                var len = data.message.length;
-                $('.star-box').css('display', 'none');
-                for (var i = 2; i < 2 + len; i++) {
-                    $('.star-box' + i).css('display', 'block');
-                    $('.star-box' + i + ' p.name').html(item[i-2].name);
-                }
-            }else{
-                $('.star-box').css('display', 'none');
-                $('.star-box1').css('display', 'block');
-            }
+            secRandomPoint(data);
         },
         fail: function (err) {
             layer.alert(err);
         }
     })
 }
+
+/**
+ * 随机第二页的星球
+ */
+function secRandomPoint(data){
+    $('.grap-box .star-box').remove();
+    var secStarPointArr = [[400, 120], [400, 470], [750, 270], [120, 350], [10, 470], [300, 440], [600, 440]];
+    var len = data.message.length;
+    var item  = data.message;
+
+    var starArr = [];
+
+    for (var i = 2; i < len + 2; i++) {
+        var index = Math.round(Math.random()*(secStarPointArr.length-1));
+
+        starArr.push('<div class="star-box star-box'+i+'" style="left: '+secStarPointArr[index][0]+'px;top: '+secStarPointArr[index][1]+'px;">\n' +
+            '    <a href="http://127.0.0.1:8000/challenges/category/1/?id='+item[i-2].id+'">'
+        );
+        starArr.push('<input type="hidden" id="ranklist" value="'+item[i-2].ranking.join(',')+'">');
+        if(i % 2 == 0){
+            starArr.push('        <div class="star-top star-shining">');
+        }else{
+            starArr.push('        <div class="star-top star-normal">');
+        }
+        starArr.push('            <img class="normal" src="../../static/img/home/star/star_'+i+'_normal.png" alt="星球'+i+'">\n' +
+            '            <img class="shining" src="../../static/img/home/star/star_'+i+'_shining.png" alt="星球'+i+'">\n' +
+            '        </div>\n' +
+            '        <div class="star-bottom">\n' +
+            '            <p class="name" style="font-size: 13px">'+item[i-2].name+'</p>\n' +
+            '        </div>\n' +
+            '    </a>\n' +
+            '</div>');
+
+        secStarPointArr.splice(index, 1);
+    }
+    $('.grap-box').append(starArr.join(''));
+    //动态添加悬停效果
+    $('.star-box').hover(function () {
+        var ranklist = $(this).find('input#ranklist').val();
+        //给目标元素添加弹框
+        if(ranklist != ''){
+            $('ul#popup-rank-list').html('');
+            var rankArr = ranklist.split(',');
+            var str = '';
+            for (var i = 0; i < rankArr.length; i++) {
+                str += '<li>'+rankArr[i]+'</li>';
+            }
+            var $popup = $('<div class="popup-tip" style="display: block">\n' +
+                           '    <div class="popup-content">\n' +
+                           '        <h6>星球前3名</h6>\n' +
+                           '        <ul id="popup-rank-list">'+str+'</ul>\n' +
+                           '    </div>\n' +
+                           '</div>');
+            $(this).find('.star-bottom').append($popup);
+        }
+
+    }, function () {
+        $(this).find('.popup-tip').remove();
+    })
+}
+
 /**
  * 抖动
  * @param intShakes 次数

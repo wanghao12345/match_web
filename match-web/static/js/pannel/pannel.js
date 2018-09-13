@@ -1,11 +1,28 @@
 $(function(){
   var $body = $(".j-p-body");
-	$body.on('click', '.pannel-btn', function(event) {
+	$body.on('click', '.j-pannel-btn', function(event) {
 		event.preventDefault();
 		if($body.hasClass("pannel-open")){
 			$body.removeClass("pannel-open");
+            $('.p-body.pannel-open2 .p-pannel').css('width', '35%');
+            $('.p-body.pannel-open2 .p-pannel .pannel-btn').css('right', '-22px');
 		}else{
 			$body.addClass("pannel-open");
+            $('.p-body.pannel-open .p-pannel').css('width', '35%');
+		}
+	});
+
+	$('#fullScreen-btn').on('click', function () {
+		$('.p-body.pannel-open .p-pannel').css('width', '100%');
+		$('.p-body.pannel-open .p-pannel .pannel-btn').css('right', '0');
+
+    })
+	$body.on('click', '.j-pannel-btn2', function(event) {
+		event.preventDefault();
+		if($body.hasClass("pannel-open2")){
+			$body.removeClass("pannel-open2");
+		}else{
+			$body.addClass("pannel-open2");
 		}
 	});
 
@@ -47,7 +64,9 @@ $(function(){
 	setDate();
   setInterval(setDate,1000);
 
-
+  setTimeout(function () {
+	  $('.loading').css('display', 'none');
+  }, 5000)
 
 })
 
