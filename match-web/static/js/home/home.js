@@ -234,14 +234,10 @@ function noticeRolling() {
     }, 20);
 }
 /**
- * 初始化星球的位置
- */
-//星球固定分布
-var point = [[230, 235],[620, 120],[170, 450],[170, 88],[700, 460],[420, 470]];
-/**
  * 随机初始化第一页星球布局
  */
 function initStarRandomPoint(){
+    var point = [[230, 235],[620, 120],[170, 450],[170, 88],[700, 460],[420, 470]];
     $('.grap-box .star-box').remove();
     var starArr = [];
     var starName = ['密码', 'WEB', 'PWN', '渗透', '逆向'];
@@ -292,6 +288,7 @@ function initStarRandomPoint(){
  * 固定初始化第一页星球布局
  */
 function initStarPoint() {
+    var point = [[230, 235],[620, 120],[170, 450],[170, 88],[700, 460],[420, 470]];
     $('.grap-box .star-box').remove();
     var starArr = [];
     var starName = ['密码', 'WEB', 'PWN', '渗透', '逆向'];
