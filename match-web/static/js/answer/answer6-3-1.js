@@ -17,8 +17,11 @@ $(function(){
      */
     $("body").on('click', '.j-msg-con .end', function(event) {
         $(this).parent('.j-msg-con').remove();
-
     });
+
+    window.setInterval(function () {
+        $('div#msg-tip-box .j-msg-putong:first-child').remove();
+    }, 1000)
 
     $(".win-subject").on('click', '.j-open .title', function(event) {
         event.preventDefault();
