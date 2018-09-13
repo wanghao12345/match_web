@@ -106,14 +106,14 @@
   </div>
 
 
-<div class="win-popUp win-subject" style="display: none">
+<div class="win-popUp win-subject win-popUp1" style="display: none">
   <div class="popUp-bar">
     <div class="operat-btn">
       <div class="o-close ani-pulse-hover j-operat-cancel"></div>
     </div>
     <div class="popUp-content">
       <div class="popUp-body">
-        <div class="popUp-inner">
+        <div class="popUp-inner" id="popUp-inner">
         <!--弹窗内容content S-->
           <div class="m-subject">
             <div class="top-bar">
@@ -130,8 +130,8 @@
                 </div>
                 <div class="tab-cn">
                   <dl class="tab-cn-dl">
-                    <dd>
-                      <div class="m-subject-text">
+                    <dd id="subject-tab-content">
+                      <!--<div class="m-subject-text">
                         <div class="row row-horizontal">
                           <div class="name">题目名称：</div>
                           <div class="content" id="sub-name">内容</div>
@@ -181,14 +181,14 @@
                         <div class="row-end sub-type2 has-answer has-answer2">
                           <a href="javascript:;" class="i-btn" id="sub-submit">提交</a>
                         </div>
-                      </div>
+                      </div>-->
                     </dd>
                     <dd>
                       <div class="m-tip-box j-open open">
                         <div class="title">解决团队</div>
                         <div class="content">
                           <div class="table-content">
-                            <table class="table align-left" id="sub-table">
+                            <table class="table align-left" id="complete-tab-content">
                               <tr>
                                 <th>序号</th>
                                 <th>用户名</th>
@@ -215,6 +215,7 @@
   </div>
   <div class="popUp-cover"></div>
 </div>
+
 
   <!--win-popUp-demo-->
 </body>
