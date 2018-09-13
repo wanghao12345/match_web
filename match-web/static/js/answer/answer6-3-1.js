@@ -223,8 +223,9 @@ function subjectType1(data, point, Pop_rule, status) {
         $('.answer-hasd').css('display', 'block');
         $('.has-answer').css('display', 'none');
     }else{
+        $('.has-answer').css('display', 'none');
         $('.answer-hasd').css('display', 'none');
-        $('.has-answer').css('display', 'block');
+        $('.has-answer1').css('display', 'block');
     }
 
     $('.win-popUp #input-key').html('Key:');
@@ -256,6 +257,7 @@ function subjectType1(data, point, Pop_rule, status) {
 
     $('table#sub-table').append(tableArr.join(''));
     Pop_rule.showPop();
+
 }
 /**
  * 题目类型2
@@ -269,8 +271,9 @@ function subjectType2(data, point, Pop_rule, status) {
         $('.answer-hasd').css('display', 'block');
         $('.has-answer').css('display', 'none');
     }else{
+        $('.has-answer').css('display', 'none');
         $('.answer-hasd').css('display', 'none');
-        $('.has-answer').css('display', 'block');
+        $('.has-answer2').css('display', 'block');
     }
 
     $('.win-popUp #input-key').html('Flag:');
