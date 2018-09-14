@@ -32,28 +32,24 @@ $(function () {
      * 选择第一颗球
      */
     $('.grap-box').on('click','.star-box1',function () {
-        if($(this).attr('data-status')=='0'){
-            var secStarPointArr = [[400, 120], [400, 470], [750, 270], [120, 350], [10, 470], [300, 440], [600, 440]];
-            var index = Math.round(Math.random()*(secStarPointArr.length-1));
-            $('.grap-box').append('<div class="star-box star-box7 star-box-add" style="left: '+secStarPointArr[index][0]+'px;top: '+secStarPointArr[index][1]+'px;">\n' +
-                '    <a target="_blank" href="http://www.baidu.com">\n' +
-                '        <div class="star-top star-shining">\n' +
-                '            <img class="normal" data-index="2" src="../../static/img/home/star/star_7_normal.png" alt="星球7">\n' +
-                '            <img class="shining" data-index="2" src="../../static/img/home/star/star_7_shining.png" alt="星球7">\n' +
-                '        </div>\n' +
-                '        <div class="star-bottom">\n' +
-                '            <p class="name">新增链接球</p>\n' +
-                '        </div>\n' +
-                '    </a>\n' +
-                '</div>');
-            $(this).attr('data-status', '1');
-        }else{
-            $('.grap-box .star-box-add').remove();
-            $(this).attr('data-status', '0');
-        }
 
+        $('.grap-box .star-box').remove();
+        var secStarPointArr = [[400, 120], [400, 470], [750, 270], [120, 350], [10, 470], [300, 440], [600, 440]];
+        var index = Math.round(Math.random()*(secStarPointArr.length-1));
+        $('.grap-box').append('<div class="star-box star-box7 star-box-add" style="left: '+secStarPointArr[index][0]+'px;top: '+secStarPointArr[index][1]+'px;">\n' +
+            '    <a target="_blank" href="http://www.baidu.com">\n' +
+            '        <div class="star-top star-shining">\n' +
+            '            <img class="normal" data-index="2" src="../../static/img/home/star/star_7_normal.png" alt="星球7">\n' +
+            '            <img class="shining" data-index="2" src="../../static/img/home/star/star_7_shining.png" alt="星球7">\n' +
+            '        </div>\n' +
+            '        <div class="star-bottom">\n' +
+            '            <p class="name">新增链接球</p>\n' +
+            '        </div>\n' +
+            '    </a>\n' +
+            '</div>');
 
-
+        //显示返回按钮
+        $('a#back-btn').css('display', 'block');
     })
     /**
      * 返回第一页
@@ -276,12 +272,7 @@ function initStarRandomPoint(){
             '</div>');
         point.splice(index, 1);
     }
-
     $('.grap-box').append(starArr.join(''));
-
-
-
-
 }
 
 /**
