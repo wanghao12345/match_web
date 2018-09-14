@@ -147,6 +147,36 @@
 .fullScreen img{
     width: 25px;
 }
+.machine-content{
+    position: absolute;
+    width: 300px;
+    right: 10px;
+    top: 100px;
+    background: white;
+    border-radius: 5px;
+    border: 1px solid #ece7e7;
+    z-index: 9999;
+}
+.machine-content ul{
+    padding: 10px;
+}
+
+.machine-content ul li{
+    width: 100%;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    color: #605c5c;
+    border: 1px solid #ece7e7;
+    margin: 5px 0;
+    border-radius: 5px;
+    overflow: hidden;
+    text-overflow:ellipsis;
+    white-space: nowrap;
+}
+
+
+
 
 .loading{
     position: fixed;
