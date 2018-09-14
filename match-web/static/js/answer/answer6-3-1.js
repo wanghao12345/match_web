@@ -16,27 +16,19 @@ $(function(){
     /**
      * 关闭右上角信息框
      */
-    $("body").on('click', '.j-msg-con .end', function(event) {
-        $(this).parent('.j-msg-con').remove();
-    });
-
-    var removeTime = window.setInterval(function () {
-        try {
-            $('div#msg-tip-box').find('.j-msg-putong')[0].remove();
-        }catch (e) {
-            window.clearInterval(removeTime);
-        }
-    }, 2000)
-
-    $(".win-subject").on('click', '.j-open .title', function(event) {
-        event.preventDefault();
-        var $this = $(this),$tip = $this.closest(".j-open");
-        if($tip.hasClass("open")){
-            $tip.removeClass("open");
-        }else{
-            $tip.addClass("open");
-        }
-    });
+    // $("body").on('click', '.j-msg-con .end', function(event) {
+    //     $(this).parent('.j-msg-con').remove();
+    // });
+    //
+    // $(".win-subject").on('click', '.j-open .title', function(event) {
+    //     event.preventDefault();
+    //     var $this = $(this),$tip = $this.closest(".j-open");
+    //     if($tip.hasClass("open")){
+    //         $tip.removeClass("open");
+    //     }else{
+    //         $tip.addClass("open");
+    //     }
+    // });
     /**
      * 打开题目详情框
      */

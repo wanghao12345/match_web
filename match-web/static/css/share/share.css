@@ -250,6 +250,40 @@
     position: absolute;
     z-index: 1;
 }
+/*消息提示框*/
+.msg-tip-box{
+    position: absolute;
+    width: 300px;
+    height: 500px;
+    right: 50px;
+    top: 40px;
+}
+
+.msg-tip-box .msg-con1{
+    width: 240px;
+    padding: 12px 12px 0 12px;
+    border: 1px solid #f49375;
+    font-size: 12px;
+    background: #303467;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+    z-index: 999;
+    margin: 10px;
+}
+.msg-tip-box .msg-con1 .cont {
+    padding-bottom: 15px;
+    color: #9FD7FF;
+    line-height: 1.6;
+}
+.msg-tip-box .msg-con1 .end {
+    padding: 12px 0;
+    border-top: 1px solid #3E5974;
+    text-align: center;
+    color: #01FFFF;
+    cursor: pointer;
+}
+
 
 /*滚动条*/
 
