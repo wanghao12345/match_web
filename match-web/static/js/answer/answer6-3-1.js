@@ -11,27 +11,24 @@ $(function(){
     /**
      * 初始化题目列表
      */
-    requestSubjectList(Pop_rule);
+    // requestSubjectList(Pop_rule);
+    myPage('http://s.hackcoll.com:3334/challenges/api/category/', Pop_rule)
     /**
      * 关闭右上角信息框
      */
-    $("body").on('click', '.j-msg-con .end', function(event) {
-        $(this).parent('.j-msg-con').remove();
-    });
-
-    window.setInterval(function () {
-        $('div#msg-tip-box .j-msg-putong:first-child').remove();
-    }, 1000)
-
-    $(".win-subject").on('click', '.j-open .title', function(event) {
-        event.preventDefault();
-        var $this = $(this),$tip = $this.closest(".j-open");
-        if($tip.hasClass("open")){
-            $tip.removeClass("open");
-        }else{
-            $tip.addClass("open");
-        }
-    });
+    // $("body").on('click', '.j-msg-con .end', function(event) {
+    //     $(this).parent('.j-msg-con').remove();
+    // });
+    //
+    // $(".win-subject").on('click', '.j-open .title', function(event) {
+    //     event.preventDefault();
+    //     var $this = $(this),$tip = $this.closest(".j-open");
+    //     if($tip.hasClass("open")){
+    //         $tip.removeClass("open");
+    //     }else{
+    //         $tip.addClass("open");
+    //     }
+    // });
     /**
      * 打开题目详情框
      */
@@ -60,34 +57,40 @@ $(function(){
     /**
      * 下发题目
      */
-    $('input#opera-topic').on('click', function () {
+    $('.win-popUp').on('click', 'input#opera-topic', function () {
+        $('#opera-result').html('下发题目中...');
         sendSubject('topic');
     });
     /**
      * 延长时间
      */
-    $('input#opera-delay').on('click', function () {
+    $('.win-popUp').on('click', 'input#opera-delay', function () {
+
         if($(this).attr('data-delayStatus')=='1'){
+            $('.answer-result-restart').html($('#opera-result').html());
+            $('#opera-result').html('延长时间中...');
             sendSubject('delay');
         }
     });
     /**
      * 重新下发
      */
-    $('input#opera-restart').on('click', function () {
-        $('input#opera-delay').attr('data-delayStatus', '0');
-        $('input#opera-delay').css({
-            'cursor':'no-drop',
-            'color':'#cfcbcb',
-            'border-color':'#c9c2c2'
-        });
+    $('.win-popUp').on('click', 'input#opera-restart', function () {
+        $('.answer-result-restart').html($('#opera-result').html());
+        $('#opera-result').html('正在重启中...');
+        // $('input#opera-delay').attr('data-delayStatus', '0');
+        // $('input#opera-delay').css({
+        //     'cursor':'no-drop',
+        //     'color':'#cfcbcb',
+        //     'border-color':'#c9c2c2'
+        // });
         sendSubject('restart');
     });
 
     /**
      * 发送答案key
      */
-    $('a#sub-sendKey').on('click', function () {
+    $('.win-popUp').on('click', 'a#sub-sendKey', function () {
         var data = {
             shallenge: $(this).find('input#sub-shallenge').val(),
             key: $('input#sub-key').val()
@@ -101,20 +104,121 @@ $(function(){
     /**
      * 提交答案Flag
      */
-    $('a#sub-submit').on('click', function () {
+    $('.win-popUp').on('click', 'a#sub-submit', function () {
         var data = {
-            shallenge: $('input#sub-shallenge').val(),
+            shallenge: $(this).find('input#sub-shallenge').val(),
             key: $('input#sub-key').val()
         }
         if(data.key == ''){
-            layer.alert('key不能为空！');
+            layer.alert('Flag不能为空！');
         }else{
             sendKey(data);
         }
     });
 
 
+
+
 })
+
+/**
+ * 分页
+ * @type {*|jQuery}
+ */
+function myPage(url, Pop_rule) {
+    $('.j-my-page').pagination({
+        pageCount: 0, //初始化页数
+        showData: 10,//每页显示的条数
+        callback: function (api) {
+            var data = {
+                type: $('#subject-type').html(),
+                page: api.getCurrent()
+            };
+            requestTable(url,data,'',Pop_rule);
+        }
+    },function(api){
+        api.$el.siblings("i.first").html("共"+api.getPageCount()+"页");
+        var data = {
+            type: $('#subject-type').html(),
+            page: api.getCurrent()
+        };
+        requestTable(url,data, api, Pop_rule);
+    });
+}
+/**
+ * 分页数据处理
+ * @param page
+ */
+function requestTable(myUrl,params, api, Pop_rule) {
+    $.ajax({
+        url: myUrl,
+        type: 'get',
+        data:params,
+        dataType: 'json',
+        timeout: 1000,
+        success: function (data) {
+            if(api){
+                api.setPageCount(Math.ceil(data.count/10));
+                api.init();
+            }
+            if(data.code == 200){
+                var item = data.message;
+                var arr = [];
+                $('ul#subject-list').html('');
+                item.forEach(function (value) {
+                    arr.push('<li id="subject-item'+value.id+'">\n' +
+                        '  <input type="hidden" value="'+value.id+'" id="cid">\n' +
+                        '  <input type="hidden" value="'+value.point+'" id="point">\n' +
+                        '  <div class="lump">\n' +
+                        '    <div class="lump-inner">\n' +
+                        '      <div class="top-lump">\n' +
+                        '        <h2>题目类型:' + $('#subject-type').html() + '</h2>\n' +
+                        '        <h3>分值:'+value.point+'pt</h3>');
+                    if(value.status){
+                        arr.push('<h4><i class="i-icon i-ok"></i>');
+                        arr.push('<input type="hidden" id="answer-status" value="1">');
+                    }else if(value.prompt){
+                        arr.push('<h4><i class="i-icon i-tip"></i>');
+                        arr.push('<input type="hidden" id="answer-status" value="0">');
+                    }else{
+                        arr.push('<h4><i class="i-icon"></i>');
+                        arr.push('<input type="hidden" id="answer-status" value="0">');
+                    }
+                    if(value.prompt){
+                        arr.push('<span>提示</span></h4>');
+                    }else{
+                        arr.push('<span></span></h4>');
+                    }
+                    arr.push('</div>\n' +
+                        '      <div class="mid-lump">\n' +
+                        '        <div class="cont">\n' +
+                        '          题目名称:'+value.name+'' +
+                        '        </div>\n' +
+                        '      </div>\n' +
+                        '      <div class="end-lump">\n' +
+                        '        <h2>'+(value.ranking[0]==undefined? '' : '第一名:'+ value.ranking[0])+'</h2>\n' +
+                        '        <h2>'+(value.ranking[1]==undefined? '' : '第二名:'+ value.ranking[1])+'</h2>\n' +
+                        '        <h2>'+(value.ranking[2]==undefined? '' : '第三名:'+ value.ranking[2])+'</h2>\n' +
+                        '      </div>\n' +
+                        '    </div>\n' +
+                        '    <i class="i-1"></i><i class="i-2"></i>\n' +
+                        '  </div>\n' +
+                        '</li>');
+                });
+                $('ul#subject-list').append(arr.join(''));
+                //判断是否弹出框
+                isOpenDetail(Pop_rule);
+            }
+        },
+        fail: function (err) {
+            console.log(err)
+        }
+    })
+}
+
+
+
+
 /**
  * 请求题目列表
  */
@@ -217,44 +321,87 @@ function getSubjectDetail(cid, point, Pop_rule, status) {
  * @param data
  */
 function subjectType1(data, point, Pop_rule, status) {
-    $('.win-popUp .sub-type1').css('display', 'block');
-    $('.win-popUp .sub-type2').css('display', 'none');
-    if(status==1){ //已回答过
-        $('.answer-hasd').css('display', 'block');
-        $('.has-answer').css('display', 'none');
-    }else{
-        $('.answer-hasd').css('display', 'none');
-        $('.has-answer').css('display', 'block');
-    }
-
-    $('.win-popUp #input-key').html('Key:');
-
     var item = data.message;
     $('#sub-type').html('题目类型:' + $('#subject-type').html());
     $('#sub-point').html('题目类型:分值:'+point+'pt');
-    $('#sub-name').html(item.name);
-    if(item.prompt){
-        $('#sub-prompt-box').css('display', 'block');
-        $('#sub-prompt-box #sub-prompt').html(item.prompt);
-    }else{
-        $('#sub-prompt-box').css('display', 'none');
-    }
-    $('#sub-description').html(item.description);
-    $('#sub-shallenge').val(item.id);
 
-    $('table#sub-table tr.sub-tr').remove();
+    $('#sub-shallenge').val(item.id);
+    var popup_content_tab1 = '<div class="m-subject-text">\n' +
+                        '  <div class="row row-horizontal">\n' +
+                        '    <div class="name">题目名称：</div>\n' +
+                        '    <div class="content">'+item.name+'</div>\n' +
+                        '  </div>\n' +
+                        '  <div class="row row-horizontal">\n' +
+                        '    <div class="name">题目描述：</div>\n' +
+                        '    <div class="content">'+item.description+'</div>\n' +
+                        '  </div>';
+
+                        if(item.prompt){
+                            popup_content_tab1 +='  <div class="row-tip m-tip-box j-open open sub-type1" id="sub-prompt-box">\n' +
+                                '    <div class="title">提示</div>\n' +
+                                '    <div class="content">\n' +
+                                '      <div class="msg">'+item.prompt+'</div>\n' +
+                                '    </div>\n' +
+                                '  </div>';
+                        }
+
+    popup_content_tab1 +='  <div class="row-href sub-type2-result" id="opera-result">\n' +
+                        '  </div>\n' +
+                        '  <div class="row row-vertical has-answer">\n' +
+                        '    <div class="name" id="input-key">Key：</div>\n' +
+                        '    <input class="content" style="border: 0;width: 720px;height: 40px;padding: 0 5px;margin-top: 10px;" type="text" id="sub-key">\n' +
+                        '  </div>\n' +
+                        '  <div class="row-feedback">';
+
+                        if(status == 1){ //已回答过
+                            popup_content_tab1 +='    <div class="correct answer-correct" style="display: none">你已答对本题！请再接再厉！</div>\n' +
+                                '    <div class="error answer-error" style="display: none;">抱歉，答案错误，请重新输入</div>\n' +
+                                '    <div class="error answer-hasd">您或您的队友已回答过该题目</div>';
+                        }else{
+
+                            popup_content_tab1 +='    <div class="correct answer-correct" style="display: none">你已答对本题！请再接再厉！</div>\n' +
+                                '    <div class="error answer-error" style="display: none;">抱歉，答案错误，请重新输入</div>\n' +
+                                '    <div class="error answer-hasd" style="display: none;">您或您的队友已回答过该题目</div>';
+                        }
+
+                        if(status == 1){ //已经回答
+                            popup_content_tab1 +='  </div>\n' +
+                                '  <div class="row-end has-answer has-answer1" style="display: none">\n' +
+                                '    <a href="javascript:;" class="i-btn" id="sub-sendKey">\n' +
+                                '      <input type="hidden" id="sub-shallenge" value="'+item.id+'">\n' +
+                                '      Send Key</a>\n' +
+                                '  </div>\n' +
+                                '</div>';
+                        }else{
+                            popup_content_tab1 +='  </div>\n' +
+                                '  <div class="row-end has-answer has-answer1">\n' +
+                                '    <a href="javascript:;" class="i-btn" id="sub-sendKey">\n' +
+                                '      <input type="hidden" id="sub-shallenge" value="'+item.id+'">\n' +
+                                '      Send Key</a>\n' +
+                                '  </div>\n' +
+                                '</div>';
+                        }
+
+    $('#subject-tab-content').html(popup_content_tab1);
+    var popup_content_tab2 = '<tr>\n' +
+                             '  <th>序号</th>\n' +
+                             '  <th>用户名</th>\n' +
+                             '  <th>队伍</th>\n' +
+                             '  <th>时间</th>\n' +
+                             '</tr>';
+
+
     var rankArr = item.ranking;
-    var tableArr = [];
     rankArr.forEach(function (value, index, arr) {
-        tableArr.push(' <tr class="sub-tr">\n' +
-            '  <td>' + (index+1) + '</td>\n' +
-            '  <td>' + value.name + '</td>\n' +
-            '  <td>' + value.team + '</td>\n' +
-            '  <td>' + value.datetime + '</td>\n' +
-            '</tr>');
+        popup_content_tab2 += '<tr>' +
+            '<td>' + (index+1) + '</td>' +
+            '<td>' + value.name + '</td>' +
+            '<td>' + value.team + '</td>' +
+            '<td>' + value.datetime + '</td>' +
+            '</tr>';
     })
 
-    $('table#sub-table').append(tableArr.join(''));
+    $('#complete-tab-content').html(popup_content_tab2);
     Pop_rule.showPop();
 }
 /**
@@ -262,46 +409,109 @@ function subjectType1(data, point, Pop_rule, status) {
  * @param data
  */
 function subjectType2(data, point, Pop_rule, status) {
-    $('.win-popUp .sub-type1').css('display', 'none');
-    $('.win-popUp .sub-type2').css('display', 'block');
-    $('.win-popUp .sub-type2-progress').css('display', 'none');
-    if(status==1){ //已回答过
-        $('.answer-hasd').css('display', 'block');
-        $('.has-answer').css('display', 'none');
-    }else{
-        $('.answer-hasd').css('display', 'none');
-        $('.has-answer').css('display', 'block');
-    }
-
-    $('.win-popUp #input-key').html('Flag:');
-    $('#opera-result').html(data.message.url);
-
     var item = data.message;
     $('#sub-type').html('题目类型:' + $('#subject-type').html());
     $('#sub-point').html('题目类型:分值:'+point+'pt');
-    $('#sub-name').html(item.name);
-    if(item.prompt){
-        $('#sub-prompt-box').css('display', 'block');
-        $('#sub-prompt-box #sub-prompt').html(item.prompt);
-    }else{
-        $('#sub-prompt-box').css('display', 'none');
-    }
-    $('#sub-description').html(item.description);
-    $('#sub-shallenge').val(item.id);
 
-    $('table#sub-table tr.sub-tr').remove();
+    var popup_content_tab1 = '<div class="m-subject-text">\n' +
+        '  <div class="row row-horizontal">\n' +
+        '    <div class="name">题目名称：</div>\n' +
+        '    <div class="content">'+item.name+'</div>\n' +
+        '  </div>\n' +
+        '  <div class="row row-horizontal">\n' +
+        '    <div class="name">题目描述：</div>\n' +
+        '    <div class="content">'+item.description+'</div>\n' +
+        '  </div>';
+
+    if(item.prompt){
+        popup_content_tab1 +='  <div class="row-tip m-tip-box j-open open sub-type1" id="sub-prompt-box">\n' +
+            '    <div class="title">提示</div>\n' +
+            '    <div class="content">\n' +
+            '      <div class="msg">'+item.prompt+'</div>\n' +
+            '    </div>\n' +
+            '  </div>';
+    }
+
+    if(item.url){ //有url
+        popup_content_tab1 += '<div class="row-button sub-type2" style="margin-top: 30px;">\n' +
+            '  <input type="button" id="opera-restart" class="i-button" value="重新下发">\n' +
+            '  <input type="button" id="opera-topic" class="i-button" style="display: none;" value="下发题目">\n' +
+            '  <input type="button" id="opera-delay" data-delayStatus="1" class="i-button" value="延长时间">\n' +
+            '</div>';
+        popup_content_tab1 +='  <div class="row-href sub-type2-result" id="opera-result">'+item.url+'</div>';
+        popup_content_tab1 += '<div class="row-progress j-progress sub-type2-progress" style="display: none">\n' +
+            '  <div class="name">下发进度</div>\n' +
+            '  <div class="progress"><i style="width:0%"></i></div>\n' +
+            '  <div class="num">0%</div>\n' +
+            '</div>';
+    }else{
+        popup_content_tab1 += '<div class="row-button sub-type2" style="margin-top: 30px;">\n' +
+            '  <input type="button" id="opera-restart" class="i-button" value="重新下发" style="display: none">\n' +
+            '  <input type="button" id="opera-topic" class="i-button" value="下发题目">\n' +
+            '  <input type="button" id="opera-delay" data-delayStatus="0" style="cursor: no-drop;color: #cfcbcb;border-color: #c9c2c2;" class="i-button" value="延长时间">\n' +
+            '</div>';
+        popup_content_tab1 +='  <div class="row-href sub-type2-result" id="opera-result"></div>';
+        popup_content_tab1 += '<div class="row-progress j-progress sub-type2-progress">\n' +
+            '  <div class="name">下发进度</div>\n' +
+            '  <div class="progress"><i style="width:0%"></i></div>\n' +
+            '  <div class="num">0%</div>\n' +
+            '</div>';
+    }
+
+    popup_content_tab1 +='  <div class="row row-vertical has-answer">\n' +
+        '    <div class="name" id="input-key">Flag：</div>\n' +
+        '    <input class="content" style="border: 0;width: 720px;height: 40px;padding: 0 5px;margin-top: 10px;" type="text" id="sub-key">\n' +
+        '  </div>\n' +
+        '  <div class="row-feedback">';
+
+    if(status == 1){ //已回答过
+        popup_content_tab1 +='    <div class="correct answer-correct" style="display: none">你已答对本题！请再接再厉！</div>\n' +
+            '    <div class="error answer-error" style="display: none;">抱歉，答案错误，请重新输入</div>\n' +
+            '    <div class="error answer-hasd">您或您的队友已回答过该题目</div>';
+    }else{
+
+        popup_content_tab1 +='    <div class="correct answer-correct" style="display: none">你已答对本题！请再接再厉！</div>\n' +
+            '    <div class="error answer-error" style="display: none;">抱歉，答案错误，请重新输入</div>\n' +
+            '    <div class="error answer-hasd" style="display: none;">您或您的队友已回答过该题目</div>';
+    }
+    if(status == 1){ //已经回答
+        popup_content_tab1 +='  </div>\n' +
+            '  <div class="row-end has-answer has-answer1" style="display: none">\n' +
+            '    <a href="javascript:;" class="i-btn" id="sub-sendKey">\n' +
+            '      <input type="hidden" id="sub-shallenge" value="'+item.id+'">\n' +
+            '      提交</a>\n' +
+            '  </div>\n' +
+            '</div>';
+    }else{
+        popup_content_tab1 +='  </div>\n' +
+            '  <div class="row-end has-answer has-answer1">\n' +
+            '    <a href="javascript:;" class="i-btn" id="sub-sendKey">\n' +
+            '      <input type="hidden" id="sub-shallenge" value="'+item.id+'">\n' +
+            '      提交</a>\n' +
+            '  </div>\n' +
+            '</div>';
+    }
+
+    $('#subject-tab-content').html(popup_content_tab1);
+    var popup_content_tab2 = '<tr>\n' +
+        '  <th>序号</th>\n' +
+        '  <th>用户名</th>\n' +
+        '  <th>队伍</th>\n' +
+        '  <th>时间</th>\n' +
+        '</tr>';
+
+
     var rankArr = item.ranking;
-    var tableArr = [];
     rankArr.forEach(function (value, index, arr) {
-        tableArr.push(' <tr class="sub-tr">\n' +
-            '  <td>' + (index+1) + '</td>\n' +
-            '  <td>' + value.name + '</td>\n' +
-            '  <td>' + value.team + '</td>\n' +
-            '  <td>' + value.datetime + '</td>\n' +
-            '</tr>');
+        popup_content_tab2 += '<tr>' +
+            '<td>' + (index+1) + '</td>' +
+            '<td>' + value.name + '</td>' +
+            '<td>' + value.team + '</td>' +
+            '<td>' + value.datetime + '</td>' +
+            '</tr>';
     })
 
-    $('table#sub-table').append(tableArr.join(''));
+    $('#complete-tab-content').html(popup_content_tab2);
     Pop_rule.showPop();
 }
 
@@ -333,11 +543,19 @@ function sendSubject(opera) {
                         });
                     })
                 }else if(opera == 'restart'){
-                    $('input#opera-restart').css('display', 'none');
-                    $('input#opera-topic').css('display', 'inline-block');
+                    // $('input#opera-restart').css('display', 'none');
+                    // $('input#opera-topic').css('display', 'inline-block');
+
                     $('#opera-result').html(data.message);
+                    setTimeout(function () {
+                        $('#opera-result').html($('.answer-result-restart').html());
+                    }, 2000);
+
                 }else{
                     $('#opera-result').html(data.message);
+                    setTimeout(function () {
+                        $('#opera-result').html($('.answer-result-restart').html());
+                    }, 2000);
                 }
             }
             if(data.code == 201){
@@ -346,6 +564,17 @@ function sendSubject(opera) {
                         sendSubject('topic');
                     }, 1000)
                 }
+                if(opera == 'restart'){
+                    window.setTimeout(function () {
+                        sendSubject('restart');
+                    }, 1000)
+                }
+                if(opera == 'delay'){
+                    window.setTimeout(function () {
+                        sendSubject('delay');
+                    }, 1000)
+                }
+
             }
 
             if(data.code == 400){

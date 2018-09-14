@@ -5,6 +5,9 @@ var ws = new WebSocket("ws://s.hackcoll.com:3334/ctf_channels");
 ws.onopen = function () {
     // 使用 send() 方法发送数据
     ws.send("发送数据");
+
+    $('body').append('<div class="msg-tip-box" id="msg-tip-box">');
+
     console.log("数据发送中...");
 };
 
@@ -101,3 +104,20 @@ function creatTip(text, type) {
 
 
 }
+
+/**
+ * 关闭右上角信息框
+ */
+
+$(function () {
+    $("body").on('click', '.j-msg-con .end', function(event) {
+        $(this).parent('.j-msg-con').remove();
+    });
+})
+var removeTime = window.setInterval(function () {
+    try {
+        $('div#msg-tip-box').find('.j-msg-putong')[0].remove();
+    }catch (e) {
+        window.clearInterval(removeTime);
+    }
+}, 2000)
