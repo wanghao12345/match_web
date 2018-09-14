@@ -85,12 +85,12 @@ $(function(){
     $('.win-popUp').on('click', 'input#opera-restart', function () {
         $('.answer-result-restart').html($('#opera-result').html());
         $('#opera-result').html('正在重启中...');
-        $('input#opera-delay').attr('data-delayStatus', '0');
-        $('input#opera-delay').css({
-            'cursor':'no-drop',
-            'color':'#cfcbcb',
-            'border-color':'#c9c2c2'
-        });
+        // $('input#opera-delay').attr('data-delayStatus', '0');
+        // $('input#opera-delay').css({
+        //     'cursor':'no-drop',
+        //     'color':'#cfcbcb',
+        //     'border-color':'#c9c2c2'
+        // });
         sendSubject('restart');
     });
 
@@ -449,8 +449,8 @@ function sendSubject(opera) {
                         });
                     })
                 }else if(opera == 'restart'){
-                    $('input#opera-restart').css('display', 'none');
-                    $('input#opera-topic').css('display', 'inline-block');
+                    // $('input#opera-restart').css('display', 'none');
+                    // $('input#opera-topic').css('display', 'inline-block');
 
                     $('#opera-result').html(data.message);
                     setTimeout(function () {
