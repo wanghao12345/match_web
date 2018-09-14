@@ -11,7 +11,8 @@ $(function(){
     /**
      * 初始化题目列表
      */
-    requestSubjectList(Pop_rule);
+    // requestSubjectList(Pop_rule);
+    myPage('http://s.hackcoll.com:3334/challenges/api/category/', Pop_rule)
     /**
      * 关闭右上角信息框
      */
@@ -124,7 +125,108 @@ $(function(){
     });
 
 
+
+
 })
+
+/**
+ * 分页
+ * @type {*|jQuery}
+ */
+function myPage(url, Pop_rule) {
+    $('.j-my-page').pagination({
+        pageCount: 0, //初始化页数
+        showData: 10,//每页显示的条数
+        callback: function (api) {
+            var data = {
+                type: $('#subject-type').html(),
+                page: api.getCurrent()
+            };
+            requestTable(url,data,'',Pop_rule);
+        }
+    },function(api){
+        api.$el.siblings("i.first").html("共"+api.getPageCount()+"页");
+        var data = {
+            type: $('#subject-type').html(),
+            page: api.getCurrent()
+        };
+        requestTable(url,data, api, Pop_rule);
+    });
+}
+/**
+ * 分页数据处理
+ * @param page
+ */
+function requestTable(myUrl,params, api, Pop_rule) {
+    $.ajax({
+        url: myUrl,
+        type: 'get',
+        data:params,
+        dataType: 'json',
+        timeout: 1000,
+        success: function (data) {
+            if(api){
+                api.setPageCount(Math.ceil(data.count/10));
+                api.init();
+            }
+            if(data.code == 200){
+                var item = data.message;
+                var arr = [];
+                $('ul#subject-list').html('');
+                item.forEach(function (value) {
+                    arr.push('<li id="subject-item'+value.id+'">\n' +
+                        '  <input type="hidden" value="'+value.id+'" id="cid">\n' +
+                        '  <input type="hidden" value="'+value.point+'" id="point">\n' +
+                        '  <div class="lump">\n' +
+                        '    <div class="lump-inner">\n' +
+                        '      <div class="top-lump">\n' +
+                        '        <h2>题目类型:' + $('#subject-type').html() + '</h2>\n' +
+                        '        <h3>分值:'+value.point+'pt</h3>');
+                    if(value.status){
+                        arr.push('<h4><i class="i-icon i-ok"></i>');
+                        arr.push('<input type="hidden" id="answer-status" value="1">');
+                    }else if(value.prompt){
+                        arr.push('<h4><i class="i-icon i-tip"></i>');
+                        arr.push('<input type="hidden" id="answer-status" value="0">');
+                    }else{
+                        arr.push('<h4><i class="i-icon"></i>');
+                        arr.push('<input type="hidden" id="answer-status" value="0">');
+                    }
+                    if(value.prompt){
+                        arr.push('<span>提示</span></h4>');
+                    }else{
+                        arr.push('<span></span></h4>');
+                    }
+                    arr.push('</div>\n' +
+                        '      <div class="mid-lump">\n' +
+                        '        <div class="cont">\n' +
+                        '          题目名称:'+value.name+'' +
+                        '        </div>\n' +
+                        '      </div>\n' +
+                        '      <div class="end-lump">\n' +
+                        '        <h2>'+(value.ranking[0]==undefined? '' : '第一名:'+ value.ranking[0])+'</h2>\n' +
+                        '        <h2>'+(value.ranking[1]==undefined? '' : '第二名:'+ value.ranking[1])+'</h2>\n' +
+                        '        <h2>'+(value.ranking[2]==undefined? '' : '第三名:'+ value.ranking[2])+'</h2>\n' +
+                        '      </div>\n' +
+                        '    </div>\n' +
+                        '    <i class="i-1"></i><i class="i-2"></i>\n' +
+                        '  </div>\n' +
+                        '</li>');
+                });
+                $('ul#subject-list').append(arr.join(''));
+                //判断是否弹出框
+                isOpenDetail(Pop_rule);
+            }
+        },
+        fail: function (err) {
+            console.log(err)
+        }
+    })
+}
+
+
+
+
 /**
  * 请求题目列表
  */
