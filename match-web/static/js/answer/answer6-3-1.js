@@ -441,7 +441,11 @@ function sendSubject(opera) {
                 }else if(opera == 'restart'){
                     $('input#opera-restart').css('display', 'none');
                     $('input#opera-topic').css('display', 'inline-block');
-                    $('#opera-result').html(data.message);
+                    if(data.code == 201){
+                        $('#opera-result').html('正在启动中...');
+                    }else{
+                        $('#opera-result').html(data.message);
+                    }
                 }else{
                     $('#opera-result').html(data.message);
                 }
