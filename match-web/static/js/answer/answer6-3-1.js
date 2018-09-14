@@ -19,9 +19,13 @@ $(function(){
         $(this).parent('.j-msg-con').remove();
     });
 
-    window.setInterval(function () {
-        $('div#msg-tip-box .j-msg-putong:first-child').remove();
-    }, 1000)
+    var removeTime = window.setInterval(function () {
+        try {
+            $('div#msg-tip-box').find('.j-msg-putong')[0].remove();
+        }catch (e) {
+            window.clearInterval(removeTime);
+        }
+    }, 2000)
 
     $(".win-subject").on('click', '.j-open .title', function(event) {
         event.preventDefault();
@@ -61,13 +65,17 @@ $(function(){
      * 下发题目
      */
     $('.win-popUp').on('click', 'input#opera-topic', function () {
+        $('#opera-result').html('下发题目中...');
         sendSubject('topic');
     });
     /**
      * 延长时间
      */
     $('.win-popUp').on('click', 'input#opera-delay', function () {
+
         if($(this).attr('data-delayStatus')=='1'){
+            $('.answer-result-restart').html($('#opera-result').html());
+            $('#opera-result').html('延长时间中...');
             sendSubject('delay');
         }
     });
@@ -75,6 +83,8 @@ $(function(){
      * 重新下发
      */
     $('.win-popUp').on('click', 'input#opera-restart', function () {
+        $('.answer-result-restart').html($('#opera-result').html());
+        $('#opera-result').html('正在重启中...');
         $('input#opera-delay').attr('data-delayStatus', '0');
         $('input#opera-delay').css({
             'cursor':'no-drop',
@@ -332,7 +342,7 @@ function subjectType2(data, point, Pop_rule, status) {
         popup_content_tab1 += '<div class="row-button sub-type2" style="margin-top: 30px;">\n' +
             '  <input type="button" id="opera-restart" class="i-button" value="重新下发">\n' +
             '  <input type="button" id="opera-topic" class="i-button" style="display: none;" value="下发题目">\n' +
-            '  <input type="button" id="opera-delay" data-delayStatus="0" class="i-button" value="延长时间">\n' +
+            '  <input type="button" id="opera-delay" data-delayStatus="1" class="i-button" value="延长时间">\n' +
             '</div>';
         popup_content_tab1 +='  <div class="row-href sub-type2-result" id="opera-result">'+item.url+'</div>';
         popup_content_tab1 += '<div class="row-progress j-progress sub-type2-progress" style="display: none">\n' +
@@ -441,13 +451,17 @@ function sendSubject(opera) {
                 }else if(opera == 'restart'){
                     $('input#opera-restart').css('display', 'none');
                     $('input#opera-topic').css('display', 'inline-block');
-                    if(data.code == 201){
-                        $('#opera-result').html('正在启动中...');
-                    }else{
-                        $('#opera-result').html(data.message);
-                    }
+
+                    $('#opera-result').html(data.message);
+                    setTimeout(function () {
+                        $('#opera-result').html($('.answer-result-restart').html());
+                    }, 2000);
+
                 }else{
                     $('#opera-result').html(data.message);
+                    setTimeout(function () {
+                        $('#opera-result').html($('.answer-result-restart').html());
+                    }, 2000);
                 }
             }
             if(data.code == 201){
@@ -456,6 +470,17 @@ function sendSubject(opera) {
                         sendSubject('topic');
                     }, 1000)
                 }
+                if(opera == 'restart'){
+                    window.setTimeout(function () {
+                        sendSubject('restart');
+                    }, 1000)
+                }
+                if(opera == 'delay'){
+                    window.setTimeout(function () {
+                        sendSubject('delay');
+                    }, 1000)
+                }
+
             }
 
             if(data.code == 400){

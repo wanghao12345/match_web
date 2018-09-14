@@ -279,46 +279,61 @@ function initStarRandomPoint(){
  * 固定初始化第一页星球布局
  */
 function initStarPoint() {
-    var point = [[230, 235],[620, 120],[170, 450],[170, 88],[700, 460],[420, 470]];
-    $('.grap-box .star-box').remove();
-    var starArr = [];
-    var starName = ['密码', 'WEB', 'PWN', '渗透', '逆向'];
-    starArr.push('<div class="star-box star-box1" data-status="0">\n' +
-                 '    <a href="javascript:;">\n' +
-                 '        <div class="star-top star-normal">\n' +
-                 '            <img class="normal" data-index="1" src="../../static/img/home/star/star_1_normal.png" alt="星球1">\n' +
-                 '            <img class="shining" data-index="1" src="../../static/img/home/star/star_1_shining.png" alt="星球1">\n' +
-                 '        </div>\n' +
-                 '        <div class="star-bottom">\n' +
-                 '            <p>参赛队伍 50支</p>\n' +
-                 '            <p>参赛队员 2324人</p>\n' +
-                 '        </div>\n' +
-                 '    </a>\n' +
-                 '</div>');
-    for (var i = 2; i < 7; i++){
-        starArr.push('<div class="star-box star-box'+i+'" style="left: '+point[i-2][0]+'px;top: '+point[i-2][1]+'px;">\n' +
-                     '    <a href="javascript:;">'
-        );
-        if(i % 2 == 0){
-            starArr.push('        <div class="star-top star-shining">');
-        }else{
-            starArr.push('        <div class="star-top star-normal">');
+    $.ajax({
+        url: 'http://s.hackcoll.com:3334/api/index/',
+        type: 'get',
+        data:{},
+        header:{
+            'X-Requested-With':'XMLHttpRequest'
+        },
+        dataType: 'json',
+        success: function (data) {
+
+            var point = [[230, 235],[620, 120],[170, 450],[170, 88],[700, 460],[420, 470]];
+            $('.grap-box .star-box').remove();
+            var starArr = [];
+            var starName = ['密码', 'WEB', 'PWN', '渗透', '逆向'];
+            starArr.push('<div class="star-box star-box1" data-status="0">\n' +
+                '    <a href="javascript:;">\n' +
+                '        <div class="star-top star-normal">\n' +
+                '            <img class="normal" data-index="1" src="../../static/img/home/star/star_1_normal.png" alt="星球1">\n' +
+                '            <img class="shining" data-index="1" src="../../static/img/home/star/star_1_shining.png" alt="星球1">\n' +
+                '        </div>\n' +
+                '        <div class="star-bottom">\n' +
+                '            <p>参赛队伍 '+data.team_count+'支</p>\n' +
+                '            <p>参赛队员 '+data.people_count+'人</p>\n' +
+                '        </div>\n' +
+                '    </a>\n' +
+                '</div>');
+            for (var i = 2; i < 7; i++){
+                starArr.push('<div class="star-box star-box'+i+'" style="left: '+point[i-2][0]+'px;top: '+point[i-2][1]+'px;">\n' +
+                    '    <a href="javascript:;">'
+                );
+                if(data.category[i-2][1]){
+                    starArr.push('        <div class="star-top star-shining">');
+                }else{
+                    starArr.push('        <div class="star-top star-normal">');
+                }
+                starArr.push('            <img class="normal" src="../../static/img/home/star/star_'+i+'_normal.png" alt="星球'+i+'">\n' +
+                    '            <img class="shining" src="../../static/img/home/star/star_'+i+'_shining.png" alt="星球'+i+'">\n' +
+                    '        </div>\n' +
+                    '        <div class="star-bottom">\n' +
+                    '            <p class="name">'+data.category[i-2][0]+'</p>\n' +
+                    '            <div class="progress">\n' +
+                    '                <span class="bar" style="width: '+data.category[i-2][2]+'%;"></span>\n' +
+                    '            </div>\n' +
+                    '        </div>\n' +
+                    '    </a>\n' +
+                    '</div>');
+            }
+
+            $('.grap-box').append(starArr.join(''));
+
+        },
+        fail: function (err) {
+            layer.alert(err);
         }
-        starArr.push('            <img class="normal" src="../../static/img/home/star/star_'+i+'_normal.png" alt="星球'+i+'">\n' +
-                     '            <img class="shining" src="../../static/img/home/star/star_'+i+'_shining.png" alt="星球'+i+'">\n' +
-                     '        </div>\n' +
-                     '        <div class="star-bottom">\n' +
-                     '            <p class="name">'+starName[i-2]+'</p>\n' +
-                     '            <div class="progress">\n' +
-                     '                <span class="bar" style="width: 50%;"></span>\n' +
-                     '            </div>\n' +
-                     '        </div>\n' +
-                     '    </a>\n' +
-                     '</div>');
-    }
-
-    $('.grap-box').append(starArr.join(''));
-
+    })
 }
 
 
