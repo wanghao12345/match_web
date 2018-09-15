@@ -11,10 +11,10 @@
     bottom: 0;
 }
 .team-box{
-    width: 920px;
+    width: 88%;
     height: 620px;
     margin: 0 auto;
-    margin-top: 50px;
+    margin-top: 30px;
     box-sizing: border-box;
     padding: 10px;
     background: rgba(189, 181, 181, 0.1);

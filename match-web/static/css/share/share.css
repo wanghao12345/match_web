@@ -101,7 +101,7 @@
 .footer-box{font-size: 14px;height: 46px;display: -webkit-flex;display: -moz-flex;display: -ms-flex;display: -o-flex;display: flex;-ms-align-items: center;align-items: center;justify-content: center;}
 .full-column{flex-grow: 1;background: #1A2146;}
 .main-box{flex-grow: 1;display: -webkit-flex;display: -moz-flex;display: -ms-flex;display: -o-flex;display: flex;justify-content: center;}
-.area{width: 1200px;display: -webkit-flex;display: -moz-flex;display: -ms-flex;display: -o-flex;display: flex;}
+.area{width: 88%;display: -webkit-flex;display: -moz-flex;display: -ms-flex;display: -o-flex;display: flex;}
 .header-box{border-bottom: 1px solid #2f2e6b;}
 .header-box .area{position: relative;height: 48px;display: -webkit-flex;display: -moz-flex;display: -ms-flex;display: -o-flex;display: flex;}
 .header-box .logo{height: 48px;display: -webkit-flex;display: -moz-flex;display: -ms-flex;display: -o-flex;display: flex;-ms-align-items: center;align-items: center;color: #00FFFF;}

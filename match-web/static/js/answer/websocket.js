@@ -81,7 +81,7 @@ function creatTip(text, type) {
 
             break;
         case "warning":
-            content = ' <div style="display: block !important;" class="msg-con1 effect-hidden j-msg-con">\n' +
+            content = ' <div style="display: block !important;" class="msg-con1 effect-hidden j-msg-con j-msg-warning">\n' +
                 '  <div class="cont">'+text+'</div>\n' +
                 '  <div class="end">我知道了</div>\n' +
                 '</div>';
