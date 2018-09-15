@@ -254,15 +254,14 @@
 .msg-tip-box{
     position: absolute;
     width: 300px;
-    height: 500px;
-    right: 50px;
+    right: 6%;
     top: 40px;
 }
 
 .msg-tip-box .msg-con1{
     width: 240px;
     padding: 12px 12px 0 12px;
-    border: 1px solid #f49375;
+    border: 1px solid #01FFFF;
     font-size: 12px;
     background: #303467;
     -webkit-border-radius: 2px;

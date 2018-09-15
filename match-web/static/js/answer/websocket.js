@@ -74,21 +74,21 @@ function creatTip(text, type) {
     var content = '';
     switch (type) {
         case "success":
-            content = ' <div style="border-color: #e91e63;display: block !important;" class="msg-con1 effect-hidden j-msg-con j-msg-putong">\n' +
+            content = ' <div style="display: block !important;" class="msg-con1 effect-hidden j-msg-con j-msg-putong">\n' +
                 '  <div class="cont">'+text+'</div>\n' +
                 '  <div class="end">我知道了</div>\n' +
                 '</div>';
 
             break;
         case "warning":
-            content = ' <div style="border-color: #FFC107;display: block !important;" class="msg-con1 effect-hidden j-msg-con">\n' +
+            content = ' <div style="display: block !important;" class="msg-con1 effect-hidden j-msg-con">\n' +
                 '  <div class="cont">'+text+'</div>\n' +
                 '  <div class="end">我知道了</div>\n' +
                 '</div>';
 
             break;
         case "error":
-            content = ' <div style="border-color: #01FFFF;display: block !important;" class="msg-con1 effect-hidden j-msg-con j-msg-putong">\n' +
+            content = ' <div style="display: block !important;" class="msg-con1 effect-hidden j-msg-con j-msg-putong">\n' +
                 '  <div class="cont">'+text+'</div>\n' +
                 '  <div class="end">我知道了</div>\n' +
                 '</div>';

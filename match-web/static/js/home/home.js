@@ -1,3 +1,5 @@
+var TextScroll1 = null, TextScroll2 = null;
+
 $(function () {
     /**
      * 星球初始化排序
@@ -71,6 +73,7 @@ $(function () {
      * 积分榜
      */
     requestScoreList();
+    TextScroll1 = new TextScroll('#rank-scroll', '#score-rank-list', '.rank-item', 55);
     window.setInterval(function () {
         requestScoreList();
     }, 10000);
@@ -79,6 +82,7 @@ $(function () {
      * 答题动态
      */
     requestDynamic();
+    TextScroll2 = new TextScroll('#textScroll', '#scroll-item-content', '.scroll-item', 70);
     //10秒后加载答题动态
     window.setInterval(function () {
         requestDynamic();
@@ -87,6 +91,7 @@ $(function () {
 /**
  * 积分榜请求
  */
+
 function requestScoreList() {
     $.ajax({
         url: 'http://s.hackcoll.com:3334/challenges/users_ranking/',
@@ -95,23 +100,28 @@ function requestScoreList() {
         dataType: 'json',
         timeout: 1000,
         success: function (data) {
+            TextScroll1.stop();
             var arr = [];
-            $('ul#score-rank-list').html('');
-            for(var i = 0; i < 10; i++){
+            // $('ul#score-rank-list').html('');
+            var len = $('ul#score-rank-list').find('.rank-item').length;
+            var len1 = $('ul#score-rank-list').find('.rank-item').length;
+            for(var i = 0; i < 100000; i++){
                 if(data[i]){
-                    if(i<3){
-                        arr.push('<li class="rank-item">\n' +
+                    if( len < 3){
+                        len += 1;
+                        arr.push('<li class="rank-item" id="rank-item'+len+'">\n' +
                             '    <div class="rank">\n' +
-                            '        <img src="../../static/img/home/img_no'+(i+1)+'.png" alt="第一">\n' +
+                            '        <img src="../../static/img/home/img_no'+(len)+'.png" alt="第一">\n' +
                             '    </div>\n' +
                             '    <div class="name">\n' +
                             '        '+data[i].nickname+'<br/><i>'+data[i].points+'</i>\n' +
                             '    </div>\n' +
                             '</li>');
                     }else{
-                        arr.push('<li class="rank-item">\n' +
+                        len += 1;
+                        arr.push('<li class="rank-item" id="rank-item'+len+'">\n' +
                             '    <div class="rank">\n' +
-                            '        NO.'+(i+1)+'\n' +
+                            '        NO.'+(len)+'\n' +
                             '    </div>\n' +
                             '    <div class="name">\n' +
                             '        '+data[i].nickname+'<br/><i>'+data[i].points+'</i>\n' +
@@ -121,14 +131,14 @@ function requestScoreList() {
                 }else{
                     break;
                 }
-
-
             }
-            $('ul#score-rank-list').append(arr.join(''));
-            $('#rank-scroll').textScroll({
-                itemBox:'.rank-item',
-                outBox: '#score-rank-list'
-            });
+            if(len1 == 0){
+                $('ul#score-rank-list').append(arr.join(''));
+            }else{
+                $('ul#score-rank-list li#rank-item'+len1).after(arr.join(''));
+            }
+            TextScroll1.start();
+
         },
         fail: function (err) {
             layer.alert(err);
@@ -147,8 +157,10 @@ function requestDynamic() {
         dataType: 'json',
         success: function (data) {
             if (data.code == 200){
+                TextScroll2.stop();
+
                 $('input#Dynamic-Id').val(data.first_id);
-                $('ul#scroll-item-content').html('');
+                // $('ul#scroll-item-content').html('');
                 var item = data.message;
                 var arr = [];
                 item.forEach(function (value, index) {
@@ -165,10 +177,7 @@ function requestDynamic() {
                 /**
                  * 答题动态
                  */
-                $('#textScroll').textScroll({
-                    itemBox:'.scroll-item',
-                    outBox: '#scroll-item-content'
-                });
+                TextScroll2.start();
             }
         },
         fail: function (err) {
@@ -289,7 +298,9 @@ function initStarPoint() {
         dataType: 'json',
         success: function (data) {
 
-            var point = [[230, 235],[620, 120],[170, 450],[170, 88],[700, 460],[420, 470]];
+            // var point = [[230, 235],[620, 120],[170, 450],[170, 88],[700, 460],[420, 470]];
+            var point = [['25%', 235],['70%', 120],['19%', 450],['21%', 88],['78%', 460],['50%', 470]];
+
             $('.grap-box .star-box').remove();
             var starArr = [];
             var starName = ['密码', 'WEB', 'PWN', '渗透', '逆向'];
@@ -306,7 +317,7 @@ function initStarPoint() {
                 '    </a>\n' +
                 '</div>');
             for (var i = 2; i < 7; i++){
-                starArr.push('<div class="star-box star-box'+i+'" style="left: '+point[i-2][0]+'px;top: '+point[i-2][1]+'px;">\n' +
+                starArr.push('<div class="star-box star-box'+i+'" style="left: '+point[i-2][0]+';top: '+point[i-2][1]+'px;">\n' +
                     '    <a href="javascript:;">'
                 );
                 if(data.category[i-2][1]){
@@ -364,7 +375,8 @@ function getSecPoint(name){
  */
 function secRandomPoint(data){
     $('.grap-box .star-box').remove();
-    var secStarPointArr = [[400, 120], [400, 470], [750, 270], [120, 350], [10, 470], [300, 440], [600, 440]];
+    // var secStarPointArr = [[400, 120], [400, 470], [750, 270], [120, 350], [10, 470], [300, 440], [600, 440]];
+    var secStarPointArr = [['45%', 120], ['45%', 470], ['83.5%', 270], ['13%', 350], ['1%', 470], ['32%', 440], ['67%', 440]];
     var len = data.message.length;
     var item  = data.message;
 
@@ -373,7 +385,7 @@ function secRandomPoint(data){
     for (var i = 2; i < len + 2; i++) {
         var index = Math.round(Math.random()*(secStarPointArr.length-1));
 
-        starArr.push('<div class="star-box star-box'+i+'" style="left: '+secStarPointArr[index][0]+'px;top: '+secStarPointArr[index][1]+'px;">\n' +
+        starArr.push('<div class="star-box star-box'+i+'" style="left: '+secStarPointArr[index][0]+';top: '+secStarPointArr[index][1]+'px;">\n' +
             '    <a href="http://127.0.0.1:8000/challenges/category/1/?id='+item[i-2].id+'">'
         );
         starArr.push('<input type="hidden" id="ranklist" value="'+item[i-2].ranking.join(',')+'">');

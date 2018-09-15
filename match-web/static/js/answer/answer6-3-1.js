@@ -458,18 +458,21 @@ function subjectType2(data, point, Pop_rule, status) {
             '</div>';
     }
 
-    popup_content_tab1 +='  <div class="row row-vertical has-answer">\n' +
-        '    <div class="name" id="input-key">Flag：</div>\n' +
-        '    <input class="content" style="border: 0;width: 720px;height: 40px;padding: 0 5px;margin-top: 10px;" type="text" id="sub-key">\n' +
-        '  </div>\n' +
-        '  <div class="row-feedback">';
-
     if(status == 1){ //已回答过
+        popup_content_tab1 +='  <div class="row row-vertical has-answer" style="display: none">\n' +
+            '    <div class="name" id="input-key">Flag：</div>\n' +
+            '    <input class="content" style="border: 0;width: 720px;height: 40px;padding: 0 5px;margin-top: 10px;" type="text" id="sub-key">\n' +
+            '  </div>\n' +
+            '  <div class="row-feedback">';
         popup_content_tab1 +='    <div class="correct answer-correct" style="display: none">你已答对本题！请再接再厉！</div>\n' +
             '    <div class="error answer-error" style="display: none;">抱歉，答案错误，请重新输入</div>\n' +
             '    <div class="error answer-hasd">您或您的队友已回答过该题目</div>';
     }else{
-
+        popup_content_tab1 +='  <div class="row row-vertical has-answer">\n' +
+            '    <div class="name" id="input-key">Flag：</div>\n' +
+            '    <input class="content" style="border: 0;width: 720px;height: 40px;padding: 0 5px;margin-top: 10px;" type="text" id="sub-key">\n' +
+            '  </div>\n' +
+            '  <div class="row-feedback">';
         popup_content_tab1 +='    <div class="correct answer-correct" style="display: none">你已答对本题！请再接再厉！</div>\n' +
             '    <div class="error answer-error" style="display: none;">抱歉，答案错误，请重新输入</div>\n' +
             '    <div class="error answer-hasd" style="display: none;">您或您的队友已回答过该题目</div>';
