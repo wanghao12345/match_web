@@ -8,7 +8,7 @@
 .full-column{flex-grow: 1;background: #1A2146;}
 .main-column{flex-grow: 1;}
 .main-box{flex-grow: 1;display: -webkit-flex;display: -moz-flex;display: -ms-flex;display: -o-flex;display: flex;justify-content: center;}
-.area{width: 1200px;display: -webkit-flex;display: -moz-flex;display: -ms-flex;display: -o-flex;display: flex;}
+.area{width: 88%;display: -webkit-flex;display: -moz-flex;display: -ms-flex;display: -o-flex;display: flex;}
 .header-box{border-bottom: 1px solid #2f2e6b;}
 .header-box .area{position: relative;height: 48px;display: -webkit-flex;display: -moz-flex;display: -ms-flex;display: -o-flex;display: flex;}
 .header-box .logo{height: 48px;display: -webkit-flex;display: -moz-flex;display: -ms-flex;display: -o-flex;display: flex;-ms-align-items: center;align-items: center;color: #00FFFF;}
@@ -20,6 +20,7 @@
 .header-box .logout a{display: block;padding: 10px 0;width: 70px;background: #303467;color: #95caf2;font-size: 12px;text-align: center;}
 
 .footer-box{text-align: center;height: 46px;color: #838499;border-top: 1px solid #2f2e6b;background: #080a33;}
+.footer-box.layout-bottom{position: absolute;bottom: 0;left: 0;right: 0;}
 .m-msg{height: 48px;display: -webkit-flex;display: -moz-flex;display: -ms-flex;display: -o-flex;display: flex;}
 .m-msg li{position: relative;display: -webkit-flex;display: -moz-flex;display: -ms-flex;display: -o-flex;display: flex;-ms-align-items: center;align-items: center;}
 .m-msg a{color: #01ffff;display: block;padding: 0 6px;}
@@ -59,7 +60,7 @@
 .m-title-2.style-2{margin-top: 15px;background: #1A2146;border-bottom: 0;}
 .m-title-2 h2{display: -webkit-flex;display: -moz-flex;display: -ms-flex;display: -o-flex;display: flex;flex-grow: 1;-ms-align-items: center;align-items: center;color: #01ffff;font-size: 18px;}
 .m-title-2 h2 img{height: 20px;margin-right: 5px;}
-.m-title-2 h3{padding-right: 20px;-webkit-flex-shrink: 1;flex-shrink: 1;}
+.m-title-2 h3{display: -webkit-flex;display: -moz-flex;display: -ms-flex;display: -o-flex;display: flex;padding-right: 20px;-webkit-flex-shrink: 1;flex-shrink: 1;}
 .m-title-2 h3 a{display: inline-block;color: #9FD7FF;margin-left: 15px;font-size: 14px;}
 .m-title-2 h2 .s2{display: inline-block;margin-left: 10px;color: #9FD7FF;font-size: 16px;}
 .m-title-2 h2 .s2 i{color: #01ffff;}

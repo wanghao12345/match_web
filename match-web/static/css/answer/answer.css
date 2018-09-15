@@ -16,7 +16,7 @@
 .m-answer-catalog .con-bar{flex-grow: 1;padding: 20px 20px 0 30px;}
 .m-answer-catalog .cont{min-height: 40px;line-height: 20px;font-size: 12px;letter-spacing: 0.81px;}
 .m-answer-catalog .end-bar{-webkit-flex-shrink: 0;flex-shrink: 0;padding: 25px 30px 30px 30px;text-align: right;}
-.m-answer-catalog .i-btn{display: inline-block;padding: 8px 20px;text-align: right;color: #FFF;background: #6EC5C3;}
+.m-answer-catalog .i-btn{display: inline-block;padding: 8px 20px;text-align: right;color: #FFF;background: #6EC5C3;font-size: 14px;}
 .m-answer-catalog .i-btn:hover{background: #91dedc;}
 
 
@@ -89,3 +89,4 @@
 .m-subject-text .msg{padding: 10px;min-height:40px;}
 
 
+a.i-btn{display:inline-block;background:#6EC5C3;color:#FFF;padding:8px 20px;border:0;cursor:pointer;}

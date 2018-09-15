@@ -23,6 +23,7 @@
   <script src="../../static/js/plug/winPop/win-popup.js"></script>
   <script src="../../static/js/plug/KOTip/main-msg.js"></script>
   <script src="../../static/js/answer/answer.js"></script>
+  <script src="../../static/js/share/countTime.js"></script>
 </head>
 <body class="my-body">
 
@@ -65,7 +66,7 @@
   		<div class="inner main-column">
         <div class="m-title-2 style-2">
           <h2><img src="../../static/img/SquadInformation/tt-ico.jpg" class="ico" alt=""><div class="s1">密码</div><span class="s2">题目数量 <i>20</i></span></h2>
-          <h3><a href="">返回</a></h3>
+          <h3><div class="countdown">比赛倒计时：<span id="counttime"></span></div><a href="">返回</a></h3>
         </div>
         <div class="content-bar">
           
@@ -282,6 +283,8 @@ $(function(){
       Pop_rule.resizePop()
     },300)
   }});
+
+  countTime("2018-09-24 23:23:23");
 })
 </script>
 </body>
