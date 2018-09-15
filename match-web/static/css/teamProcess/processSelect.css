@@ -5,6 +5,8 @@ html,body{
 
 .box{
     padding: 0;
+    background: url("../../img/login/img_sign_BG4.png") no-repeat;
+    background-size: 100% 100%;
 }
 .team-box{
     width: 750px;

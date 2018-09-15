@@ -65,7 +65,7 @@ input.m-search::-webkit-input-placeholder{color:#537099;}
 .m-my-line i{display: block;background: #01FFFF;}
 
 .align-left th,
-.align-left td{padding-left:10px;text-align: left;}
+.align-left td{padding-left:10px;text-align: center;}
 
 
 .i-btn{vertical-align: middle;display: inline-block;padding-left: 25px;margin-right: 25px;vertical-align: middle;border: 0;color: #00FFFF;cursor: pointer;}

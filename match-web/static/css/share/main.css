@@ -16,7 +16,7 @@
 .header-box .nav{flex-grow: 1;padding: 0 30px;}
 .header-box .msgs{-webkit-flex-shrink: 0;flex-shrink: 0;}
 .header-box .user-li:hover .logout{display: block;}
-.header-box .logout{display: none;position: absolute;top: 100%;right: 0;}
+.header-box .logout{display: none;position: absolute;top: 80%;right: 0;z-index: 99999;}
 .header-box .logout a{display: block;padding: 10px 0;width: 70px;background: #303467;color: #95caf2;font-size: 12px;text-align: center;}
 
 .footer-box{text-align: center;height: 46px;color: #838499;border-top: 1px solid #2f2e6b;background: #080a33;}

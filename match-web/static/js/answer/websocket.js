@@ -95,6 +95,9 @@ function creatTip(text, type) {
 
             break;
     }
+    if($('#msg-tip-box').length == 0){
+        $('body').append('<div class="msg-tip-box" id="msg-tip-box">');
+    }
     $('div#msg-tip-box').append(content);
 
 
@@ -112,6 +115,9 @@ function creatTip(text, type) {
 $(function () {
     $("body").on('click', '.j-msg-con .end', function(event) {
         $(this).parent('.j-msg-con').remove();
+        if($('body #msg-tip-box').find('.msg-con1').length == 0){
+            $('body #msg-tip-box').remove();
+        }
     });
 })
 var removeTime = window.setInterval(function () {
@@ -119,5 +125,8 @@ var removeTime = window.setInterval(function () {
         $('div#msg-tip-box').find('.j-msg-putong')[0].remove();
     }catch (e) {
         window.clearInterval(removeTime);
+    }
+    if($('body #msg-tip-box').find('.msg-con1').length == 0){
+        $('body #msg-tip-box').remove();
     }
 }, 2000)

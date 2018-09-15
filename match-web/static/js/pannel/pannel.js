@@ -2,16 +2,17 @@ $(function(){
   var $body = $(".j-p-body");
 	$body.on('click', '.j-pannel-btn', function(event) {
 		event.preventDefault();
-		if($body.hasClass("pannel-open")){
+		if($body.hasClass("pannel-open")){ //收缩
 			$body.removeClass("pannel-open");
-            $('.p-body.pannel-open2 .p-pannel').css('width', '35%');
-            $('.p-body.pannel-open2 .p-pannel .pannel-btn').css('right', '-22px');
-		}else{
+            $('.p-body  .p-pannel').css('width', '35%');
+            $('.p-body  .p-pannel .pannel-btn').css('right', '-22px');
+		}else{ //展开
 			$body.addClass("pannel-open");
-            $('.p-body.pannel-open .p-pannel').css('width', '35%');
+            $('.p-body .pannel-open .p-pannel').css('width', '35%');
+            $('.p-body  .p-pannel .pannel-btn').css('right', '-22px');
 		}
 	});
-
+	//全屏
 	$('#fullScreen-btn').on('click', function () {
 		$('.p-body.pannel-open .p-pannel').css('width', '100%');
 		$('.p-body.pannel-open .p-pannel .pannel-btn').css('right', '0');
@@ -61,6 +62,10 @@ $(function(){
 			}
 		});
 	});
+	$(".m-pannel-ul #machine-btn").on('click', function(event) {
+		$(this).next(".machine-con").slideToggle();
+	});
+
 	setDate();
   setInterval(setDate,1000);
 
