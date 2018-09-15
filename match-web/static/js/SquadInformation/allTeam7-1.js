@@ -69,7 +69,7 @@ function requestTable(myUrl,params, api) {
                         break;
                     }
                     arr.push('<tr class="data-tr"><td>'+(i+1)+'</td>\n' +
-                        '<td>'+tableData[i].name+'</td>\n' +
+                        '<td><a href="/accounts/team/'+i+'">'+tableData[i].name+'</a></td>\n' +
                         '<td>'+tableData[i].created_at+'</td>\n' +
                         '<td>'+tableData[i].users.join('、')+'</td>\n' +
                         '</tr>');
