@@ -17,20 +17,6 @@ $(function(){
 		$('.p-body.pannel-open .p-pannel .pannel-btn').css('right', '0');
 
     })
-	//实验机
-    $('#machine-btn').on('click', function () {
-        var status = $(this).attr('data-status');
-        if(status == '1'){
-			$('#machine-show').fadeIn();
-            $(this).attr('data-status', '0');
-		}else{
-            $('#machine-show').fadeOut();
-            $(this).attr('data-status', '1');
-		}
-
-    })
-
-
 	$body.on('click', '.j-pannel-btn2', function(event) {
 		event.preventDefault();
 		if($body.hasClass("pannel-open2")){
