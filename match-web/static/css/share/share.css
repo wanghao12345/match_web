@@ -141,7 +141,7 @@
 .msg-con .end{padding: 12px 0;border-top: 1px solid #3E5974;text-align: center;color: #01FFFF;cursor: pointer;}
 
 
-.m-title-1{position: relative;padding: 25px 0;text-align: center;font-size: 16px;color: #01ffff;}
+.m-title-1{position: relative;padding: 25px 0;text-align: center;font-size: 16px;color: #00FCFF;}
 .m-title-1:before{position: absolute;top: 50%;left: 0;right: 0;content:"";display: block;border-top: 1px solid #3e5974;}
 .m-title-1 h2{position: relative;padding: 0 20px;background: #1a2146;display: inline-block;z-index:2;}
 
