@@ -8,6 +8,8 @@ body{
     position: relative;
     background: #080A33;
     padding: 0;
+    background: url("../../img/login/img_sign_BG3.png") no-repeat;
+    background-size: 100% 100%;
 }
 .box-bg-img{
     width: 100%;
