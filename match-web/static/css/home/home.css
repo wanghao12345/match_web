@@ -104,13 +104,14 @@ body{
 }
 
 .home-left-title em.right{
-    width: 100px;
+    width: 58%;
     height: 0.5px;
     display: block;
     float: left;
-    background: #01FFFF;
+    background: #BDFAF5;
     margin-top: 25px;
     margin-left: 10px;
+    opacity: 0.65;
 }
 .home-left-content{
     width: 100%;
@@ -446,11 +447,11 @@ body{
 }
 
 .home-right-box em.right{
-    width: 159px;
+    width: 65%;
     height: 0.5px;
     display: block;
     float: left;
-    background: #01FFFF;
+    background: #BDFAF5 ;
     margin-top: 25px;
     margin-left: 10px;
 }
@@ -459,6 +460,14 @@ body{
     height: 120px;
     margin: 10px auto;
     position: relative;
+}
+.home-right-box .countTime-box .top-left{
+    position: absolute;
+    top: 10px;
+    left: 15px;
+}
+.home-right-box .countTime-box .top-left img{
+    width: 30px;
 }
 .home-right-box .countTime-box .top{
     width: 100%;
