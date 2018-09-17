@@ -75,6 +75,7 @@ function creatTip(text, type) {
     switch (type) {
         case "success":
             content = ' <div style="display: block !important;" class="msg-con1 effect-hidden j-msg-con j-msg-putong">\n' +
+                '  <p class="tip-title"><em></em>成功通知</p>\n' +
                 '  <div class="cont">'+text+'</div>\n' +
                 '  <div class="end">我知道了</div>\n' +
                 '</div>';
@@ -82,6 +83,7 @@ function creatTip(text, type) {
             break;
         case "warning":
             content = ' <div style="display: block !important;" class="msg-con1 effect-hidden j-msg-con j-msg-warning">\n' +
+                '  <p class="tip-title"><em></em>警告通知</p>\n' +
                 '  <div class="cont">'+text+'</div>\n' +
                 '  <div class="end">我知道了</div>\n' +
                 '</div>';
@@ -89,6 +91,7 @@ function creatTip(text, type) {
             break;
         case "error":
             content = ' <div style="display: block !important;" class="msg-con1 effect-hidden j-msg-con j-msg-putong">\n' +
+                '  <p class="tip-title"><em></em>错误通知</p>\n' +
                 '  <div class="cont">'+text+'</div>\n' +
                 '  <div class="end">我知道了</div>\n' +
                 '</div>';

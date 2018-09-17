@@ -270,6 +270,18 @@
     z-index: 999;
     margin: 10px;
 }
+.msg-tip-box .msg-con1 p.tip-title{
+    margin: 10px 0;
+    font-size: 12px;
+}
+.msg-tip-box .msg-con1 p.tip-title em{
+    width: 6px;
+    height: 12px;
+    display: block;
+    float: left;
+    background: #01FFFF;
+    margin-right: 5px;
+}
 .msg-tip-box .msg-con1 .cont {
     padding-bottom: 15px;
     color: #9FD7FF;
