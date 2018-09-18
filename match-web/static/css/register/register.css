@@ -184,3 +184,13 @@ body{
     /*padding-left: 30px;*/
     color: #00FFFF;
 }
+p.zhuyi-tip{
+    font-family: PingFangSC-Regular;
+    font-size: 10px;
+    color: #9FD7FF;
+    letter-spacing: 0;
+    padding-top: 45px;
+    box-sizing: border-box;
+    text-align: right;
+    padding-right: 68px;
+}
