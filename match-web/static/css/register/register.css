@@ -23,9 +23,11 @@ body{
     z-index: 2;
     box-sizing: border-box;
     padding: 10px;
-    background: rgba(189, 181, 181, 0.1);
+    background: #1a2146;;
     margin: 50px auto;
 }
+
+
 
 .middle{
     width: 100%;
@@ -192,5 +194,5 @@ p.zhuyi-tip{
     padding-top: 45px;
     box-sizing: border-box;
     text-align: right;
-    padding-right: 68px;
+    padding-right: 53px;
 }
