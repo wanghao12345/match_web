@@ -376,7 +376,10 @@ function getSecPoint(name){
         dataType: 'json',
         timeout: 1000,
         success: function (data) {
-            secRandomPoint(data);
+            $('.grap-box .star-box').remove();
+            if(data.code == 200){
+                secRandomPoint(data);
+            }
         },
         fail: function (err) {
             layer.alert(err);
@@ -388,7 +391,6 @@ function getSecPoint(name){
  * 随机第二页的星球
  */
 function secRandomPoint(data){
-    $('.grap-box .star-box').remove();
     // var secStarPointArr = [[400, 120], [400, 470], [750, 270], [120, 350], [10, 470], [300, 440], [600, 440]];
     var secStarPointArr = [['45%', 120], ['45%', 470], ['83.5%', 270], ['13%', 350], ['1%', 470], ['32%', 440], ['67%', 440]];
     var len = data.message.length;
