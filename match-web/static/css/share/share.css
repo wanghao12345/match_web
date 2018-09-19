@@ -230,11 +230,11 @@
 .unit-frame-top p{
     width: 100%;
     height: 40px;
-    line-height: 35px;
-    font-size: 20px;
+    line-height: 30px;
     color: #00FFFF;
     letter-spacing: 0;
     text-align: center;
+    font-size: 15px;
 }
 .unit-frame-middle{
     width: 100%;

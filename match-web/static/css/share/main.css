@@ -12,7 +12,7 @@
 .header-box{border-bottom: 1px solid #2f2e6b;}
 .header-box .area{position: relative;height: 48px;display: -webkit-flex;display: -moz-flex;display: -ms-flex;display: -o-flex;display: flex;}
 .header-box .logo{height: 48px;display: -webkit-flex;display: -moz-flex;display: -ms-flex;display: -o-flex;display: flex;-ms-align-items: center;align-items: center;color: #00FFFF;}
-.header-box .logo img{margin-right: 5px;}
+.header-box .logo img{margin-right: 5px;width: 88px;height: 32px;}
 .header-box .nav{flex-grow: 1;padding: 0 30px;}
 .header-box .msgs{-webkit-flex-shrink: 0;flex-shrink: 0;}
 .header-box .user-li:hover .logout{display: block;}

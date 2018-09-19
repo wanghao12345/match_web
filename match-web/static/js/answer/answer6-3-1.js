@@ -187,7 +187,9 @@ function requestTable(myUrl,params, api, Pop_rule) {
                         arr.push('<h4><i class="i-icon"></i>');
                         arr.push('<input type="hidden" id="answer-status" value="0">');
                     }
-                    if(value.prompt){
+                    if(value.status){
+                        arr.push('<span>完成</span></h4>');
+                    }else if(value.prompt){
                         arr.push('<span>提示</span></h4>');
                     }else{
                         arr.push('<span></span></h4>');
@@ -355,7 +357,7 @@ function subjectType1(data, point, Pop_rule, status) {
                         if(status == 1){ //已回答过
                             popup_content_tab1 +='  <div class="row row-vertical has-answer">\n' +
                                 '    <div class="name" id="input-key">Flag：</div>\n' +
-                                '    <input class="content" style="border: 0;width: 720px;height: 40px;padding: 0 5px;margin-top: 10px;" type="text" id="sub-key">\n' +
+                                '    <input class="content" style="border: 0;width: 720px;height: 40px;padding: 0 5px;margin-top: 10px;display: none;" type="text" id="sub-key">\n' +
                                 '  </div>\n' +
                                 '  <div class="row-feedback">';
                             popup_content_tab1 +='    <div class="correct answer-correct" style="display: none">你已答对本题！请再接再厉！</div>\n' +
