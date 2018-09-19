@@ -12,7 +12,7 @@
 .header-box{border-bottom: 1px solid #2f2e6b;}
 .header-box .area{position: relative;height: 48px;display: -webkit-flex;display: -moz-flex;display: -ms-flex;display: -o-flex;display: flex;}
 .header-box .logo{height: 48px;display: -webkit-flex;display: -moz-flex;display: -ms-flex;display: -o-flex;display: flex;-ms-align-items: center;align-items: center;color: #00FFFF;}
-.header-box .logo img{margin-right: 5px;height: 32px;width: 88px;}
+.header-box .logo img{margin-right: 5px;}
 .header-box .nav{flex-grow: 1;padding: 0 30px;}
 .header-box .msgs{-webkit-flex-shrink: 0;flex-shrink: 0;}
 .header-box .user-li:hover .logout{display: block;}
@@ -54,7 +54,9 @@
 
 .m-title-1{position: relative;padding: 25px 0;text-align: center;font-size: 16px;color: #01ffff;}
 .m-title-1:before{position: absolute;top: 50%;left: 0;right: 0;content:"";display: block;border-top: 1px solid #3e5974;}
-.m-title-1 h2{position: relative;padding: 0 20px;background: #1a2146;display: inline-block;z-index:2;}
+.m-title-1 h2{position: relative;padding: 0 20px;background: #10163c;display: inline-block;z-index:2;}
+
+.left-column .m-title-1 h2{background:#1a2146;}
 
 .m-title-2{height: 63px;display: -webkit-flex;display: -moz-flex;display: -ms-flex;display: -o-flex;display: flex;-ms-align-items: center;align-items: center;border-bottom: 1px solid #3e5974;}
 .m-title-2.style-2{margin-top: 15px;background: #1A2146;border-bottom: 0;}

@@ -48,74 +48,82 @@
     </div>
     <div class="box-out-content">
         <div class="box-in-content">
-            <div class="register-box">
-                <div class="top unit-frame-top">
-                    <p>用户注册</p>
+            <div class="register-box unit-frame">
+                <div class="unit-frame-border">
+                    <div class="unit-frame-inner-border">
+                        <div class="top unit-frame-top">
+                            <p>用户注册</p>
+                        </div>
+                        <div class="middle unit-frame-middle">
+                            <form action="" enctype ="multipart/form-data">
+                                <ul>
+                                    <li>
+                                        <label for="username">用户名</label>
+                                        <input type="text" required="required" autocomplete="off" id="username" name="username">*
+                                        <p class="tip">10个字符以内</p>
+                                    </li>
+                                    <li>
+                                        <label for="email">邮箱</label>
+                                        <input type="email" required="required" autocomplete="off" id="email" name="email">*
+                                    </li>
+                                    <li>
+                                        <label for="school">院校</label>
+                                        <input type="text" required="required" autocomplete="off" id="school" name="school">
+                                    </li>
+                                    <li>
+                                        <label for="ID">ID</label>
+                                        <input type="text" required="required" autocomplete="off" id="ID" name="ID">*
+                                    </li>
+                                    <li>
+                                        <label for="sex">性别</label>
+                                        <input type="radio" checked class="radio" name="sex" id="male" value="1"><label class="radio" for="male">男</label>
+                                        <input type="radio" class="radio" name="sex" id="female" value="2"><label class="radio" for="female">女</label>
+                                        <input type="radio" class="radio" name="sex" id="secrecy" value="3"><label class="radio" for="secrecy">保密</label>
+                                    </li>
+                                    <li>
+                                        <label for="headImg">头像</label>
+                                        <input type="text" readonly class="headImgInput" id="headImg">
+                                        <!--<div class="headImgInput" id="headImg"></div>-->
+                                        <button class="selectPic" id="selectPic">
+                                            <input type="file" value="选择图片" name="">
+                                            选择图片</button>
+                                    </li>
+                                    <li style="position: relative;">
+                                        <label for="skill">技能</label>
+                                        <div class="skill" name="skill" id="skill">
+                                            <ul id="skill-list">
+                                                <li data-select="false">技能1</li>
+                                                <li data-select="false">技能2</li>
+                                                <li data-select="false">技能3</li>
+                                                <li data-select="false">技胜多负少能4</li>
+                                                <li data-select="false">技能5</li>
+                                                <li data-select="false">技能6</li>
+                                                <li data-select="false">技能的看法是看7</li>
+                                            </ul>
+                                            <input type="hidden" id="skills" value="">
+                                        </div><span style="position: absolute;right: 23px;top: 40px;">*</span>
+                                        <!--<p class="tip">编辑技能并按Enter添加</p>-->
+                                    </li>
+                                    <li>
+                                        <label for="password">密码</label>
+                                        <input type="password" required="required" autocomplete="off" id="password" name="password">
+                                        <p class="tip">密码必须至少包含8个字符且不能全为数字，同时不能是常用密码，不能与您的其他个人信息非常相似</p>
+                                    </li>
+                                    <li>
+                                        <label for="repassword">确认密码</label>
+                                        <input type="password" required="required" autocomplete="off" id="repassword" name="repassword">
+                                    </li>
+                                </ul>
+                                <button name="submit" type="submit" id="submit" class="submit">提交</button>
+                            </form>
+                        </div>
+                        <div class="bottom unit-frame-bottom">
+                            <p class="zhuyi-tip">注：带*为必填项目</p>
+                        </div>
+                        <i class="i-1"></i>
+                        <i class="i-2"></i>
+                    </div>
                 </div>
-                <div class="middle unit-frame-middle">
-                    <form action="" enctype ="multipart/form-data">
-                        <ul>
-                            <li>
-                                <label for="username">用户名</label>
-                                <input type="text" required="required" autocomplete="off" id="username" name="username">*
-                                <p class="tip">10个字符以内</p>
-                            </li>
-                            <li>
-                                <label for="email">邮箱</label>
-                                <input type="email" required="required" autocomplete="off" id="email" name="email">*
-                            </li>
-                            <li>
-                                <label for="school">院校</label>
-                                <input type="text" required="required" autocomplete="off" id="school" name="school">
-                            </li>
-                            <li>
-                                <label for="ID">ID</label>
-                                <input type="text" required="required" autocomplete="off" id="ID" name="ID">*
-                            </li>
-                            <li>
-                                <label for="sex">性别</label>
-                                <input type="radio" checked class="radio" name="sex" id="male" value="1"><label class="radio" for="male">男</label>
-                                <input type="radio" class="radio" name="sex" id="female" value="2"><label class="radio" for="female">女</label>
-                                <input type="radio" class="radio" name="sex" id="secrecy" value="3"><label class="radio" for="secrecy">保密</label>
-                            </li>
-                            <li>
-                                <label for="headImg">头像</label>
-                                <input type="text" readonly class="headImgInput" id="headImg">
-                                <!--<div class="headImgInput" id="headImg"></div>-->
-                                <button class="selectPic" id="selectPic">
-                                    <input type="file" value="选择图片" name="">
-                                    选择图片</button>
-                            </li>
-                            <li style="position: relative;">
-                                <label for="skill">技能</label>
-                                <div class="skill" name="skill" id="skill">
-                                    <ul id="skill-list">
-                                        <li data-select="false">技能1</li>
-                                        <li data-select="false">技能2</li>
-                                        <li data-select="false">技能3</li>
-                                        <li data-select="false">技胜多负少能4</li>
-                                        <li data-select="false">技能5</li>
-                                        <li data-select="false">技能6</li>
-                                        <li data-select="false">技能的看法是看7</li>
-                                    </ul>
-                                    <input type="hidden" id="skills" value="">
-                                </div><span style="position: absolute;right: 36px;top: 40px;">*</span>
-                                <!--<p class="tip">编辑技能并按Enter添加</p>-->
-                            </li>
-                            <li>
-                                <label for="password">密码</label>
-                                <input type="password" required="required" autocomplete="off" id="password" name="password">
-                                <p class="tip">密码必须至少包含8个字符且不能全为数字，同时不能是常用密码，不能与您的其他个人信息非常相似</p>
-                            </li>
-                            <li>
-                                <label for="repassword">确认密码</label>
-                                <input type="password" required="required" autocomplete="off" id="repassword" name="repassword">
-                            </li>
-                        </ul>
-                        <button name="submit" type="submit" id="submit" class="submit">提交</button>
-                    </form>
-                </div>
-                <div class="bottom unit-frame-bottom"></div>
             </div>
         </div>
     </div>

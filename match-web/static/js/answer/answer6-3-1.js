@@ -53,7 +53,10 @@ $(function(){
                 Pop_rule.resizePop()
             },300)
     }});
-
+    /**
+     * 倒计时
+     */
+    countTime("2018-09-17 17:08:00");
     /**
      * 下发题目
      */
@@ -323,7 +326,7 @@ function getSubjectDetail(cid, point, Pop_rule, status) {
 function subjectType1(data, point, Pop_rule, status) {
     var item = data.message;
     $('#sub-type').html('题目类型:' + $('#subject-type').html());
-    $('#sub-point').html('题目类型:分值:'+point+'pt');
+    $('#sub-point').html('分值:'+point+'pt');
 
     $('#sub-shallenge').val(item.id);
     var popup_content_tab1 = '<div class="m-subject-text">\n' +
@@ -346,19 +349,24 @@ function subjectType1(data, point, Pop_rule, status) {
                         }
 
     popup_content_tab1 +='  <div class="row-href sub-type2-result" id="opera-result">\n' +
-                        '  </div>\n' +
-                        '  <div class="row row-vertical has-answer">\n' +
-                        '    <div class="name" id="input-key">Key：</div>\n' +
-                        '    <input class="content" style="border: 0;width: 720px;height: 40px;padding: 0 5px;margin-top: 10px;" type="text" id="sub-key">\n' +
-                        '  </div>\n' +
-                        '  <div class="row-feedback">';
+                        '  </div>';
+
 
                         if(status == 1){ //已回答过
+                            popup_content_tab1 +='  <div class="row row-vertical has-answer">\n' +
+                                '    <div class="name" id="input-key">Flag：</div>\n' +
+                                '    <input class="content" style="border: 0;width: 720px;height: 40px;padding: 0 5px;margin-top: 10px;" type="text" id="sub-key">\n' +
+                                '  </div>\n' +
+                                '  <div class="row-feedback">';
                             popup_content_tab1 +='    <div class="correct answer-correct" style="display: none">你已答对本题！请再接再厉！</div>\n' +
                                 '    <div class="error answer-error" style="display: none;">抱歉，答案错误，请重新输入</div>\n' +
                                 '    <div class="error answer-hasd">您或您的队友已回答过该题目</div>';
                         }else{
-
+                            popup_content_tab1 +='  <div class="row row-vertical has-answer">\n' +
+                                '    <div class="name" id="input-key">Key：</div>\n' +
+                                '    <input class="content" style="border: 0;width: 720px;height: 40px;padding: 0 5px;margin-top: 10px;" type="text" id="sub-key">\n' +
+                                '  </div>\n' +
+                                '  <div class="row-feedback">';
                             popup_content_tab1 +='    <div class="correct answer-correct" style="display: none">你已答对本题！请再接再厉！</div>\n' +
                                 '    <div class="error answer-error" style="display: none;">抱歉，答案错误，请重新输入</div>\n' +
                                 '    <div class="error answer-hasd" style="display: none;">您或您的队友已回答过该题目</div>';
@@ -411,7 +419,7 @@ function subjectType1(data, point, Pop_rule, status) {
 function subjectType2(data, point, Pop_rule, status) {
     var item = data.message;
     $('#sub-type').html('题目类型:' + $('#subject-type').html());
-    $('#sub-point').html('题目类型:分值:'+point+'pt');
+    $('#sub-point').html('分值:'+point+'pt');
 
     var popup_content_tab1 = '<div class="m-subject-text">\n' +
         '  <div class="row row-horizontal">\n' +

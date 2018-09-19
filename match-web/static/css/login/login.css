@@ -7,9 +7,13 @@ body{
     width: 100%;
     height: 100%;
     position: relative;
+    padding: 0;
+}
+.box .box-content{
+    width: 100%;
+    height: 100%;
     background: url("../../img/login/img_sign_BG1.png") no-repeat;
     background-size: 100% 100%;
-    padding: 0;
 }
 .footer-box{
     position: absolute;
@@ -23,19 +27,18 @@ body{
     left: 50%;
     top: 50%;
     margin-left: -185px;
-    margin-top: -250px;
+    margin-top: -205px;
     z-index: 2;
 }
 .login-box-bg{
-    opacity: 0.1;
-    background: #BDFAF5;
+    background: #1a2146;
     width: 390px;
     height: 470px;
     position: absolute;
     left: 50%;
     top: 50%;
     margin-left: -195px;
-    margin-top: -205px;
+    margin-top: -160px;
     z-index: 1;
 }
 .login-box .title{
@@ -59,8 +62,6 @@ body{
 .login-box .content .middle{
     width: 100%;
     height: 300px;
-    background: url(../../img/login/img_signin_bg_2.png) no-repeat;
-    background-size: 100% 100%;
     box-sizing: border-box;
     padding-top: 40px;
 
@@ -140,9 +141,10 @@ body{
     margin: 0 10px;
 }
 
-
-
-
+.footer {
+    position: relative;
+    bottom: 0px;
+}
 
 
 

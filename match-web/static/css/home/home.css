@@ -71,7 +71,7 @@ body{
     bottom: 8px;
     width: 100%;
     height: 1px;
-    background: #01FFFF;
+    background: #7BA3AF;
 }
 .home-left-bottom .bottom-right-icon{
     width: 60px;
@@ -104,13 +104,14 @@ body{
 }
 
 .home-left-title em.right{
-    width: 100px;
+    width: 58%;
     height: 0.5px;
     display: block;
     float: left;
-    background: #01FFFF;
+    background: #BDFAF5;
     margin-top: 25px;
     margin-left: 10px;
+    opacity: 0.65;
 }
 .home-left-content{
     width: 100%;
@@ -446,25 +447,37 @@ body{
 }
 
 .home-right-box em.right{
-    width: 159px;
+    width: 65%;
     height: 0.5px;
     display: block;
     float: left;
-    background: #01FFFF;
+    background: #BDFAF5 ;
     margin-top: 25px;
     margin-left: 10px;
 }
 .home-right-box .countTime-box{
-    width: 220px;
-    height: 120px;
+    width: 90%;
+    height: 18%;
     margin: 10px auto;
     position: relative;
 }
+.home-right-box .countTime-box .top-left{
+    position: absolute;
+    top: 10px;
+    left: 15px;
+}
+.home-right-box .countTime-box .top-left img{
+    width: 30px;
+}
 .home-right-box .countTime-box .top{
     width: 100%;
-    height: 65%;
+    height: 35%;
     background: url("../../img/home/img_frame_style4_1.png");
     background-size: 100% 100%;
+}
+.home-right-box .countTime-box .middle{
+    height: 30%;
+    background: #14173a;
 }
 .home-right-box .countTime-box .bottom{
     width: 100%;
@@ -473,22 +486,23 @@ body{
     background-size: 100% 100%;
 }
 .home-right-box .countTime-box em.left{
-    width: 2px;
+    width: 3px;
     height: 44px;
     position: absolute;
-    left: 1px;
+    left: 0px;
     top: 36px;
     display: block;
     margin: 0;
 }
 .home-right-box .countTime-box em.right{
-    width: 2px;
+    width: 3px;
     height: 44px;
     position: absolute;
-    right: 1px;
+    right: 0px;
     top: 36px;
     display: block;
     margin: 0;
+    background: #01FFFF;
 }
 .home-right-box .countTime-box .countTime-content{
     width: 100%;
@@ -542,7 +556,7 @@ body{
     background: white;
     border-radius: 10px;
     box-sizing: border-box;
-    border: 4px solid #979797;
+    border: 4px solid #464343;
     margin-top: 3px;
     float: left;
 }

@@ -306,7 +306,7 @@ function initStarPoint() {
             var starName = ['密码', 'WEB', 'PWN', '渗透', '逆向'];
             starArr.push('<div class="star-box star-box1" data-status="0">\n' +
                 '    <a href="javascript:;">\n' +
-                '        <div class="star-top star-normal">\n' +
+                '        <div class="star-top star-shining">\n' +
                 '            <img class="normal" data-index="1" src="../../static/img/home/star/star_1_normal.png" alt="星球1">\n' +
                 '            <img class="shining" data-index="1" src="../../static/img/home/star/star_1_shining.png" alt="星球1">\n' +
                 '        </div>\n' +
@@ -353,7 +353,7 @@ function initStarPoint() {
  */
 function getSecPoint(name){
     $.ajax({
-        url: 'http://s.hackcoll.com:3334/challenges/api/category/?type='+name,
+        url: 'http://s.hackcoll.com:3334/challenges/api/category/?type=' + name + '&show=5',
         type: 'get',
         data:{},
         header:{
