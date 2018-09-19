@@ -187,7 +187,9 @@ function requestTable(myUrl,params, api, Pop_rule) {
                         arr.push('<h4><i class="i-icon"></i>');
                         arr.push('<input type="hidden" id="answer-status" value="0">');
                     }
-                    if(value.prompt){
+                    if(value.status){
+                        arr.push('<span>完成</span></h4>');
+                    }else if(value.prompt){
                         arr.push('<span>提示</span></h4>');
                     }else{
                         arr.push('<span></span></h4>');
