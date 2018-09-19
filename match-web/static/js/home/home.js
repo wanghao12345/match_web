@@ -100,45 +100,36 @@ function requestScoreList() {
         dataType: 'json',
         timeout: 1000,
         success: function (data) {
-            TextScroll1.stop();
             var arr = [];
-            // $('ul#score-rank-list').html('');
-            var len = $('ul#score-rank-list').find('.rank-item').length;
-            var len1 = $('ul#score-rank-list').find('.rank-item').length;
-            for(var i = 0; i < 100000; i++){
+            var len = 1;
+            for (var i = 0; i < 10000; i++) {
                 if(data[i]){
-                    if( len < 3){
-                        len += 1;
+                    if(len < 4){
+
                         arr.push('<li class="rank-item" id="rank-item'+len+'">\n' +
-                            '    <div class="rank">\n' +
-                            '        <img src="../../static/img/home/img_no'+(len)+'.png" alt="第一">\n' +
-                            '    </div>\n' +
-                            '    <div class="name">\n' +
-                            '        '+data[i].nickname+'<br/><i>'+data[i].points+'</i>\n' +
-                            '    </div>\n' +
-                            '</li>');
+                                        '    <div class="rank">\n' +
+                                        '        <img src="../../static/img/home/img_no'+(len)+'.png" alt="第一">\n' +
+                                        '    </div>\n' +
+                                        '    <div class="name">\n' +
+                                        '        '+data[i].nickname+'<br/><i>'+data[i].points+'</i>\n' +
+                                        '    </div>\n' +
+                                        '</li>');
                     }else{
-                        len += 1;
                         arr.push('<li class="rank-item" id="rank-item'+len+'">\n' +
-                            '    <div class="rank">\n' +
-                            '        NO.'+(len)+'\n' +
-                            '    </div>\n' +
-                            '    <div class="name">\n' +
-                            '        '+data[i].nickname+'<br/><i>'+data[i].points+'</i>\n' +
-                            '    </div>\n' +
-                            '</li>');
+                                        '    <div class="rank">\n' +
+                                        '        NO.'+(len)+'\n' +
+                                        '    </div>\n' +
+                                        '    <div class="name">\n' +
+                                        '        '+data[i].nickname+'<br/><i>'+data[i].points+'</i>\n' +
+                                        '    </div>\n' +
+                                        '</li>');
                     }
+                    len++;
                 }else{
                     break;
                 }
             }
-            if(len1 == 0){
-                $('ul#score-rank-list').append(arr.join(''));
-            }else{
-                $('ul#score-rank-list li#rank-item'+len1).after(arr.join(''));
-            }
-            TextScroll1.start();
-
+            $('ul#score-rank-list').html(arr.join(''));
         },
         fail: function (err) {
             layer.alert(err);
