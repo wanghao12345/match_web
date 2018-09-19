@@ -125,35 +125,13 @@ body{
 }
 .home-left-content ul.rank-list li{
     width: 100%;
-    height: 50px;
+    height: 55px;
     overflow: hidden;
     box-sizing: border-box;
-    background: #303467;
-    margin: 5px 0px;
-    border-radius: 5px;
-    position: relative;
+    border-bottom: 1px solid #6c788ef4;
 }
-.home-left-content ul.rank-list li .rank-front{
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
-    display: block;
-}
-.home-left-content ul.rank-list li .rank-back{
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
-    transform: rotateY(180deg);
-    display: none;
-}
-
-
 .home-left-content ul.rank-list li .rank{
-    width: 30%;
+    width: 50px;
     height: 100%;
     float: left;
     text-align: center;
@@ -166,7 +144,7 @@ body{
     width: 39px;
 }
 .home-left-content ul.rank-list li .name{
-    width: 70%;
+    width: 100px;
     height: 100%;
     float: right;
     text-align: right;
@@ -176,7 +154,7 @@ body{
     font-size: 14px;
     color: #9FD7FF;
     line-height: 20px;
-    padding-right: 7px;
+    padding-right: 5px;
 }
 .home-left-content ul.rank-list li .name i{
     font-style: italic;

@@ -107,21 +107,42 @@ function requestScoreList() {
                     if(len < 4){
 
                         arr.push('<li class="rank-item" id="rank-item'+len+'">\n' +
+                                        '<div class="rank-front">' +
                                         '    <div class="rank">\n' +
                                         '        <img src="../../static/img/home/img_no'+(len)+'.png" alt="第一">\n' +
                                         '    </div>\n' +
                                         '    <div class="name">\n' +
                                         '        '+data[i].nickname+'<br/><i>'+data[i].points+'</i>\n' +
                                         '    </div>\n' +
+                                        '</div>' +
+                                        '<div class="rank-back">' +
+                                        '    <div class="rank">\n' +
+                                        '        <img src="../../static/img/home/img_no'+(len)+'.png" alt="第一">\n' +
+                                        '    </div>\n' +
+                                        '    <div class="name">\n' +
+                                        '        '+data[i].nickname+'<br/><i>'+data[i].points+'</i>\n' +
+                                        '    </div>\n' +
+                                        '</div>\n' +
                                         '</li>');
                     }else{
                         arr.push('<li class="rank-item" id="rank-item'+len+'">\n' +
+                                        '<div class="rank-front">' +
                                         '    <div class="rank">\n' +
                                         '        NO.'+(len)+'\n' +
                                         '    </div>\n' +
                                         '    <div class="name">\n' +
                                         '        '+data[i].nickname+'<br/><i>'+data[i].points+'</i>\n' +
                                         '    </div>\n' +
+                                        '</div>' +
+                                        '' +
+                                        '<div class="rank-back">' +
+                                        '    <div class="rank">\n' +
+                                        '        NO.'+(len)+'\n' +
+                                        '    </div>\n' +
+                                        '    <div class="name">\n' +
+                                        '        '+data[i].nickname+'<br/><i>'+data[i].points+'</i>\n' +
+                                        '    </div>\n' +
+                                        '</div>\n'+
                                         '</li>');
                     }
                     len++;
@@ -130,6 +151,8 @@ function requestScoreList() {
                 }
             }
             $('ul#score-rank-list').html(arr.join(''));
+
+            transformList(0);
         },
         fail: function (err) {
             layer.alert(err);
@@ -440,4 +463,37 @@ jQuery.fn.shake = function (intShakes, intDistance, intDuration) {
         }
     });
     return this;
+}
+
+/**
+ * 获取列表
+ * @type {jQuery|HTMLElement}
+ */
+function transformList(index) {
+    var $liArr = $('ul#score-rank-list li.rank-item');
+    if(index < $liArr.length){
+        transform3D($liArr[index], index);
+    }else{
+        return;
+    }
+}
+/**
+ * 3d翻转
+ */
+function transform3D(DOM, index) {
+    var num = 0;
+    var time = window.setInterval(function () {
+        num += 10;
+        if(num<180){
+            $(DOM).css('transform', 'rotateY('+num+'deg)');
+
+            $(DOM).find('.rank-front').fadeOut();
+            $(DOM).find('.rank-back').fadeIn();
+
+        }else{
+            // $(DOM).css('transform', 'rotateY(0deg)');
+            window.clearInterval(time);
+            transformList(index + 1);
+        }
+    }, 50)
 }
