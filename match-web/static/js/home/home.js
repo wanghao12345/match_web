@@ -91,7 +91,7 @@ $(function () {
 /**
  * 积分榜请求
  */
-
+var ScoreRankList = [];
 function requestScoreList() {
     $.ajax({
         url: 'http://s.hackcoll.com:3334/challenges/users_ranking/',
@@ -100,64 +100,167 @@ function requestScoreList() {
         dataType: 'json',
         timeout: 1000,
         success: function (data) {
-            var arr = [];
-            var len = 1;
-            for (var i = 0; i < 10000; i++) {
-                if(data[i]){
-                    if(len < 4){
 
-                        arr.push('<li class="rank-item" id="rank-item'+len+'">\n' +
-                                        '<div class="rank-front">' +
-                                        '    <div class="rank">\n' +
-                                        '        <img src="../../static/img/home/img_no'+(len)+'.png" alt="第一">\n' +
-                                        '    </div>\n' +
-                                        '    <div class="name">\n' +
-                                        '        '+data[i].nickname+'<br/><i>'+data[i].points+'</i>\n' +
-                                        '    </div>\n' +
-                                        '</div>' +
-                                        '<div class="rank-back">' +
-                                        '    <div class="rank">\n' +
-                                        '        <img src="../../static/img/home/img_no'+(len)+'.png" alt="第一">\n' +
-                                        '    </div>\n' +
-                                        '    <div class="name">\n' +
-                                        '        '+data[i].nickname+'<br/><i>'+data[i].points+'</i>\n' +
-                                        '    </div>\n' +
-                                        '</div>\n' +
-                                        '</li>');
-                    }else{
-                        arr.push('<li class="rank-item" id="rank-item'+len+'">\n' +
-                                        '<div class="rank-front">' +
-                                        '    <div class="rank">\n' +
-                                        '        NO.'+(len)+'\n' +
-                                        '    </div>\n' +
-                                        '    <div class="name">\n' +
-                                        '        '+data[i].nickname+'<br/><i>'+data[i].points+'</i>\n' +
-                                        '    </div>\n' +
-                                        '</div>' +
-                                        '' +
-                                        '<div class="rank-back">' +
-                                        '    <div class="rank">\n' +
-                                        '        NO.'+(len)+'\n' +
-                                        '    </div>\n' +
-                                        '    <div class="name">\n' +
-                                        '        '+data[i].nickname+'<br/><i>'+data[i].points+'</i>\n' +
-                                        '    </div>\n' +
-                                        '</div>\n'+
-                                        '</li>');
-                    }
-                    len++;
-                }else{
-                    break;
-                }
+            if(compareLastScore(data, ScoreRankList)){
+                ScoreListAppend(data);
             }
-            $('ul#score-rank-list').html(arr.join(''));
 
-            transformList(0);
+
+
+            // var arr = [];
+            // var len = 1;
+            // for (var i = 0; i < 10000; i++) {
+            //     if(data[i]){
+            //         if(len < 4){
+            //             arr.push('<li class="rank-item" id="rank-item'+len+'">\n' +
+            //                 '<div class="rank-item-content">' +
+            //                 '<div class="rank-front">' +
+            //                 '    <div class="rank">\n' +
+            //                 '        <img src="../../static/img/home/img_no'+(len)+'.png" alt="第一">\n' +
+            //                 '    </div>\n' +
+            //                 '    <div class="name">\n' +
+            //                 '        '+data[i].nickname+'<br/><i>'+data[i].points+'</i>\n' +
+            //                 '    </div>\n' +
+            //                 '</div>' +
+            //                 '<div class="rank-back">' +
+            //                 '    <div class="rank">\n' +
+            //                 '        <img src="../../static/img/home/img_no'+(len)+'.png" alt="第一">\n' +
+            //                 '    </div>\n' +
+            //                 '    <div class="name">\n' +
+            //                 '        '+data[i].nickname+'<br/><i>'+data[i].points+'</i>\n' +
+            //                 '    </div>\n' +
+            //                 '</div>\n' +
+            //                 '</div>\n' +
+            //                 '</li>');
+            //
+            //         }else{
+            //             arr.push('<li class="rank-item" id="rank-item'+len+'">\n' +
+            //                             '<div class="rank-item-content">' +
+            //                             '<div class="rank-front">' +
+            //                             '    <div class="rank">\n' +
+            //                             '        NO.'+(len)+'\n' +
+            //                             '    </div>\n' +
+            //                             '    <div class="name">\n' +
+            //                             '        '+data[i].nickname+'<br/><i>'+data[i].points+'</i>\n' +
+            //                             '    </div>\n' +
+            //                             '</div>' +
+            //                             '' +
+            //                             '<div class="rank-back">' +
+            //                             '    <div class="rank">\n' +
+            //                             '        NO.'+(len)+'\n' +
+            //                             '    </div>\n' +
+            //                             '    <div class="name">\n' +
+            //                             '        '+data[i].nickname+'<br/><i>'+data[i].points+'</i>\n' +
+            //                             '    </div>\n' +
+            //                             '</div>\n'+
+            //                             '</div>\n'+
+            //                             '</li>');
+            //         }
+            //         len++;
+            //     }else{
+            //         break;
+            //     }
+            // }
+            // $('ul#score-rank-list').html(arr.join(''));
+            //
+            // transformList(0);
         },
         fail: function (err) {
             layer.alert(err);
         }
     })
+}
+
+/**
+ * 对比往期排行
+ */
+function compareLastScore(data, ScoreRankList) {
+    var flag = false;
+    if(ScoreRankList.length != 0){
+        for (var i = 0; i < 1000; i++){
+            if(data[i]){
+                if(data[i].nickname != ScoreRankList[i]){
+                    flag = true;
+                }
+                ScoreRankList[i] = data[i].nickname;
+            }else{
+                break;
+            }
+        }
+    }else{
+        for (var i = 0; i < 1000; i++){
+            if(data[i]){
+                ScoreRankList[i] = data[i].nickname;
+            }else{
+                break;
+            }
+        }
+        flag = true;
+    }
+    return flag;
+}
+
+/**
+ * 积分榜列表渲染
+ */
+function ScoreListAppend(data) {
+
+    var arr = [];
+    var len = 1;
+    for (var i = 0; i < 10000; i++) {
+        if(data[i]){
+            if(len < 4){
+                arr.push('<li class="rank-item" id="rank-item'+len+'" style="display: none;">\n' +
+                    '<div class="rank-item-content">' +
+                    '<div class="rank-front">' +
+                    '    <div class="rank">\n' +
+                    '        <img src="../../static/img/home/img_no'+(len)+'.png" alt="第一">\n' +
+                    '    </div>\n' +
+                    '    <div class="name">\n' +
+                    '        '+data[i].nickname+'<br/><i>'+data[i].points+'</i>\n' +
+                    '    </div>\n' +
+                    '</div>' +
+                    '<div class="rank-back">' +
+                    '    <div class="rank">\n' +
+                    '        <img src="../../static/img/home/img_no'+(len)+'.png" alt="第一">\n' +
+                    '    </div>\n' +
+                    '    <div class="name">\n' +
+                    '        '+data[i].nickname+'<br/><i>'+data[i].points+'</i>\n' +
+                    '    </div>\n' +
+                    '</div>\n' +
+                    '</div>\n' +
+                    '</li>');
+
+            }else{
+                arr.push('<li class="rank-item" id="rank-item'+len+'" style="display: none;">\n' +
+                                '<div class="rank-item-content">' +
+                                '<div class="rank-front">' +
+                                '    <div class="rank">\n' +
+                                '        NO.'+(len)+'\n' +
+                                '    </div>\n' +
+                                '    <div class="name">\n' +
+                                '        '+data[i].nickname+'<br/><i>'+data[i].points+'</i>\n' +
+                                '    </div>\n' +
+                                '</div>' +
+                                '' +
+                                '<div class="rank-back">' +
+                                '    <div class="rank">\n' +
+                                '        NO.'+(len)+'\n' +
+                                '    </div>\n' +
+                                '    <div class="name">\n' +
+                                '        '+data[i].nickname+'<br/><i>'+data[i].points+'</i>\n' +
+                                '    </div>\n' +
+                                '</div>\n'+
+                                '</div>\n'+
+                                '</li>');
+            }
+            len++;
+        }else{
+            break;
+        }
+    }
+    $('ul#score-rank-list').html(arr.join(''));
+    transformList(0);
 }
 
 /**
@@ -392,7 +495,7 @@ function getSecPoint(name){
  */
 function secRandomPoint(data){
     // var secStarPointArr = [[400, 120], [400, 470], [750, 270], [120, 350], [10, 470], [300, 440], [600, 440]];
-    var secStarPointArr = [['45%', 120], ['45%', 470], ['83.5%', 270], ['13%', 350], ['1%', 470], ['32%', 440], ['67%', 440]];
+    var secStarPointArr = [['45%', 120], ['45%', 470],['60%', 470],['28%', 495], ['28%', 127], ['83.5%', 270], ['13%', 350], ['1%', 470], ['32%', 440], ['67%', 440]];
     var len = data.message.length;
     var item  = data.message;
 
@@ -410,8 +513,8 @@ function secRandomPoint(data){
         }else{
             starArr.push('        <div class="star-top star-normal">');
         }
-        starArr.push('            <img class="normal" src="../../static/img/home/star/star_'+i+'_normal.png" alt="星球'+i+'">\n' +
-            '            <img class="shining" src="../../static/img/home/star/star_'+i+'_shining.png" alt="星球'+i+'">\n' +
+        starArr.push('            <img class="normal" src="../../static/img/home/star/star_'+(index + 1)+'_normal.png" alt="星球'+i+'">\n' +
+            '            <img class="shining" src="../../static/img/home/star/star_'+(index + 1)+'_shining.png" alt="星球'+i+'">\n' +
             '        </div>\n' +
             '        <div class="star-bottom">\n' +
             '            <p class="name" style="font-size: 13px">'+item[i-2].name+'</p>\n' +
@@ -440,6 +543,16 @@ function secRandomPoint(data){
                            '    </div>\n' +
                            '</div>');
             $(this).find('.star-bottom').append($popup);
+        }else{
+            $('ul#popup-rank-list').html('');
+            var $popup1 = $('<div class="popup-tip" style="display: block">\n' +
+                '    <div class="popup-content">\n' +
+                '        <h6>星球前3名</h6>\n' +
+                '        <div style="color: #01ffff;font-size: 12px;line-height: 30px;">暂无消息</div>\n' +
+                '    </div>\n' +
+                '</div>');
+            $(this).find('.star-bottom').append($popup1);
+
         }
 
     }, function () {
@@ -471,8 +584,9 @@ jQuery.fn.shake = function (intShakes, intDistance, intDuration) {
  * 获取列表
  * @type {jQuery|HTMLElement}
  */
+// transformList(0);
 function transformList(index) {
-    var $liArr = $('ul#score-rank-list li.rank-item');
+    var $liArr = $('ul#score-rank-list li.rank-item div.rank-item-content');
     if(index < $liArr.length){
         transform3D($liArr[index], index);
     }else{
@@ -483,6 +597,7 @@ function transformList(index) {
  * 3d翻转
  */
 function transform3D(DOM, index) {
+    $('ul#score-rank-list li#rank-item'+(index+1)).css('display', 'block');
     var num = 0;
     var time = window.setInterval(function () {
         num += 10;

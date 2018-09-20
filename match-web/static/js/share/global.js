@@ -1,7 +1,7 @@
 $(function(){
-  onFooter()
+  onFooter();
   $(window).on('resize', function(event) {
-    onFooter()
+    onFooter();
   });
 })
 function onFooter(){
