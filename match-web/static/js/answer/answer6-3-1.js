@@ -461,7 +461,7 @@ function subjectType2(data, point, Pop_rule, status) {
             '  <input type="button" id="opera-delay" data-delayStatus="0" style="cursor: no-drop;color: #cfcbcb;border-color: #c9c2c2;" class="i-button" value="延长时间">\n' +
             '</div>';
         popup_content_tab1 +='  <div class="row-href sub-type2-result" id="opera-result"></div>';
-        popup_content_tab1 += '<div class="row-progress j-progress sub-type2-progress">\n' +
+        popup_content_tab1 += '<div class="row-progress j-progress sub-type2-progress" style="display: none;">\n' +
             '  <div class="name">下发进度</div>\n' +
             '  <div class="progress"><i style="width:0%"></i></div>\n' +
             '  <div class="num">0%</div>\n' +
