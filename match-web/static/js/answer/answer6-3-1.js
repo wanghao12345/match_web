@@ -61,6 +61,7 @@ $(function(){
      * 下发题目
      */
     $('.win-popUp').on('click', 'input#opera-topic', function () {
+        setProgress(0, 85);
         $('#opera-result').html('下发题目中...');
         sendSubject('topic');
     });
@@ -544,7 +545,7 @@ function sendSubject(opera) {
             console.log(data);
             if(data.code == 200){
                 if(opera == 'topic'){
-                    setProgress(function () {
+                    /*setProgress(function () {
                         $('input#opera-restart').css('display', 'inline-block');
                         $('input#opera-topic').css('display', 'none');
                         $('#opera-result').html(data.message);
@@ -554,7 +555,18 @@ function sendSubject(opera) {
                             'color':'#0ff',
                             'border-color':'#6EC5C3'
                         });
-                    })
+                    })*/
+                    setProgress(85, 100);
+                    $('input#opera-restart').css('display', 'inline-block');
+                    $('input#opera-topic').css('display', 'none');
+                    $('#opera-result').html(data.message);
+                    $('input#opera-delay').attr('data-delayStatus', '1');
+                    $('input#opera-delay').css({
+                        'cursor':'pointer',
+                        'color':'#0ff',
+                        'border-color':'#6EC5C3'
+                    });
+
                 }else if(opera == 'restart'){
                     // $('input#opera-restart').css('display', 'none');
                     // $('input#opera-topic').css('display', 'inline-block');
@@ -643,20 +655,21 @@ function sendKey(param) {
  * 进度条
  * @param num
  */
-function setProgress(callback){
+function setProgress(num, num2){
     $('.sub-type2-progress').css('display', 'flex');
-    var num = 0;
+    var num = num;
     var time = window.setInterval(function () {
         num += (Math.floor(Math.random()*10+1));
-        if(num>=100){
-            num = 100;
+        if(num>=num2){
+            num = num2;
             $(".j-progress i").width(num + '%');
             $(".j-progress .num").html(num + '%');
             window.clearInterval(time);
-            $('.sub-type2-progress').css('display', 'none');
-            $(".j-progress i").width('0%');
-            $(".j-progress .num").html('0%');
-            callback();
+            if(num == 100){
+                $('.sub-type2-progress').css('display', 'none');
+                $(".j-progress i").width('0%');
+                $(".j-progress .num").html('0%');
+            }
         }else{
             $(".j-progress i").width(num + '%');
             $(".j-progress .num").html(num + '%');
