@@ -215,6 +215,7 @@ function requestTable(myUrl,params, api, Pop_rule) {
                 //判断是否弹出框
                 isOpenDetail(Pop_rule);
             }
+            onFooter();
         },
         fail: function (err) {
             console.log(err)
@@ -366,7 +367,7 @@ function subjectType1(data, point, Pop_rule, status) {
                                 '    <div class="error answer-hasd">您或您的队友已回答过该题目</div>';
                         }else{
                             popup_content_tab1 +='  <div class="row row-vertical has-answer">\n' +
-                                '    <div class="name" id="input-key">Key：</div>\n' +
+                                '    <div class="name" id="input-key">Flag：</div>\n' +
                                 '    <input class="content" style="border: 0;width: 720px;height: 40px;padding: 0 5px;margin-top: 10px;" type="text" id="sub-key">\n' +
                                 '  </div>\n' +
                                 '  <div class="row-feedback">';
@@ -380,7 +381,7 @@ function subjectType1(data, point, Pop_rule, status) {
                                 '  <div class="row-end has-answer has-answer1" style="display: none">\n' +
                                 '    <a href="javascript:;" class="i-btn" id="sub-sendKey">\n' +
                                 '      <input type="hidden" id="sub-shallenge" value="'+item.id+'">\n' +
-                                '      Send Key</a>\n' +
+                                '      提交</a>\n' +
                                 '  </div>\n' +
                                 '</div>';
                         }else{
@@ -388,7 +389,7 @@ function subjectType1(data, point, Pop_rule, status) {
                                 '  <div class="row-end has-answer has-answer1">\n' +
                                 '    <a href="javascript:;" class="i-btn" id="sub-sendKey">\n' +
                                 '      <input type="hidden" id="sub-shallenge" value="'+item.id+'">\n' +
-                                '      Send Key</a>\n' +
+                                '      提交</a>\n' +
                                 '  </div>\n' +
                                 '</div>';
                         }
