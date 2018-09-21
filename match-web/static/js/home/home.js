@@ -495,7 +495,7 @@ function getSecPoint(name){
  */
 function secRandomPoint(data){
     // var secStarPointArr = [[400, 120], [400, 470], [750, 270], [120, 350], [10, 470], [300, 440], [600, 440]];
-    var secStarPointArr = [['45%', 120], ['45%', 470],['60%', 470],['28%', 495], ['28%', 127], ['83.5%', 270], ['13%', 350], ['1%', 470], ['32%', 440], ['67%', 440]];
+    var secStarPointArr = [['45%', 120], ['45%', 470],['50%', 470],['28%', 495], ['28%', 127], ['83.5%', 270], ['13%', 350], ['1%', 470], ['45%', 470], ['67%', 440]];
     var len = data.message.length;
     var item  = data.message;
 
@@ -513,8 +513,16 @@ function secRandomPoint(data){
         }else{
             starArr.push('        <div class="star-top star-normal">');
         }
-        starArr.push('            <img class="normal" src="../../static/img/home/star/star_'+(index + 1)+'_normal.png" alt="星球'+i+'">\n' +
-            '            <img class="shining" src="../../static/img/home/star/star_'+(index + 1)+'_shining.png" alt="星球'+i+'">\n' +
+        // var index1;
+        // if(index == 0 || index == 1){
+        //     index1 = 11;
+        // }else{
+        //     index1 = index;
+        // }
+
+        var index1 = (index == 1 || index == 0) ? 11 : index;
+        starArr.push('            <img class="normal" src="../../static/img/home/star/star_'+(index1)+'_normal.png" alt="星球'+i+'">\n' +
+            '            <img class="shining" src="../../static/img/home/star/star_'+(index1)+'_shining.png" alt="星球'+i+'">\n' +
             '        </div>\n' +
             '        <div class="star-bottom">\n' +
             '            <p class="name" style="font-size: 13px">'+item[i-2].name+'</p>\n' +
