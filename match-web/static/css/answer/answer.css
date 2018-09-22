@@ -30,8 +30,8 @@
 .m-answer-list .top-lump h4{-webkit-flex-shrink: 0;flex-shrink: 0;color: #0ff;cursor: pointer;}
 .m-answer-list .top-lump h4 span{vertical-align: middle;} 
 .m-answer-list i.i-icon{display: inline-block;width: 20px;height: 20px;vertical-align: middle;margin-right: 3px;}
-.m-answer-list i.i-tip{background: url(../../img/share/icon_key.png) no-repeat;}
-.m-answer-list i.i-ok{background: url(../../img/share/icon_ok.png) no-repeat;}
+.m-answer-list i.i-tip{background: url(../../img/share/icon_key.png) no-repeat;background-size: 100% 100%;}
+.m-answer-list i.i-ok{background: url(../../img/share/icon_ok.png) no-repeat;background-size: 100% 100%;}
 .m-answer-list .mid-lump{padding: 10px 0;flex-grow: 1;}
 .m-answer-list .mid-lump .cont{position: relative;padding: 0 10px 0 13px;min-height:88px;}
 .m-answer-list .mid-lump .cont:before{content:"";position: absolute;left: 0;top: 7px;content:"";width: 4px;height: 4px;background: #01FFFF;border: 2px solid #575872;-webkit-border-radius: 50%;-moz-border-radius:50%;border-radius: 50%;}

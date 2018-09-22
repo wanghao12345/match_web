@@ -61,9 +61,10 @@ $(function(){
      * 下发题目
      */
     $('.win-popUp').on('click', 'input#opera-topic', function () {
-        setProgress(0, 85);
         $('#opera-result').html('下发题目中...');
-        sendSubject('topic');
+        setProgress(0, 85, function () {
+            sendSubject('topic');
+        });
     });
     /**
      * 延长时间
@@ -557,15 +558,16 @@ function sendSubject(opera) {
                             'border-color':'#6EC5C3'
                         });
                     })*/
-                    setProgress(85, 100);
-                    $('input#opera-restart').css('display', 'inline-block');
-                    $('input#opera-topic').css('display', 'none');
-                    $('#opera-result').html(data.message);
-                    $('input#opera-delay').attr('data-delayStatus', '1');
-                    $('input#opera-delay').css({
-                        'cursor':'pointer',
-                        'color':'#0ff',
-                        'border-color':'#6EC5C3'
+                    setProgress(85, 100, function () {
+                        $('input#opera-restart').css('display', 'inline-block');
+                        $('input#opera-topic').css('display', 'none');
+                        $('#opera-result').html(data.message);
+                        $('input#opera-delay').attr('data-delayStatus', '1');
+                        $('input#opera-delay').css({
+                            'cursor':'pointer',
+                            'color':'#0ff',
+                            'border-color':'#6EC5C3'
+                        });
                     });
 
                 }else if(opera == 'restart'){
@@ -656,7 +658,7 @@ function sendKey(param) {
  * 进度条
  * @param num
  */
-function setProgress(num, num2){
+function setProgress(num, num2, callback){
     $('.sub-type2-progress').css('display', 'flex');
     var num = num;
     var time = window.setInterval(function () {
@@ -670,6 +672,10 @@ function setProgress(num, num2){
                 $('.sub-type2-progress').css('display', 'none');
                 $(".j-progress i").width('0%');
                 $(".j-progress .num").html('0%');
+                callback();
+            }
+            if(num == 85){
+                callback();
             }
         }else{
             $(".j-progress i").width(num + '%');

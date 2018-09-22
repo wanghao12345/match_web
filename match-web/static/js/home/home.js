@@ -495,7 +495,7 @@ function getSecPoint(name){
  */
 function secRandomPoint(data){
     // var secStarPointArr = [[400, 120], [400, 470], [750, 270], [120, 350], [10, 470], [300, 440], [600, 440]];
-    var secStarPointArr = [['45%', 120], ['45%', 470],['50%', 470],['28%', 495], ['28%', 127], ['83.5%', 270], ['13%', 350], ['1%', 470], ['45%', 470], ['67%', 440]];
+    var secStarPointArr = [['45%', 120], ['45%', 470],['60%', 460],['28%', 495], ['28%', 127], ['83.5%', 270], ['13%', 350], ['1%', 470], ['-1%', 350], ['70%', 500]];
     var len = data.message.length;
     var item  = data.message;
 
@@ -504,7 +504,7 @@ function secRandomPoint(data){
     for (var i = 2; i < len + 2; i++) {
         var index = Math.round(Math.random()*(secStarPointArr.length-1));
 
-        starArr.push('<div class="star-box star-box'+i+'" style="left: '+secStarPointArr[index][0]+';top: '+secStarPointArr[index][1]+'px;">\n' +
+        starArr.push('<div class="star-box star-box'+i+'" data-left="'+secStarPointArr[index][0]+'" style="left: '+secStarPointArr[index][0]+';top: '+secStarPointArr[index][1]+'px;">\n' +
             '    <a href="http://127.0.0.1:8000/challenges/category/1/?id='+item[i-2].id+'">'
         );
         starArr.push('<input type="hidden" id="ranklist" value="'+item[i-2].ranking.join(',')+'">');
@@ -535,6 +535,9 @@ function secRandomPoint(data){
     $('.grap-box').append(starArr.join(''));
     //动态添加悬停效果
     $('.star-box').hover(function () {
+
+        var dataLeft = $(this).attr('data-left');
+
         var ranklist = $(this).find('input#ranklist').val();
         //给目标元素添加弹框
         if(ranklist != ''){
@@ -544,23 +547,45 @@ function secRandomPoint(data){
             for (var i = 0; i < rankArr.length; i++) {
                 str += '<li>'+rankArr[i]+'</li>';
             }
-            var $popup = $('<div class="popup-tip" style="display: block">\n' +
-                           '    <div class="popup-content">\n' +
-                           '        <h6>星球前3名</h6>\n' +
-                           '        <ul id="popup-rank-list">'+str+'</ul>\n' +
-                           '    </div>\n' +
-                           '</div>');
-            $(this).find('.star-bottom').append($popup);
+
+            if(parseInt(dataLeft) < 50){
+                var $popup = $('<div class="popup-tip popup-tip2" style="display: block">\n' +
+                    '    <div class="popup-content">\n' +
+                    '        <h6>星球前3名</h6>\n' +
+                    '        <ul id="popup-rank-list">'+str+'</ul>\n' +
+                    '    </div>\n' +
+                    '</div>');
+                $(this).find('.star-bottom').append($popup);
+            }else{
+                var $popup = $('<div class="popup-tip popup-tip1" style="display: block">\n' +
+                    '    <div class="popup-content">\n' +
+                    '        <h6>星球前3名</h6>\n' +
+                    '        <ul id="popup-rank-list">'+str+'</ul>\n' +
+                    '    </div>\n' +
+                    '</div>');
+                $(this).find('.star-bottom').append($popup);
+            }
+
         }else{
             $('ul#popup-rank-list').html('');
-            var $popup1 = $('<div class="popup-tip" style="display: block">\n' +
-                '    <div class="popup-content">\n' +
-                '        <h6>星球前3名</h6>\n' +
-                '        <div style="color: #01ffff;font-size: 12px;line-height: 30px;">暂无消息</div>\n' +
-                '    </div>\n' +
-                '</div>');
-            $(this).find('.star-bottom').append($popup1);
 
+            if(parseInt(dataLeft) < 50){
+                var $popup1 = $('<div class="popup-tip popup-tip2" style="display: block">\n' +
+                    '    <div class="popup-content">\n' +
+                    '        <h6>星球前3名</h6>\n' +
+                    '        <div style="color: #01ffff;font-size: 12px;line-height: 30px;">暂无消息</div>\n' +
+                    '    </div>\n' +
+                    '</div>');
+                $(this).find('.star-bottom').append($popup1);
+            }else{
+                var $popup1 = $('<div class="popup-tip popup-tip1" style="display: block">\n' +
+                    '    <div class="popup-content">\n' +
+                    '        <h6>星球前3名</h6>\n' +
+                    '        <div style="color: #01ffff;font-size: 12px;line-height: 30px;">暂无消息</div>\n' +
+                    '    </div>\n' +
+                    '</div>');
+                $(this).find('.star-bottom').append($popup1);
+            }
         }
 
     }, function () {

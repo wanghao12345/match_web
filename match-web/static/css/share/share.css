@@ -117,8 +117,8 @@
 .m-msg li{position: relative;display: -webkit-flex;display: -moz-flex;display: -ms-flex;display: -o-flex;display: flex;-ms-align-items: center;align-items: center;}
 .m-msg a{color: #01ffff;display: block;padding: 0 6px;}
 .m-msg img{display: block;}
-.m-msg .msg-1{width: 17px;height: 17px;}
-.m-msg .msg-2{width: 18px;height: 13px;}
+.m-msg .msg-1{width: 22px;height: 20px;}
+.m-msg .msg-2{width: 22px;height: 22px;}
 .m-nav{height: 48px;display: -webkit-flex;display: -moz-flex;display: -ms-flex;display: -o-flex;display: flex;-ms-align-items: center;align-items: center;}
 .m-nav li{width: 140px;text-align: center;}
 .m-nav a{color: #9FD7FF;}
