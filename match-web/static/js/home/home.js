@@ -82,7 +82,7 @@ $(function () {
      * 答题动态
      */
     requestDynamic();
-    TextScroll2 = new TextScroll('#textScroll', '#scroll-item-content', '.scroll-item', 70);
+    TextScroll2 = new TextScroll('#textScroll', '#scroll-item-content', '.scroll-item', 50);
     //10秒后加载答题动态
     window.setInterval(function () {
         requestDynamic();
@@ -281,14 +281,24 @@ function requestDynamic() {
                 var item = data.message;
                 var arr = [];
                 item.forEach(function (value, index) {
+                   /* arr.push('<li class="scroll-item">' +
+                        '<div class="content">' +
+                        '<i>'+value.name+'</i>完成'+value.challenge_name+'题，获得' +
+                        '<i>'+value.points+'分</i>，当前累积得分' +
+                        '<i>'+value.total_points+'分</i>，团队总分' +
+                        '<i>'+value.total_points+'分</i>' +
+                        '</div>' +
+                        '</li>');*/
                     arr.push('<li class="scroll-item">' +
-                            '<div class="content">' +
-                            '<i>'+value.name+'</i>完成'+value.challenge_name+'题，获得' +
-                            '<i>'+value.points+'分</i>，当前累积得分' +
-                            '<i>'+value.total_points+'分</i>，团队总分' +
-                            '<i>'+value.total_points+'分</i>' +
-                            '</div>' +
-                            '</li>');
+                        '<div class="content">' +
+                        '<i class="dynamic-i-1">'+value.name+'</i>' +
+                        '<i class="dynamic-i-2" style="color: rgba(1,255,255,0.54);">&nbsp;完成&nbsp;</i>' +
+                        '<i class="dynamic-i-3" style="color: rgba(1,255,255,0.54);">'+value.challenge_name+'</i>' +
+
+                        '<i class="dynamic-i-5">14:36</i>' +
+                        '<i class="dynamic-i-4" ><img style="width: 17px;margin-right: 3px;" src="../../static/img/share/icon_ok.png" alt=""></i>' +
+                        '</div>' +
+                        '</li>');
                 })
                 $('ul#scroll-item-content').append(arr.join(''));
                 /**

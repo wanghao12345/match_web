@@ -61,6 +61,7 @@ $(function(){
      * 下发题目
      */
     $('.win-popUp').on('click', 'input#opera-topic', function () {
+        getDownTime(60);
         $('#opera-result').html('下发题目中...');
         setProgress(0, 85, function () {
             sendSubject('topic');
@@ -446,8 +447,9 @@ function subjectType2(data, point, Pop_rule, status) {
     }
 
     if(item.url){ //有url
-        popup_content_tab1 += '<div class="row-button sub-type2" style="margin-top: 30px;">\n' +
+        popup_content_tab1 += '<div class="row-button sub-type2" id="subtype2-select-btn" style="margin-top: 30px;">\n' +
             '  <input type="button" id="opera-restart" class="i-button" value="重新下发">\n' +
+            '  <input type="button" id="count-time" class="i-button" value="60s" style="display: none;padding: 6px 26px;cursor: no-drop;color: #cfcbcb;border-color: #c9c2c2;">\n' +
             '  <input type="button" id="opera-topic" class="i-button" style="display: none;" value="下发题目">\n' +
             '  <input type="button" id="opera-delay" data-delayStatus="1" class="i-button" value="延长时间">\n' +
             '</div>';
@@ -458,8 +460,9 @@ function subjectType2(data, point, Pop_rule, status) {
             '  <div class="num">0%</div>\n' +
             '</div>';
     }else{
-        popup_content_tab1 += '<div class="row-button sub-type2" style="margin-top: 30px;">\n' +
+        popup_content_tab1 += '<div class="row-button sub-type2" id="subtype2-select-btn" style="margin-top: 30px;">\n' +
             '  <input type="button" id="opera-restart" class="i-button" value="重新下发" style="display: none">\n' +
+            '  <input type="button" id="count-time" class="i-button" value="60s" style="display: none;padding: 6px 26px;cursor: no-drop;color: #cfcbcb;border-color: #c9c2c2;">\n' +
             '  <input type="button" id="opera-topic" class="i-button" value="下发题目">\n' +
             '  <input type="button" id="opera-delay" data-delayStatus="0" style="cursor: no-drop;color: #cfcbcb;border-color: #c9c2c2;" class="i-button" value="延长时间">\n' +
             '</div>';
@@ -559,6 +562,7 @@ function sendSubject(opera) {
                         });
                     })*/
                     setProgress(85, 100, function () {
+                        $('#subtype2-select-btn #count-time').css('display', 'none');
                         $('input#opera-restart').css('display', 'inline-block');
                         $('input#opera-topic').css('display', 'none');
                         $('#opera-result').html(data.message);
@@ -728,6 +732,27 @@ function getCookie(name) {
         return unescape(arr[2]);
     }
     return null;
+}
+
+/**
+ * 设置倒计时
+ * @param num
+ */
+function getDownTime(num) {
+    $('#subtype2-select-btn #count-time').val(num + 's');
+    $('#subtype2-select-btn #count-time').css('display', 'inline-block');
+    $('#subtype2-select-btn #opera-topic').css('display', 'none');
+
+    var time = window.setInterval(function () {
+        num--;
+        if(num < 0){
+            window.clearInterval(time);
+            $('#subtype2-select-btn #count-time').css('display', 'none');
+            $('input#opera-restart').css('display', 'inline-block');
+        }else{
+            $('#subtype2-select-btn #count-time').val(num + 's');
+        }
+    }, 1000)
 }
 
 
