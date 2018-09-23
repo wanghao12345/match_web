@@ -125,12 +125,14 @@ body{
 }
 .home-left-content ul.rank-list li{
     width: 100%;
-    height: 50px;
+    height: 55px;
     overflow: hidden;
     box-sizing: border-box;
-    background: #303467;
-    margin: 5px 0px;
-    border-radius: 5px;
+    border-bottom: 1px solid #6c788ef4;
+}
+.home-left-content ul.rank-list li .rank-item-content{
+    width: 100%;
+    height: 100%;
     position: relative;
 }
 .home-left-content ul.rank-list li .rank-front{
@@ -152,8 +154,10 @@ body{
 }
 
 
+
+
 .home-left-content ul.rank-list li .rank{
-    width: 30%;
+    width: 50px;
     height: 100%;
     float: left;
     text-align: center;
@@ -166,7 +170,7 @@ body{
     width: 39px;
 }
 .home-left-content ul.rank-list li .name{
-    width: 70%;
+    width: 100px;
     height: 100%;
     float: right;
     text-align: right;
@@ -176,7 +180,7 @@ body{
     font-size: 14px;
     color: #9FD7FF;
     line-height: 20px;
-    padding-right: 7px;
+    padding-right: 5px;
 }
 .home-left-content ul.rank-list li .name i{
     font-style: italic;
@@ -365,10 +369,13 @@ body{
 .popup-tip{
     width: 250px;
     height: 130px;
+    display: none;
+    box-sizing: border-box;
+}
+.popup-tip1{
     position: absolute;
     left: -200px;
     top: -130px;
-    /*top: -200px;*/
     background: url("../../img/home/img_frame_style5.png");
     background-size: 100% 100%;
     box-sizing: border-box;
@@ -376,6 +383,20 @@ body{
     z-index: 2;
     display: none;
 }
+.popup-tip2{
+    position: absolute;
+    left: 100px;
+    top: -130px;
+    background: url("../../img/home/img_frame_style5_1.png");
+    background-size: 100% 100%;
+    padding: 10px 10px 40px 45px;
+    z-index: 2;
+    display: none;
+}
+
+
+
+
 .popup-tip .popup-content{
     width: 100%;
     height: 100%;
@@ -554,7 +575,7 @@ body{
     left: 0px;
     top: 0px;
     box-sizing: border-box;
-    padding: 0 20px;
+    padding: 0 8px 0px 15px;
     overflow: hidden;
 }
 .home-dynamic-content ul{
@@ -562,9 +583,9 @@ body{
 }
 .home-dynamic-content ul li{
     width: 100%;
-    height: 70px;
+    height: 50px;
     box-sizing: border-box;
-    line-height: 20px;
+    line-height: 17px;
     font-family: PingFangSC-Regular;
     font-size: 13px;
     color: rgba(1,255,255,0.54);
@@ -587,9 +608,34 @@ body{
     box-sizing: border-box;
     display: inline-block;
     padding-left: 5px;
+    overflow: hidden;
 }
 .home-dynamic-content ul li i{
     color: white;
+    display: block;
+    float: left;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 12px;
+}
+.home-dynamic-content ul li i.dynamic-i-1{
+    max-width: 50px;
+}
+.home-dynamic-content ul li i.dynamic-i-2{
+
+}
+
+.home-dynamic-content ul li i.dynamic-i-3{
+    max-width: 50px;
+}
+
+.home-dynamic-content ul li i.dynamic-i-4{
+    float: right;
+}
+
+.home-dynamic-content ul li i.dynamic-i-5{
+    float: right;
 }
 
 

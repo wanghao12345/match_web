@@ -62,7 +62,9 @@ $(function(){
      */
     $('.win-popUp').on('click', 'input#opera-topic', function () {
         $('#opera-result').html('下发题目中...');
-        sendSubject('topic');
+        setProgress(0, 85, function () {
+            sendSubject('topic');
+        });
     });
     /**
      * 延长时间
@@ -79,6 +81,7 @@ $(function(){
      * 重新下发
      */
     $('.win-popUp').on('click', 'input#opera-restart', function () {
+        getDownTime(60);
         $('.answer-result-restart').html($('#opera-result').html());
         $('#opera-result').html('正在重启中...');
         // $('input#opera-delay').attr('data-delayStatus', '0');
@@ -214,6 +217,7 @@ function requestTable(myUrl,params, api, Pop_rule) {
                 //判断是否弹出框
                 isOpenDetail(Pop_rule);
             }
+            onFooter();
         },
         fail: function (err) {
             console.log(err)
@@ -355,9 +359,9 @@ function subjectType1(data, point, Pop_rule, status) {
 
 
                         if(status == 1){ //已回答过
-                            popup_content_tab1 +='  <div class="row row-vertical has-answer">\n' +
+                            popup_content_tab1 +='  <div class="row row-vertical has-answer" style="display: none;">\n' +
                                 '    <div class="name" id="input-key">Flag：</div>\n' +
-                                '    <input class="content" style="border: 0;width: 720px;height: 40px;padding: 0 5px;margin-top: 10px;display: none;" type="text" id="sub-key">\n' +
+                                '    <input class="content" style="border: 0;width: 720px;height: 40px;padding: 0 5px;margin-top: 10px;" type="text" id="sub-key">\n' +
                                 '  </div>\n' +
                                 '  <div class="row-feedback">';
                             popup_content_tab1 +='    <div class="correct answer-correct" style="display: none">你已答对本题！请再接再厉！</div>\n' +
@@ -365,7 +369,7 @@ function subjectType1(data, point, Pop_rule, status) {
                                 '    <div class="error answer-hasd">您或您的队友已回答过该题目</div>';
                         }else{
                             popup_content_tab1 +='  <div class="row row-vertical has-answer">\n' +
-                                '    <div class="name" id="input-key">Key：</div>\n' +
+                                '    <div class="name" id="input-key">Flag：</div>\n' +
                                 '    <input class="content" style="border: 0;width: 720px;height: 40px;padding: 0 5px;margin-top: 10px;" type="text" id="sub-key">\n' +
                                 '  </div>\n' +
                                 '  <div class="row-feedback">';
@@ -379,7 +383,7 @@ function subjectType1(data, point, Pop_rule, status) {
                                 '  <div class="row-end has-answer has-answer1" style="display: none">\n' +
                                 '    <a href="javascript:;" class="i-btn" id="sub-sendKey">\n' +
                                 '      <input type="hidden" id="sub-shallenge" value="'+item.id+'">\n' +
-                                '      Send Key</a>\n' +
+                                '      提交</a>\n' +
                                 '  </div>\n' +
                                 '</div>';
                         }else{
@@ -387,7 +391,7 @@ function subjectType1(data, point, Pop_rule, status) {
                                 '  <div class="row-end has-answer has-answer1">\n' +
                                 '    <a href="javascript:;" class="i-btn" id="sub-sendKey">\n' +
                                 '      <input type="hidden" id="sub-shallenge" value="'+item.id+'">\n' +
-                                '      Send Key</a>\n' +
+                                '      提交</a>\n' +
                                 '  </div>\n' +
                                 '</div>';
                         }
@@ -443,8 +447,9 @@ function subjectType2(data, point, Pop_rule, status) {
     }
 
     if(item.url){ //有url
-        popup_content_tab1 += '<div class="row-button sub-type2" style="margin-top: 30px;">\n' +
+        popup_content_tab1 += '<div class="row-button sub-type2" id="subtype2-select-btn" style="margin-top: 30px;">\n' +
             '  <input type="button" id="opera-restart" class="i-button" value="重新下发">\n' +
+            '  <input type="button" id="count-time" class="i-button" value="60s" style="display: none;padding: 6px 26px;cursor: no-drop;color: #cfcbcb;border-color: #c9c2c2;">\n' +
             '  <input type="button" id="opera-topic" class="i-button" style="display: none;" value="下发题目">\n' +
             '  <input type="button" id="opera-delay" data-delayStatus="1" class="i-button" value="延长时间">\n' +
             '</div>';
@@ -455,13 +460,14 @@ function subjectType2(data, point, Pop_rule, status) {
             '  <div class="num">0%</div>\n' +
             '</div>';
     }else{
-        popup_content_tab1 += '<div class="row-button sub-type2" style="margin-top: 30px;">\n' +
+        popup_content_tab1 += '<div class="row-button sub-type2" id="subtype2-select-btn" style="margin-top: 30px;">\n' +
             '  <input type="button" id="opera-restart" class="i-button" value="重新下发" style="display: none">\n' +
+            '  <input type="button" id="count-time" class="i-button" value="60s" style="display: none;padding: 6px 26px;cursor: no-drop;color: #cfcbcb;border-color: #c9c2c2;">\n' +
             '  <input type="button" id="opera-topic" class="i-button" value="下发题目">\n' +
             '  <input type="button" id="opera-delay" data-delayStatus="0" style="cursor: no-drop;color: #cfcbcb;border-color: #c9c2c2;" class="i-button" value="延长时间">\n' +
             '</div>';
         popup_content_tab1 +='  <div class="row-href sub-type2-result" id="opera-result"></div>';
-        popup_content_tab1 += '<div class="row-progress j-progress sub-type2-progress">\n' +
+        popup_content_tab1 += '<div class="row-progress j-progress sub-type2-progress" style="display: none;">\n' +
             '  <div class="name">下发进度</div>\n' +
             '  <div class="progress"><i style="width:0%"></i></div>\n' +
             '  <div class="num">0%</div>\n' +
@@ -544,7 +550,7 @@ function sendSubject(opera) {
             console.log(data);
             if(data.code == 200){
                 if(opera == 'topic'){
-                    setProgress(function () {
+                    /*setProgress(function () {
                         $('input#opera-restart').css('display', 'inline-block');
                         $('input#opera-topic').css('display', 'none');
                         $('#opera-result').html(data.message);
@@ -554,7 +560,20 @@ function sendSubject(opera) {
                             'color':'#0ff',
                             'border-color':'#6EC5C3'
                         });
-                    })
+                    })*/
+                    setProgress(85, 100, function () {
+                        $('#subtype2-select-btn #count-time').css('display', 'none');
+                        $('input#opera-restart').css('display', 'inline-block');
+                        $('input#opera-topic').css('display', 'none');
+                        $('#opera-result').html(data.message);
+                        $('input#opera-delay').attr('data-delayStatus', '1');
+                        $('input#opera-delay').css({
+                            'cursor':'pointer',
+                            'color':'#0ff',
+                            'border-color':'#6EC5C3'
+                        });
+                    });
+
                 }else if(opera == 'restart'){
                     // $('input#opera-restart').css('display', 'none');
                     // $('input#opera-topic').css('display', 'inline-block');
@@ -643,20 +662,25 @@ function sendKey(param) {
  * 进度条
  * @param num
  */
-function setProgress(callback){
+function setProgress(num, num2, callback){
     $('.sub-type2-progress').css('display', 'flex');
-    var num = 0;
+    var num = num;
     var time = window.setInterval(function () {
         num += (Math.floor(Math.random()*10+1));
-        if(num>=100){
-            num = 100;
+        if(num>=num2){
+            num = num2;
             $(".j-progress i").width(num + '%');
             $(".j-progress .num").html(num + '%');
             window.clearInterval(time);
-            $('.sub-type2-progress').css('display', 'none');
-            $(".j-progress i").width('0%');
-            $(".j-progress .num").html('0%');
-            callback();
+            if(num == 100){
+                $('.sub-type2-progress').css('display', 'none');
+                $(".j-progress i").width('0%');
+                $(".j-progress .num").html('0%');
+                callback();
+            }
+            if(num == 85){
+                callback();
+            }
         }else{
             $(".j-progress i").width(num + '%');
             $(".j-progress .num").html(num + '%');
@@ -708,6 +732,27 @@ function getCookie(name) {
         return unescape(arr[2]);
     }
     return null;
+}
+
+/**
+ * 设置倒计时
+ * @param num
+ */
+function getDownTime(num) {
+    $('#subtype2-select-btn #count-time').val(num + 's');
+    $('#subtype2-select-btn #count-time').css('display', 'inline-block');
+    $('#subtype2-select-btn #opera-restart').css('display', 'none');
+
+    var time = window.setInterval(function () {
+        num--;
+        if(num < 0){
+            window.clearInterval(time);
+            $('#subtype2-select-btn #count-time').css('display', 'none');
+            $('input#opera-restart').css('display', 'inline-block');
+        }else{
+            $('#subtype2-select-btn #count-time').val(num + 's');
+        }
+    }, 1000)
 }
 
 

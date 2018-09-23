@@ -82,7 +82,7 @@ $(function () {
      * 答题动态
      */
     requestDynamic();
-    TextScroll2 = new TextScroll('#textScroll', '#scroll-item-content', '.scroll-item', 70);
+    TextScroll2 = new TextScroll('#textScroll', '#scroll-item-content', '.scroll-item', 50);
     //10秒后加载答题动态
     window.setInterval(function () {
         requestDynamic();
@@ -91,7 +91,7 @@ $(function () {
 /**
  * 积分榜请求
  */
-
+var ScoreRankList = [];
 function requestScoreList() {
     $.ajax({
         url: 'http://s.hackcoll.com:3334/challenges/users_ranking/',
@@ -100,41 +100,167 @@ function requestScoreList() {
         dataType: 'json',
         timeout: 1000,
         success: function (data) {
-            var arr = [];
-            var len = 1;
-            for (var i = 0; i < 10000; i++) {
-                if(data[i]){
-                    if(len < 4){
 
-                        arr.push('<li class="rank-item" id="rank-item'+len+'">\n' +
-                                        '    <div class="rank">\n' +
-                                        '        <img src="../../static/img/home/img_no'+(len)+'.png" alt="第一">\n' +
-                                        '    </div>\n' +
-                                        '    <div class="name">\n' +
-                                        '        '+data[i].nickname+'<br/><i>'+data[i].points+'</i>\n' +
-                                        '    </div>\n' +
-                                        '</li>');
-                    }else{
-                        arr.push('<li class="rank-item" id="rank-item'+len+'">\n' +
-                                        '    <div class="rank">\n' +
-                                        '        NO.'+(len)+'\n' +
-                                        '    </div>\n' +
-                                        '    <div class="name">\n' +
-                                        '        '+data[i].nickname+'<br/><i>'+data[i].points+'</i>\n' +
-                                        '    </div>\n' +
-                                        '</li>');
-                    }
-                    len++;
-                }else{
-                    break;
-                }
+            if(compareLastScore(data, ScoreRankList)){
+                ScoreListAppend(data);
             }
-            $('ul#score-rank-list').html(arr.join(''));
+
+
+
+            // var arr = [];
+            // var len = 1;
+            // for (var i = 0; i < 10000; i++) {
+            //     if(data[i]){
+            //         if(len < 4){
+            //             arr.push('<li class="rank-item" id="rank-item'+len+'">\n' +
+            //                 '<div class="rank-item-content">' +
+            //                 '<div class="rank-front">' +
+            //                 '    <div class="rank">\n' +
+            //                 '        <img src="../../static/img/home/img_no'+(len)+'.png" alt="第一">\n' +
+            //                 '    </div>\n' +
+            //                 '    <div class="name">\n' +
+            //                 '        '+data[i].nickname+'<br/><i>'+data[i].points+'</i>\n' +
+            //                 '    </div>\n' +
+            //                 '</div>' +
+            //                 '<div class="rank-back">' +
+            //                 '    <div class="rank">\n' +
+            //                 '        <img src="../../static/img/home/img_no'+(len)+'.png" alt="第一">\n' +
+            //                 '    </div>\n' +
+            //                 '    <div class="name">\n' +
+            //                 '        '+data[i].nickname+'<br/><i>'+data[i].points+'</i>\n' +
+            //                 '    </div>\n' +
+            //                 '</div>\n' +
+            //                 '</div>\n' +
+            //                 '</li>');
+            //
+            //         }else{
+            //             arr.push('<li class="rank-item" id="rank-item'+len+'">\n' +
+            //                             '<div class="rank-item-content">' +
+            //                             '<div class="rank-front">' +
+            //                             '    <div class="rank">\n' +
+            //                             '        NO.'+(len)+'\n' +
+            //                             '    </div>\n' +
+            //                             '    <div class="name">\n' +
+            //                             '        '+data[i].nickname+'<br/><i>'+data[i].points+'</i>\n' +
+            //                             '    </div>\n' +
+            //                             '</div>' +
+            //                             '' +
+            //                             '<div class="rank-back">' +
+            //                             '    <div class="rank">\n' +
+            //                             '        NO.'+(len)+'\n' +
+            //                             '    </div>\n' +
+            //                             '    <div class="name">\n' +
+            //                             '        '+data[i].nickname+'<br/><i>'+data[i].points+'</i>\n' +
+            //                             '    </div>\n' +
+            //                             '</div>\n'+
+            //                             '</div>\n'+
+            //                             '</li>');
+            //         }
+            //         len++;
+            //     }else{
+            //         break;
+            //     }
+            // }
+            // $('ul#score-rank-list').html(arr.join(''));
+            //
+            // transformList(0);
         },
         fail: function (err) {
             layer.alert(err);
         }
     })
+}
+
+/**
+ * 对比往期排行
+ */
+function compareLastScore(data, ScoreRankList) {
+    var flag = false;
+    if(ScoreRankList.length != 0){
+        for (var i = 0; i < 1000; i++){
+            if(data[i]){
+                if(data[i].nickname != ScoreRankList[i]){
+                    flag = true;
+                }
+                ScoreRankList[i] = data[i].nickname;
+            }else{
+                break;
+            }
+        }
+    }else{
+        for (var i = 0; i < 1000; i++){
+            if(data[i]){
+                ScoreRankList[i] = data[i].nickname;
+            }else{
+                break;
+            }
+        }
+        flag = true;
+    }
+    return flag;
+}
+
+/**
+ * 积分榜列表渲染
+ */
+function ScoreListAppend(data) {
+
+    var arr = [];
+    var len = 1;
+    for (var i = 0; i < 10000; i++) {
+        if(data[i]){
+            if(len < 4){
+                arr.push('<li class="rank-item" id="rank-item'+len+'" style="display: none;">\n' +
+                    '<div class="rank-item-content">' +
+                    '<div class="rank-front">' +
+                    '    <div class="rank">\n' +
+                    '        <img src="../../static/img/home/img_no'+(len)+'.png" alt="第一">\n' +
+                    '    </div>\n' +
+                    '    <div class="name">\n' +
+                    '        '+data[i].nickname+'<br/><i>'+data[i].points+'</i>\n' +
+                    '    </div>\n' +
+                    '</div>' +
+                    '<div class="rank-back">' +
+                    '    <div class="rank">\n' +
+                    '        <img src="../../static/img/home/img_no'+(len)+'.png" alt="第一">\n' +
+                    '    </div>\n' +
+                    '    <div class="name">\n' +
+                    '        '+data[i].nickname+'<br/><i>'+data[i].points+'</i>\n' +
+                    '    </div>\n' +
+                    '</div>\n' +
+                    '</div>\n' +
+                    '</li>');
+
+            }else{
+                arr.push('<li class="rank-item" id="rank-item'+len+'" style="display: none;">\n' +
+                                '<div class="rank-item-content">' +
+                                '<div class="rank-front">' +
+                                '    <div class="rank">\n' +
+                                '        NO.'+(len)+'\n' +
+                                '    </div>\n' +
+                                '    <div class="name">\n' +
+                                '        '+data[i].nickname+'<br/><i>'+data[i].points+'</i>\n' +
+                                '    </div>\n' +
+                                '</div>' +
+                                '' +
+                                '<div class="rank-back">' +
+                                '    <div class="rank">\n' +
+                                '        NO.'+(len)+'\n' +
+                                '    </div>\n' +
+                                '    <div class="name">\n' +
+                                '        '+data[i].nickname+'<br/><i>'+data[i].points+'</i>\n' +
+                                '    </div>\n' +
+                                '</div>\n'+
+                                '</div>\n'+
+                                '</li>');
+            }
+            len++;
+        }else{
+            break;
+        }
+    }
+    $('ul#score-rank-list').html(arr.join(''));
+    transformList(0);
 }
 
 /**
@@ -155,14 +281,24 @@ function requestDynamic() {
                 var item = data.message;
                 var arr = [];
                 item.forEach(function (value, index) {
+                   /* arr.push('<li class="scroll-item">' +
+                        '<div class="content">' +
+                        '<i>'+value.name+'</i>完成'+value.challenge_name+'题，获得' +
+                        '<i>'+value.points+'分</i>，当前累积得分' +
+                        '<i>'+value.total_points+'分</i>，团队总分' +
+                        '<i>'+value.total_points+'分</i>' +
+                        '</div>' +
+                        '</li>');*/
                     arr.push('<li class="scroll-item">' +
-                            '<div class="content">' +
-                            '<i>'+value.name+'</i>完成'+value.challenge_name+'题，获得' +
-                            '<i>'+value.points+'分</i>，当前累积得分' +
-                            '<i>'+value.total_points+'分</i>，团队总分' +
-                            '<i>'+value.total_points+'分</i>' +
-                            '</div>' +
-                            '</li>');
+                        '<div class="content">' +
+                        '<i class="dynamic-i-1">'+value.name+'</i>' +
+                        '<i class="dynamic-i-2" style="color: rgba(1,255,255,0.54);">&nbsp;完成&nbsp;</i>' +
+                        '<i class="dynamic-i-3" style="color: rgba(1,255,255,0.54);">'+value.challenge_name+'</i>' +
+
+                        '<i class="dynamic-i-5">14:36</i>' +
+                        '<i class="dynamic-i-4" ><img style="width: 17px;margin-right: 3px;" src="../../static/img/share/icon_ok.png" alt=""></i>' +
+                        '</div>' +
+                        '</li>');
                 })
                 $('ul#scroll-item-content').append(arr.join(''));
                 /**
@@ -353,7 +489,10 @@ function getSecPoint(name){
         dataType: 'json',
         timeout: 1000,
         success: function (data) {
-            secRandomPoint(data);
+            $('.grap-box .star-box').remove();
+            if(data.code == 200){
+                secRandomPoint(data);
+            }
         },
         fail: function (err) {
             layer.alert(err);
@@ -365,9 +504,8 @@ function getSecPoint(name){
  * 随机第二页的星球
  */
 function secRandomPoint(data){
-    $('.grap-box .star-box').remove();
     // var secStarPointArr = [[400, 120], [400, 470], [750, 270], [120, 350], [10, 470], [300, 440], [600, 440]];
-    var secStarPointArr = [['45%', 120], ['45%', 470], ['83.5%', 270], ['13%', 350], ['1%', 470], ['32%', 440], ['67%', 440]];
+    var secStarPointArr = [['45%', 120], ['45%', 470],['60%', 460],['28%', 495], ['28%', 127], ['83.5%', 270], ['13%', 350], ['1%', 470], ['-1%', 350], ['70%', 500]];
     var len = data.message.length;
     var item  = data.message;
 
@@ -376,7 +514,7 @@ function secRandomPoint(data){
     for (var i = 2; i < len + 2; i++) {
         var index = Math.round(Math.random()*(secStarPointArr.length-1));
 
-        starArr.push('<div class="star-box star-box'+i+'" style="left: '+secStarPointArr[index][0]+';top: '+secStarPointArr[index][1]+'px;">\n' +
+        starArr.push('<div class="star-box star-box'+i+'" data-left="'+secStarPointArr[index][0]+'" style="left: '+secStarPointArr[index][0]+';top: '+secStarPointArr[index][1]+'px;">\n' +
             '    <a href="http://127.0.0.1:8000/challenges/category/1/?id='+item[i-2].id+'">'
         );
         starArr.push('<input type="hidden" id="ranklist" value="'+item[i-2].ranking.join(',')+'">');
@@ -385,8 +523,16 @@ function secRandomPoint(data){
         }else{
             starArr.push('        <div class="star-top star-normal">');
         }
-        starArr.push('            <img class="normal" src="../../static/img/home/star/star_'+i+'_normal.png" alt="星球'+i+'">\n' +
-            '            <img class="shining" src="../../static/img/home/star/star_'+i+'_shining.png" alt="星球'+i+'">\n' +
+        // var index1;
+        // if(index == 0 || index == 1){
+        //     index1 = 11;
+        // }else{
+        //     index1 = index;
+        // }
+
+        var index1 = (index == 1 || index == 0) ? 11 : index;
+        starArr.push('            <img class="normal" src="../../static/img/home/star/star_'+(index1)+'_normal.png" alt="星球'+i+'">\n' +
+            '            <img class="shining" src="../../static/img/home/star/star_'+(index1)+'_shining.png" alt="星球'+i+'">\n' +
             '        </div>\n' +
             '        <div class="star-bottom">\n' +
             '            <p class="name" style="font-size: 13px">'+item[i-2].name+'</p>\n' +
@@ -399,6 +545,9 @@ function secRandomPoint(data){
     $('.grap-box').append(starArr.join(''));
     //动态添加悬停效果
     $('.star-box').hover(function () {
+
+        var dataLeft = $(this).attr('data-left');
+
         var ranklist = $(this).find('input#ranklist').val();
         //给目标元素添加弹框
         if(ranklist != ''){
@@ -408,13 +557,45 @@ function secRandomPoint(data){
             for (var i = 0; i < rankArr.length; i++) {
                 str += '<li>'+rankArr[i]+'</li>';
             }
-            var $popup = $('<div class="popup-tip" style="display: block">\n' +
-                           '    <div class="popup-content">\n' +
-                           '        <h6>星球前3名</h6>\n' +
-                           '        <ul id="popup-rank-list">'+str+'</ul>\n' +
-                           '    </div>\n' +
-                           '</div>');
-            $(this).find('.star-bottom').append($popup);
+
+            if(parseInt(dataLeft) < 50){
+                var $popup = $('<div class="popup-tip popup-tip2" style="display: block">\n' +
+                    '    <div class="popup-content">\n' +
+                    '        <h6>星球前3名</h6>\n' +
+                    '        <ul id="popup-rank-list">'+str+'</ul>\n' +
+                    '    </div>\n' +
+                    '</div>');
+                $(this).find('.star-bottom').append($popup);
+            }else{
+                var $popup = $('<div class="popup-tip popup-tip1" style="display: block">\n' +
+                    '    <div class="popup-content">\n' +
+                    '        <h6>星球前3名</h6>\n' +
+                    '        <ul id="popup-rank-list">'+str+'</ul>\n' +
+                    '    </div>\n' +
+                    '</div>');
+                $(this).find('.star-bottom').append($popup);
+            }
+
+        }else{
+            $('ul#popup-rank-list').html('');
+
+            if(parseInt(dataLeft) < 50){
+                var $popup1 = $('<div class="popup-tip popup-tip2" style="display: block">\n' +
+                    '    <div class="popup-content">\n' +
+                    '        <h6>星球前3名</h6>\n' +
+                    '        <div style="color: #01ffff;font-size: 12px;line-height: 30px;">暂无消息</div>\n' +
+                    '    </div>\n' +
+                    '</div>');
+                $(this).find('.star-bottom').append($popup1);
+            }else{
+                var $popup1 = $('<div class="popup-tip popup-tip1" style="display: block">\n' +
+                    '    <div class="popup-content">\n' +
+                    '        <h6>星球前3名</h6>\n' +
+                    '        <div style="color: #01ffff;font-size: 12px;line-height: 30px;">暂无消息</div>\n' +
+                    '    </div>\n' +
+                    '</div>');
+                $(this).find('.star-bottom').append($popup1);
+            }
         }
 
     }, function () {
@@ -440,4 +621,39 @@ jQuery.fn.shake = function (intShakes, intDistance, intDuration) {
         }
     });
     return this;
+}
+
+/**
+ * 获取列表
+ * @type {jQuery|HTMLElement}
+ */
+// transformList(0);
+function transformList(index) {
+    var $liArr = $('ul#score-rank-list li.rank-item div.rank-item-content');
+    if(index < $liArr.length){
+        transform3D($liArr[index], index);
+    }else{
+        return;
+    }
+}
+/**
+ * 3d翻转
+ */
+function transform3D(DOM, index) {
+    $('ul#score-rank-list li#rank-item'+(index+1)).css('display', 'block');
+    var num = 0;
+    var time = window.setInterval(function () {
+        num += 10;
+        if(num<180){
+            $(DOM).css('transform', 'rotateY('+num+'deg)');
+
+            $(DOM).find('.rank-front').fadeOut();
+            $(DOM).find('.rank-back').fadeIn();
+
+        }else{
+            // $(DOM).css('transform', 'rotateY(0deg)');
+            window.clearInterval(time);
+            transformList(index + 1);
+        }
+    }, 50)
 }

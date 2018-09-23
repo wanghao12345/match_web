@@ -25,11 +25,12 @@ $(function(){
 function myPage(url) {
     $('.j-my-page').pagination({
         pageCount: 0, //初始化页数
-        showData: 10,//每页显示的条数
+        showData: 15,//每页显示的条数
         callback: function (api) {
             var data = {
                 name: $('input#search-input').val(),
-                page: api.getCurrent()
+                page: api.getCurrent(),
+                show: 15
             };
             requestTable(url,data);
         }
@@ -37,7 +38,8 @@ function myPage(url) {
         api.$el.siblings("i.first").html("共"+api.getPageCount()+"页");
         var data = {
             name: $('input#search-input').val(),
-            page: api.getCurrent()
+            page: api.getCurrent(),
+            show: 15
         };
         requestTable(url,data, api);
     });

@@ -30,7 +30,7 @@ TextScroll.prototype.init = function () {
 
             $(_this.outBox).animate({
                 marginTop: (_this.scrollHeight * (-1)) + 'px'
-            }, 2000, function () {
+            }, 1000, function () {
                 var firstItem = $(_this.outBox).children(_this.itemBox).eq(0);
                 $(_this.outBox).append(firstItem);
                 $(_this.outBox).css({
