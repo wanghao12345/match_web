@@ -79,6 +79,9 @@
           _this.removePop($el);
         } else {
           _this.hidePop();
+          if(DownTime60s){
+              window.clearInterval(DownTime60s);
+          }
         }
       });
       if(!_this.options.closeBtn){
@@ -93,6 +96,9 @@
             _this.removePop($el);
           } else {
             _this.hidePop();
+            if(DownTime60s){
+               window.clearInterval(DownTime60s);
+            }
           }
         });
       }

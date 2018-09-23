@@ -9,6 +9,19 @@ $(function(){
      */
     var Pop_rule = $(".win-subject").popUp({"visible":false,"width":800});
     /**
+     * 提示
+     */
+    $(".win-subject").on('click', '.j-open .title', function(event) {
+        event.preventDefault();
+        var $this = $(this),$tip = $this.closest(".j-open");
+        if($tip.hasClass("open")){
+            $tip.removeClass("open");
+        }else{
+            $tip.addClass("open");
+        }
+    });
+
+    /**
      * 初始化题目列表
      */
     // requestSubjectList(Pop_rule);
@@ -738,15 +751,16 @@ function getCookie(name) {
  * 设置倒计时
  * @param num
  */
+
 function getDownTime(num) {
     $('#subtype2-select-btn #count-time').val(num + 's');
     $('#subtype2-select-btn #count-time').css('display', 'inline-block');
     $('#subtype2-select-btn #opera-restart').css('display', 'none');
 
-    var time = window.setInterval(function () {
+    DownTime60s = window.setInterval(function () {
         num--;
         if(num < 0){
-            window.clearInterval(time);
+            window.clearInterval(DownTime60s);
             $('#subtype2-select-btn #count-time').css('display', 'none');
             $('input#opera-restart').css('display', 'inline-block');
         }else{
