@@ -61,7 +61,6 @@ $(function(){
      * 下发题目
      */
     $('.win-popUp').on('click', 'input#opera-topic', function () {
-        getDownTime(60);
         $('#opera-result').html('下发题目中...');
         setProgress(0, 85, function () {
             sendSubject('topic');
@@ -82,6 +81,7 @@ $(function(){
      * 重新下发
      */
     $('.win-popUp').on('click', 'input#opera-restart', function () {
+        getDownTime(60);
         $('.answer-result-restart').html($('#opera-result').html());
         $('#opera-result').html('正在重启中...');
         // $('input#opera-delay').attr('data-delayStatus', '0');
@@ -741,7 +741,7 @@ function getCookie(name) {
 function getDownTime(num) {
     $('#subtype2-select-btn #count-time').val(num + 's');
     $('#subtype2-select-btn #count-time').css('display', 'inline-block');
-    $('#subtype2-select-btn #opera-topic').css('display', 'none');
+    $('#subtype2-select-btn #opera-restart').css('display', 'none');
 
     var time = window.setInterval(function () {
         num--;
