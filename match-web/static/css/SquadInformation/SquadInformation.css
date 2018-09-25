@@ -72,7 +72,7 @@ input.m-search::-webkit-input-placeholder{color:#537099;}
 .i-btn.i-btn-ok{background: url(../../img/SquadInformation/ok.png) left center/contain no-repeat;}
 .i-btn.i-btn-no{margin-right: 0;background: url(../../img/SquadInformation/no.png) left center/contain no-repeat;}
 
-.table-content{min-height:400px;}
+.table-content{min-height:512px;}
 .page-center{width: 600px;margin-left:auto;margin-right:auto;}
 .page-nav:after{content: '.';display: block;height: 0;clear: both;overflow: hidden;}
 
