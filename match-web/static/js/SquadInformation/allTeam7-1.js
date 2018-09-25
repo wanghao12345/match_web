@@ -77,6 +77,7 @@ function requestTable(myUrl,params, api) {
                         '</tr>');
                 }
                 $('table#data').append(arr.join(''));
+                onFooter();
             }
         },
         fail: function (err) {

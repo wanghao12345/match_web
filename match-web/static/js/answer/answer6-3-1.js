@@ -73,11 +73,16 @@ $(function(){
     /**
      * 下发题目
      */
+
     $('.win-popUp').on('click', 'input#opera-topic', function () {
-        $('#opera-result').html('下发题目中...');
-        setProgress(0, 85, function () {
+        if(topicStatus){
+            topicStatus = false;
+            $('#opera-result').html('下发题目中...');
             sendSubject('topic');
-        });
+            setProgress(0, 85, function () {
+                window.clearInterval(progressTime);
+            });
+        }
     });
     /**
      * 延长时间
@@ -552,6 +557,7 @@ function subjectType2(data, point, Pop_rule, status) {
  * @param opera (topic: 下发题目， delay: 延时， restart: 重启)
  * @param uid 题目id
  */
+var topicStatus = true;
 function sendSubject(opera) {
     $.ajax({
         url: 'http://s.hackcoll.com:3334/challenges/control/topic/?opera='+opera+'&uid='+$('input#sub-shallenge').val(),
@@ -563,17 +569,8 @@ function sendSubject(opera) {
             console.log(data);
             if(data.code == 200){
                 if(opera == 'topic'){
-                    /*setProgress(function () {
-                        $('input#opera-restart').css('display', 'inline-block');
-                        $('input#opera-topic').css('display', 'none');
-                        $('#opera-result').html(data.message);
-                        $('input#opera-delay').attr('data-delayStatus', '1');
-                        $('input#opera-delay').css({
-                            'cursor':'pointer',
-                            'color':'#0ff',
-                            'border-color':'#6EC5C3'
-                        });
-                    })*/
+                    topicStatus = true;
+                    window.clearInterval(progressTime);
                     setProgress(85, 100, function () {
                         $('#subtype2-select-btn #count-time').css('display', 'none');
                         $('input#opera-restart').css('display', 'inline-block');
@@ -675,24 +672,27 @@ function sendKey(param) {
  * 进度条
  * @param num
  */
+var progressTime = null;
 function setProgress(num, num2, callback){
     $('.sub-type2-progress').css('display', 'flex');
     var num = num;
-    var time = window.setInterval(function () {
+    progressTime = window.setInterval(function () {
         num += (Math.floor(Math.random()*10+1));
         if(num>=num2){
             num = num2;
             $(".j-progress i").width(num + '%');
             $(".j-progress .num").html(num + '%');
-            window.clearInterval(time);
+            window.clearInterval(progressTime);
             if(num == 100){
                 $('.sub-type2-progress').css('display', 'none');
                 $(".j-progress i").width('0%');
                 $(".j-progress .num").html('0%');
                 callback();
+
             }
             if(num == 85){
                 callback();
+
             }
         }else{
             $(".j-progress i").width(num + '%');
